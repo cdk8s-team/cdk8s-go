@@ -1,11 +1,7 @@
-## My Project
+## cdk8s-go
 
-TODO: Fill this README out!
+Go bindings for [cdk8s](https://cdk8s.ok)
 
-Be sure to:
-
-* Change the title in this README
-* Edit your repository description on GitHub
 
 ## Security
 
