@@ -1,4 +1,4 @@
-module github.com/awslabs/cdk8s-go/cdk8s/cdk8s
+module github.com/awslabs/cdk8s-go/cdk8s
 
 go 1.15
 

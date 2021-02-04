@@ -3,9 +3,9 @@ package cdk8splus17
 
 import (
 	_jsii_ "github.com/aws/jsii-runtime-go"
-	_init_ "github.com/awslabs/cdk8s-go/cdk8s-plus-17/cdk8splus17/jsii"
+	_init_ "github.com/awslabs/cdk8s-go/cdk8splus17/jsii"
 	"reflect"
-	"github.com/awslabs/cdk8s-go/cdk8s/cdk8s"
+	"github.com/awslabs/cdk8s-go/cdk8s"
 	"github.com/aws/constructs-go/constructs/v3"
 )
 

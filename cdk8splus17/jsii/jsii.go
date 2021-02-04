@@ -5,7 +5,7 @@ import (
 	"sync"
 	// Initialization endpoints of dependencies
 	constructs "github.com/aws/constructs-go/constructs/v3/jsii"
-	cdk8s "github.com/awslabs/cdk8s-go/cdk8s/cdk8s/jsii"
+	cdk8s "github.com/awslabs/cdk8s-go/cdk8s/jsii"
 )
 
 var once sync.Once
@@ -19,6 +19,6 @@ func Initialize() {
 		constructs.Initialize()
 
 		// Load this library into the kernel
-		rt.Load("cdk8s-plus-17", "1.0.0-beta.7", tarball)
+		rt.Load("cdk8s-plus-17", "1.0.0-beta.8", tarball)
 	})
 }

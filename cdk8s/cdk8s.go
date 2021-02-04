@@ -3,7 +3,7 @@ package cdk8s
 
 import (
 	_jsii_ "github.com/aws/jsii-runtime-go"
-	_init_ "github.com/awslabs/cdk8s-go/cdk8s/cdk8s/jsii"
+	_init_ "github.com/awslabs/cdk8s-go/cdk8s/jsii"
 	"reflect"
 	"github.com/aws/constructs-go/constructs/v3"
 )
