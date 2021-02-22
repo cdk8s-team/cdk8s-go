@@ -19,6 +19,6 @@ func Initialize() {
 		constructs.Initialize()
 
 		// Load this library into the kernel
-		rt.Load("cdk8s-plus-17", "1.0.0-beta.8", tarball)
+		rt.Load("cdk8s-plus-17", "1.0.0-beta.9", tarball)
 	})
 }
