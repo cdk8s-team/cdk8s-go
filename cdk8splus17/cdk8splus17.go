@@ -4,21 +4,13 @@ package cdk8splus17
 import (
 	_jsii_ "github.com/aws/jsii-runtime-go"
 	_init_ "github.com/awslabs/cdk8s-go/cdk8splus17/jsii"
-	"reflect"
-	"github.com/awslabs/cdk8s-go/cdk8s"
-	"github.com/aws/constructs-go/constructs/v3"
-)
 
-// AddDirectoryOptionsIface is the public interface for the custom type AddDirectoryOptions
-// Experimental.
-type AddDirectoryOptionsIface interface {
-	GetExclude() []string
-	GetKeyPrefix() string
-}
+	"github.com/aws/constructs-go/constructs/v3"
+	"github.com/awslabs/cdk8s-go/cdk8s"
+)
 
 // Options for `configmap.addDirectory()`.
 // Experimental.
-// Struct proxy
 type AddDirectoryOptions struct {
 	// Glob patterns to exclude when adding files.
 	// Experimental.
@@ -28,44 +20,8 @@ type AddDirectoryOptions struct {
 	KeyPrefix string `json:"keyPrefix"`
 }
 
-func (a *AddDirectoryOptions) GetExclude() []string {
-	var returns []string
-	_jsii_.Get(
-		a,
-		"exclude",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (a *AddDirectoryOptions) GetKeyPrefix() string {
-	var returns string
-	_jsii_.Get(
-		a,
-		"keyPrefix",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// CommandProbeOptionsIface is the public interface for the custom type CommandProbeOptions
-// Experimental.
-type CommandProbeOptionsIface interface {
-	GetFailureThreshold() float64
-	GetInitialDelaySeconds() cdk8s.DurationIface
-	GetPeriodSeconds() cdk8s.DurationIface
-	GetSuccessThreshold() float64
-	GetTimeoutSeconds() cdk8s.DurationIface
-}
-
 // Options for `Probe.fromCommand()`.
 // Experimental.
-// Struct proxy
 type CommandProbeOptions struct {
 	// Minimum consecutive failures for the probe to be considered failed after having succeeded.
 	//
@@ -76,12 +32,12 @@ type CommandProbeOptions struct {
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
 	//
 	// Experimental.
-	InitialDelaySeconds cdk8s.DurationIface `json:"initialDelaySeconds"`
+	InitialDelaySeconds cdk8s.Duration `json:"initialDelaySeconds"`
 	// How often (in seconds) to perform the probe.
 	//
 	// Default to 10 seconds. Minimum value is 1.
 	// Experimental.
-	PeriodSeconds cdk8s.DurationIface `json:"periodSeconds"`
+	PeriodSeconds cdk8s.Duration `json:"periodSeconds"`
 	// Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1.
 	//
 	// Must be 1 for liveness and startup. Minimum value is 1.
@@ -93,264 +49,126 @@ type CommandProbeOptions struct {
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
 	//
 	// Experimental.
-	TimeoutSeconds cdk8s.DurationIface `json:"timeoutSeconds"`
+	TimeoutSeconds cdk8s.Duration `json:"timeoutSeconds"`
 }
 
-func (c *CommandProbeOptions) GetFailureThreshold() float64 {
-	var returns float64
-	_jsii_.Get(
-		c,
-		"failureThreshold",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (c *CommandProbeOptions) GetInitialDelaySeconds() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
-	_jsii_.Get(
-		c,
-		"initialDelaySeconds",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *CommandProbeOptions) GetPeriodSeconds() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
-	_jsii_.Get(
-		c,
-		"periodSeconds",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *CommandProbeOptions) GetSuccessThreshold() float64 {
-	var returns float64
-	_jsii_.Get(
-		c,
-		"successThreshold",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (c *CommandProbeOptions) GetTimeoutSeconds() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
-	_jsii_.Get(
-		c,
-		"timeoutSeconds",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-
-// Class interface
-type ConfigMapIface interface {
-	constructs.IConstructIface
-	IResourceIface
-	IConfigMapIface
-	IResourceIface
-	GetApiObject() cdk8s.ApiObjectIface
-	GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetName() string
-	GetBinaryData() map[string]string
-	GetData() map[string]string
-	OnPrepare()
-	OnSynthesize(session constructs.ISynthesisSessionIface)
-	OnValidate() []string
-	ToString() string
-	AddBinaryData(key string, value string)
-	AddData(key string, value string)
-	AddDirectory(localDir string, options AddDirectoryOptionsIface)
-	AddFile(localFile string, key string)
+// ToProbeOptions is a convenience function to obtain a new ProbeOptions from this CommandProbeOptions.
+func (c *CommandProbeOptions) ToProbeOptions() ProbeOptions {
+	return ProbeOptions {
+		FailureThreshold: c.FailureThreshold,
+		InitialDelaySeconds: c.InitialDelaySeconds,
+		PeriodSeconds: c.PeriodSeconds,
+		SuccessThreshold: c.SuccessThreshold,
+		TimeoutSeconds: c.TimeoutSeconds,
+	}
 }
 
 // ConfigMap holds configuration data for pods to consume.
 // Experimental.
-// Struct proxy
-type ConfigMap struct {
-	// The underlying cdk8s API object.
-	// See: base.Resource.apiObject
-	//
-	// Experimental.
-	ApiObject cdk8s.ApiObjectIface `json:"apiObject"`
-	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataDefinitionIface `json:"metadata"`
-	// The name of this API object.
-	// Experimental.
-	Name string `json:"name"`
-	// The binary data associated with this config map.
-	//
-	// Returns a copy. To add data records, use `addBinaryData()` or `addData()`.
-	// Experimental.
-	BinaryData map[string]string `json:"binaryData"`
-	// The data associated with this config map.
-	//
-	// Returns an copy. To add data records, use `addData()` or `addBinaryData()`.
-	// Experimental.
-	Data map[string]string `json:"data"`
+type ConfigMap interface {
+	Resource
+	IConfigMap
+	ApiObject() cdk8s.ApiObject
+	BinaryData() map[string]string
+	Data() map[string]string
+	AddBinaryData(key string, value string)
+	AddData(key string, value string)
+	AddDirectory(localDir string, options AddDirectoryOptions)
+	AddFile(localFile string, key string)
 }
 
-func (c *ConfigMap) GetApiObject() cdk8s.ApiObjectIface {
-	var returns cdk8s.ApiObjectIface
+// The jsii proxy struct for ConfigMap
+type configMap struct {
+	resource // extends cdk8s-plus-17.Resource
+	iConfigMap // implements cdk8s-plus-17.IConfigMap
+}
+
+func (c *configMap) ApiObject() cdk8s.ApiObject {
+	var returns cdk8s.ApiObject
 	_jsii_.Get(
 		c,
 		"apiObject",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObject)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (c *ConfigMap) GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
-	_jsii_.Get(
-		c,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ConfigMap) GetName() string {
-	var returns string
-	_jsii_.Get(
-		c,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (c *ConfigMap) GetBinaryData() map[string]string {
+func (c *configMap) BinaryData() map[string]string {
 	var returns map[string]string
 	_jsii_.Get(
 		c,
 		"binaryData",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (c *ConfigMap) GetData() map[string]string {
+func (c *configMap) Data() map[string]string {
 	var returns map[string]string
 	_jsii_.Get(
 		c,
 		"data",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
+	)
+	return returns
+}
+
+func (c *configMap) Metadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
+	_jsii_.Get(
+		c,
+		"metadata",
+		&returns,
+	)
+	return returns
+}
+
+func (c *configMap) Name() string {
+	var returns string
+	_jsii_.Get(
+		c,
+		"name",
+		&returns,
 	)
 	return returns
 }
 
 
-func NewConfigMap(scope constructs.ConstructIface, id string, props ConfigMapPropsIface) ConfigMapIface {
+func NewConfigMap(scope constructs.Construct, id string, props ConfigMapProps) ConfigMap {
 	_init_.Initialize()
-	self := ConfigMap{}
+	c := configMap{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.ConfigMap",
 		[]interface{}{scope, id, props},
 		[]_jsii_.FQN{"cdk8s-plus-17.IConfigMap"},
 		[]_jsii_.Override{},
-		&self,
+		&c,
 	)
-	return &self
+	return &c
 }
 
-func ConfigMap_FromConfigMapName(name string) IConfigMapIface {
+// Represents a ConfigMap created elsewhere.
+// Experimental.
+func ConfigMap_FromConfigMapName(name string) IConfigMap {
 	_init_.Initialize()
-	var returns IConfigMapIface
-	_jsii_.InvokeStatic(
+	var returns IConfigMap
+	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.ConfigMap",
 		"fromConfigMapName",
 		[]interface{}{name},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IConfigMapIface)(nil)).Elem(): reflect.TypeOf((*IConfigMap)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (c *ConfigMap) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
-		c,
-		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (c *ConfigMap) OnSynthesize(session constructs.ISynthesisSessionIface) {
-	var returns interface{}
-	_jsii_.Invoke(
-		c,
-		"onSynthesize",
-		[]interface{}{session},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (c *ConfigMap) OnValidate() []string {
-	var returns []string
-	_jsii_.Invoke(
-		c,
-		"onValidate",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ConfigMap) ToString() string {
-	var returns string
-	_jsii_.Invoke(
-		c,
-		"toString",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (c *ConfigMap) AddBinaryData(key string, value string) {
+// Adds a binary data entry to the config map.
+//
+// BinaryData can contain byte
+// sequences that are not in the UTF-8 range.
+// Experimental.
+func (c *configMap) AddBinaryData(key string, value string) {
 	var returns interface{}
 	_jsii_.Invoke(
 		c,
@@ -358,11 +176,12 @@ func (c *ConfigMap) AddBinaryData(key string, value string) {
 		[]interface{}{key, value},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (c *ConfigMap) AddData(key string, value string) {
+// Adds a data entry to the config map.
+// Experimental.
+func (c *configMap) AddData(key string, value string) {
 	var returns interface{}
 	_jsii_.Invoke(
 		c,
@@ -370,11 +189,12 @@ func (c *ConfigMap) AddData(key string, value string) {
 		[]interface{}{key, value},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (c *ConfigMap) AddDirectory(localDir string, options AddDirectoryOptionsIface) {
+// Adds a directory to the ConfigMap.
+// Experimental.
+func (c *configMap) AddDirectory(localDir string, options AddDirectoryOptions) {
 	var returns interface{}
 	_jsii_.Invoke(
 		c,
@@ -382,11 +202,12 @@ func (c *ConfigMap) AddDirectory(localDir string, options AddDirectoryOptionsIfa
 		[]interface{}{localDir, options},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (c *ConfigMap) AddFile(localFile string, key string) {
+// Adds a file to the ConfigMap.
+// Experimental.
+func (c *configMap) AddFile(localFile string, key string) {
 	var returns interface{}
 	_jsii_.Invoke(
 		c,
@@ -394,25 +215,85 @@ func (c *ConfigMap) AddFile(localFile string, key string) {
 		[]interface{}{localFile, key},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-// ConfigMapPropsIface is the public interface for the custom type ConfigMapProps
+// Perform final modifications before synthesis.
+//
+// This method can be implemented by derived constructs in order to perform
+// final changes before synthesis. prepare() will be called after child
+// constructs have been prepared.
+//
+// This is an advanced framework feature. Only use this if you
+// understand the implications.
 // Experimental.
-type ConfigMapPropsIface interface {
-	GetMetadata() cdk8s.ApiObjectMetadataIface
-	GetBinaryData() map[string]string
-	GetData() map[string]string
+func (c *configMap) OnPrepare() {
+	var returns interface{}
+	_jsii_.Invoke(
+		c,
+		"onPrepare",
+		[]interface{}{},
+		false,
+		&returns,
+	)
+}
+
+// Allows this construct to emit artifacts into the cloud assembly during synthesis.
+//
+// This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
+// as they participate in synthesizing the cloud assembly.
+// Experimental.
+func (c *configMap) OnSynthesize(session constructs.ISynthesisSession) {
+	var returns interface{}
+	_jsii_.Invoke(
+		c,
+		"onSynthesize",
+		[]interface{}{session},
+		false,
+		&returns,
+	)
+}
+
+// Validate the current construct.
+//
+// This method can be implemented by derived constructs in order to perform
+// validation logic. It is called on all constructs before synthesis.
+//
+// Returns: An array of validation error messages, or an empty array if there the construct is valid.
+// Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
+// instead of overriding this method.
+func (c *configMap) OnValidate() []string {
+	var returns []string
+	_jsii_.Invoke(
+		c,
+		"onValidate",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
+}
+
+// Returns a string representation of this construct.
+// Experimental.
+func (c *configMap) ToString() string {
+	var returns string
+	_jsii_.Invoke(
+		c,
+		"toString",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
 }
 
 // Properties for initialization of `ConfigMap`.
 // Experimental.
-// Struct proxy
 type ConfigMapProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataIface `json:"metadata"`
+	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
 	// BinaryData contains the binary data.
 	//
 	// Each key must consist of alphanumeric characters, '-', '_' or '.'.
@@ -436,58 +317,15 @@ type ConfigMapProps struct {
 	Data map[string]string `json:"data"`
 }
 
-func (c *ConfigMapProps) GetMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		c,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ConfigMapProps) GetBinaryData() map[string]string {
-	var returns map[string]string
-	_jsii_.Get(
-		c,
-		"binaryData",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ConfigMapProps) GetData() map[string]string {
-	var returns map[string]string
-	_jsii_.Get(
-		c,
-		"data",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-
-// ConfigMapVolumeOptionsIface is the public interface for the custom type ConfigMapVolumeOptions
-// Experimental.
-type ConfigMapVolumeOptionsIface interface {
-	GetDefaultMode() float64
-	GetItems() map[string]PathMappingIface
-	GetName() string
-	GetOptional() bool
+// ToResourceProps is a convenience function to obtain a new ResourceProps from this ConfigMapProps.
+func (c *ConfigMapProps) ToResourceProps() ResourceProps {
+	return ResourceProps {
+		Metadata: c.Metadata,
+	}
 }
 
 // Options for the ConfigMap-based volume.
 // Experimental.
-// Struct proxy
 type ConfigMapVolumeOptions struct {
 	// Mode bits to use on created files by default.
 	//
@@ -505,7 +343,7 @@ type ConfigMapVolumeOptions struct {
 	// error unless it is marked optional. Paths must be relative and may not
 	// contain the '..' path or start with '..'.
 	// Experimental.
-	Items map[string]PathMappingIface `json:"items"`
+	Items map[string]PathMapping `json:"items"`
 	// The volume name.
 	// Experimental.
 	Name string `json:"name"`
@@ -514,231 +352,140 @@ type ConfigMapVolumeOptions struct {
 	Optional bool `json:"optional"`
 }
 
-func (c *ConfigMapVolumeOptions) GetDefaultMode() float64 {
-	var returns float64
-	_jsii_.Get(
-		c,
-		"defaultMode",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (c *ConfigMapVolumeOptions) GetItems() map[string]PathMappingIface {
-	var returns map[string]PathMappingIface
-	_jsii_.Get(
-		c,
-		"items",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*PathMappingIface)(nil)).Elem(): reflect.TypeOf((*PathMapping)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ConfigMapVolumeOptions) GetName() string {
-	var returns string
-	_jsii_.Get(
-		c,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (c *ConfigMapVolumeOptions) GetOptional() bool {
-	var returns bool
-	_jsii_.Get(
-		c,
-		"optional",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// Class interface
-type ContainerIface interface {
-	GetEnv() map[string]EnvValueIface
-	GetImage() string
-	GetImagePullPolicy() ImagePullPolicy
-	GetMounts() []VolumeMountIface
-	GetName() string
-	GetArgs() []string
-	GetCommand() []string
-	GetPort() float64
-	GetWorkingDir() string
-	AddEnv(name string, value EnvValueIface)
-	Mount(path string, volume VolumeIface, options MountOptionsIface)
-}
-
 // A single application container that you want to run within a pod.
 // Experimental.
-// Struct proxy
-type Container struct {
-	// The environment variables for this container.
-	//
-	// Returns a copy. To add environment variables use `addEnv()`.
-	// Experimental.
-	Env map[string]EnvValueIface `json:"env"`
-	// The container image.
-	// Experimental.
-	Image string `json:"image"`
-	// Image pull policy for this container.
-	// Experimental.
-	ImagePullPolicy ImagePullPolicy `json:"imagePullPolicy"`
-	// Volume mounts configured for this container.
-	// Experimental.
-	Mounts []VolumeMountIface `json:"mounts"`
-	// The name of the container.
-	// Experimental.
-	Name string `json:"name"`
-	// Arguments to the entrypoint.
-	//
-	// Returns: a copy of the arguments array, cannot be modified.
-	// Experimental.
-	Args []string `json:"args"`
-	// Entrypoint array (the command to execute when the container starts).
-	//
-	// Returns: a copy of the entrypoint array, cannot be modified
-	// Experimental.
-	Command []string `json:"command"`
-	// The port this container exposes.
-	// Experimental.
-	Port float64 `json:"port"`
-	// The working directory inside the container.
-	// Experimental.
-	WorkingDir string `json:"workingDir"`
+type Container interface {
+	Args() []string
+	Command() []string
+	Env() map[string]EnvValue
+	Image() string
+	ImagePullPolicy() ImagePullPolicy
+	Mounts() []VolumeMount
+	Name() string
+	Port() float64
+	WorkingDir() string
+	AddEnv(name string, value EnvValue)
+	Mount(path string, volume Volume, options MountOptions)
 }
 
-func (c *Container) GetEnv() map[string]EnvValueIface {
-	var returns map[string]EnvValueIface
-	_jsii_.Get(
-		c,
-		"env",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*EnvValueIface)(nil)).Elem(): reflect.TypeOf((*EnvValue)(nil)).Elem(),
-		},
-	)
-	return returns
+// The jsii proxy struct for Container
+type container struct {
+	_ byte // padding
 }
 
-func (c *Container) GetImage() string {
-	var returns string
-	_jsii_.Get(
-		c,
-		"image",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (c *Container) GetImagePullPolicy() ImagePullPolicy {
-	var returns ImagePullPolicy
-	_jsii_.Get(
-		c,
-		"imagePullPolicy",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ImagePullPolicy)(nil)).Elem(): reflect.TypeOf((*ImagePullPolicy)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *Container) GetMounts() []VolumeMountIface {
-	var returns []VolumeMountIface
-	_jsii_.Get(
-		c,
-		"mounts",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeMountIface)(nil)).Elem(): reflect.TypeOf((*VolumeMount)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *Container) GetName() string {
-	var returns string
-	_jsii_.Get(
-		c,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (c *Container) GetArgs() []string {
+func (c *container) Args() []string {
 	var returns []string
 	_jsii_.Get(
 		c,
 		"args",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (c *Container) GetCommand() []string {
+func (c *container) Command() []string {
 	var returns []string
 	_jsii_.Get(
 		c,
 		"command",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (c *Container) GetPort() float64 {
+func (c *container) Env() map[string]EnvValue {
+	var returns map[string]EnvValue
+	_jsii_.Get(
+		c,
+		"env",
+		&returns,
+	)
+	return returns
+}
+
+func (c *container) Image() string {
+	var returns string
+	_jsii_.Get(
+		c,
+		"image",
+		&returns,
+	)
+	return returns
+}
+
+func (c *container) ImagePullPolicy() ImagePullPolicy {
+	var returns ImagePullPolicy
+	_jsii_.Get(
+		c,
+		"imagePullPolicy",
+		&returns,
+	)
+	return returns
+}
+
+func (c *container) Mounts() []VolumeMount {
+	var returns []VolumeMount
+	_jsii_.Get(
+		c,
+		"mounts",
+		&returns,
+	)
+	return returns
+}
+
+func (c *container) Name() string {
+	var returns string
+	_jsii_.Get(
+		c,
+		"name",
+		&returns,
+	)
+	return returns
+}
+
+func (c *container) Port() float64 {
 	var returns float64
 	_jsii_.Get(
 		c,
 		"port",
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
-func (c *Container) GetWorkingDir() string {
+func (c *container) WorkingDir() string {
 	var returns string
 	_jsii_.Get(
 		c,
 		"workingDir",
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
 
-func NewContainer(props ContainerPropsIface) ContainerIface {
+func NewContainer(props ContainerProps) Container {
 	_init_.Initialize()
-	self := Container{}
+	c := container{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.Container",
 		[]interface{}{props},
 		[]_jsii_.FQN{},
 		[]_jsii_.Override{},
-		&self,
+		&c,
 	)
-	return &self
+	return &c
 }
 
-func (c *Container) AddEnv(name string, value EnvValueIface) {
+// Add an environment value to the container.
+//
+// The variable value can come
+// from various dynamic sources such a secrets of config maps.
+// See: EnvValue.fromXXX
+//
+// Experimental.
+func (c *container) AddEnv(name string, value EnvValue) {
 	var returns interface{}
 	_jsii_.Invoke(
 		c,
@@ -746,11 +493,14 @@ func (c *Container) AddEnv(name string, value EnvValueIface) {
 		[]interface{}{name, value},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (c *Container) Mount(path string, volume VolumeIface, options MountOptionsIface) {
+// Mount a volume to a specific path so that it is accessible by the container.
+//
+// Every pod that is configured to use this container will autmoatically have access to the volume.
+// Experimental.
+func (c *container) Mount(path string, volume Volume, options MountOptions) {
 	var returns interface{}
 	_jsii_.Invoke(
 		c,
@@ -758,30 +508,11 @@ func (c *Container) Mount(path string, volume VolumeIface, options MountOptionsI
 		[]interface{}{path, volume, options},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
-}
-
-// ContainerPropsIface is the public interface for the custom type ContainerProps
-// Experimental.
-type ContainerPropsIface interface {
-	GetImage() string
-	GetArgs() []string
-	GetCommand() []string
-	GetEnv() map[string]EnvValueIface
-	GetImagePullPolicy() ImagePullPolicy
-	GetLiveness() ProbeIface
-	GetName() string
-	GetPort() float64
-	GetReadiness() ProbeIface
-	GetStartup() ProbeIface
-	GetVolumeMounts() []VolumeMountIface
-	GetWorkingDir() string
 }
 
 // Properties for creating a container.
 // Experimental.
-// Struct proxy
 type ContainerProps struct {
 	// Docker image name.
 	// Experimental.
@@ -811,7 +542,7 @@ type ContainerProps struct {
 	//
 	// Cannot be updated.
 	// Experimental.
-	Env map[string]EnvValueIface `json:"env"`
+	Env map[string]EnvValue `json:"env"`
 	// Image pull policy for this container.
 	// Experimental.
 	ImagePullPolicy ImagePullPolicy `json:"imagePullPolicy"`
@@ -819,7 +550,7 @@ type ContainerProps struct {
 	//
 	// Container will be restarted if the probe fails.
 	// Experimental.
-	Liveness ProbeIface `json:"liveness"`
+	Liveness Probe `json:"liveness"`
 	// Name of the container specified as a DNS_LABEL.
 	//
 	// Each container in a pod must have a unique name (DNS_LABEL). Cannot be updated.
@@ -832,197 +563,22 @@ type ContainerProps struct {
 	Port float64 `json:"port"`
 	// Determines when the container is ready to serve traffic.
 	// Experimental.
-	Readiness ProbeIface `json:"readiness"`
+	Readiness Probe `json:"readiness"`
 	// StartupProbe indicates that the Pod has successfully initialized.
 	//
 	// If specified, no other probes are executed until this completes successfully
 	// Experimental.
-	Startup ProbeIface `json:"startup"`
+	Startup Probe `json:"startup"`
 	// Pod volumes to mount into the container's filesystem.
 	//
 	// Cannot be updated.
 	// Experimental.
-	VolumeMounts []VolumeMountIface `json:"volumeMounts"`
+	VolumeMounts []VolumeMount `json:"volumeMounts"`
 	// Container's working directory.
 	//
 	// If not specified, the container runtime's default will be used, which might be configured in the container image. Cannot be updated.
 	// Experimental.
 	WorkingDir string `json:"workingDir"`
-}
-
-func (c *ContainerProps) GetImage() string {
-	var returns string
-	_jsii_.Get(
-		c,
-		"image",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (c *ContainerProps) GetArgs() []string {
-	var returns []string
-	_jsii_.Get(
-		c,
-		"args",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ContainerProps) GetCommand() []string {
-	var returns []string
-	_jsii_.Get(
-		c,
-		"command",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ContainerProps) GetEnv() map[string]EnvValueIface {
-	var returns map[string]EnvValueIface
-	_jsii_.Get(
-		c,
-		"env",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*EnvValueIface)(nil)).Elem(): reflect.TypeOf((*EnvValue)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ContainerProps) GetImagePullPolicy() ImagePullPolicy {
-	var returns ImagePullPolicy
-	_jsii_.Get(
-		c,
-		"imagePullPolicy",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ImagePullPolicy)(nil)).Elem(): reflect.TypeOf((*ImagePullPolicy)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ContainerProps) GetLiveness() ProbeIface {
-	var returns ProbeIface
-	_jsii_.Get(
-		c,
-		"liveness",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ProbeIface)(nil)).Elem(): reflect.TypeOf((*Probe)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ContainerProps) GetName() string {
-	var returns string
-	_jsii_.Get(
-		c,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (c *ContainerProps) GetPort() float64 {
-	var returns float64
-	_jsii_.Get(
-		c,
-		"port",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (c *ContainerProps) GetReadiness() ProbeIface {
-	var returns ProbeIface
-	_jsii_.Get(
-		c,
-		"readiness",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ProbeIface)(nil)).Elem(): reflect.TypeOf((*Probe)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ContainerProps) GetStartup() ProbeIface {
-	var returns ProbeIface
-	_jsii_.Get(
-		c,
-		"startup",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ProbeIface)(nil)).Elem(): reflect.TypeOf((*Probe)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ContainerProps) GetVolumeMounts() []VolumeMountIface {
-	var returns []VolumeMountIface
-	_jsii_.Get(
-		c,
-		"volumeMounts",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeMountIface)(nil)).Elem(): reflect.TypeOf((*VolumeMount)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (c *ContainerProps) GetWorkingDir() string {
-	var returns string
-	_jsii_.Get(
-		c,
-		"workingDir",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// Class interface
-type DeploymentIface interface {
-	constructs.IConstructIface
-	IResourceIface
-	IPodTemplateIface
-	IPodSpecIface
-	GetApiObject() cdk8s.ApiObjectIface
-	GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetName() string
-	GetContainers() []ContainerIface
-	GetLabelSelector() map[string]string
-	GetPodMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetReplicas() float64
-	GetVolumes() []VolumeIface
-	GetRestartPolicy() RestartPolicy
-	GetServiceAccount() IServiceAccountIface
-	OnPrepare()
-	OnSynthesize(session constructs.ISynthesisSessionIface)
-	OnValidate() []string
-	ToString() string
-	AddContainer(container ContainerPropsIface) ContainerIface
-	AddVolume(volume VolumeIface)
-	Expose(port float64, options ExposeOptionsIface) ServiceIface
-	SelectByLabel(key string, value string)
 }
 
 // A Deployment provides declarative updates for Pods and ReplicaSets.
@@ -1050,255 +606,161 @@ type DeploymentIface interface {
 // - Use the status of the Deployment as an indicator that a rollout has stuck.
 // - Clean up older ReplicaSets that you don't need anymore.
 // Experimental.
-// Struct proxy
-type Deployment struct {
-	// The underlying cdk8s API object.
-	// See: base.Resource.apiObject
-	//
-	// Experimental.
-	ApiObject cdk8s.ApiObjectIface `json:"apiObject"`
-	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataDefinitionIface `json:"metadata"`
-	// The name of this API object.
-	// Experimental.
-	Name string `json:"name"`
-	// The containers belonging to the pod.
-	//
-	// Use `addContainer` to add containers.
-	// Experimental.
-	Containers []ContainerIface `json:"containers"`
-	// The labels this deployment will match against in order to select pods.
-	//
-	// Returns a a copy. Use `selectByLabel()` to add labels.
-	// Experimental.
-	LabelSelector map[string]string `json:"labelSelector"`
-	// Provides read/write access to the underlying pod metadata of the resource.
-	// Experimental.
-	PodMetadata cdk8s.ApiObjectMetadataDefinitionIface `json:"podMetadata"`
-	// Number of desired pods.
-	// Experimental.
-	Replicas float64 `json:"replicas"`
-	// The volumes associated with this pod.
-	//
-	// Use `addVolume` to add volumes.
-	// Experimental.
-	Volumes []VolumeIface `json:"volumes"`
-	// Restart policy for all containers within the pod.
-	// Experimental.
-	RestartPolicy RestartPolicy `json:"restartPolicy"`
-	// The service account used to run this pod.
-	// Experimental.
-	ServiceAccount IServiceAccountIface `json:"serviceAccount"`
+type Deployment interface {
+	Resource
+	IPodTemplate
+	ApiObject() cdk8s.ApiObject
+	Containers() []Container
+	LabelSelector() map[string]string
+	PodMetadata() cdk8s.ApiObjectMetadataDefinition
+	Replicas() float64
+	RestartPolicy() RestartPolicy
+	ServiceAccount() IServiceAccount
+	Volumes() []Volume
+	AddContainer(container ContainerProps) Container
+	AddVolume(volume Volume)
+	Expose(port float64, options ExposeOptions) Service
+	SelectByLabel(key string, value string)
 }
 
-func (d *Deployment) GetApiObject() cdk8s.ApiObjectIface {
-	var returns cdk8s.ApiObjectIface
+// The jsii proxy struct for Deployment
+type deployment struct {
+	resource // extends cdk8s-plus-17.Resource
+	iPodTemplate // implements cdk8s-plus-17.IPodTemplate
+}
+
+func (d *deployment) ApiObject() cdk8s.ApiObject {
+	var returns cdk8s.ApiObject
 	_jsii_.Get(
 		d,
 		"apiObject",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObject)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (d *Deployment) GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
-	_jsii_.Get(
-		d,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (d *Deployment) GetName() string {
-	var returns string
-	_jsii_.Get(
-		d,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (d *Deployment) GetContainers() []ContainerIface {
-	var returns []ContainerIface
+func (d *deployment) Containers() []Container {
+	var returns []Container
 	_jsii_.Get(
 		d,
 		"containers",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (d *Deployment) GetLabelSelector() map[string]string {
+func (d *deployment) LabelSelector() map[string]string {
 	var returns map[string]string
 	_jsii_.Get(
 		d,
 		"labelSelector",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (d *Deployment) GetPodMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
+func (d *deployment) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
 		d,
 		"podMetadata",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (d *Deployment) GetReplicas() float64 {
+func (d *deployment) Replicas() float64 {
 	var returns float64
 	_jsii_.Get(
 		d,
 		"replicas",
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
-func (d *Deployment) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		d,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (d *Deployment) GetRestartPolicy() RestartPolicy {
+func (d *deployment) RestartPolicy() RestartPolicy {
 	var returns RestartPolicy
 	_jsii_.Get(
 		d,
 		"restartPolicy",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (d *Deployment) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
+func (d *deployment) ServiceAccount() IServiceAccount {
+	var returns IServiceAccount
 	_jsii_.Get(
 		d,
 		"serviceAccount",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
+	)
+	return returns
+}
+
+func (d *deployment) Volumes() []Volume {
+	var returns []Volume
+	_jsii_.Get(
+		d,
+		"volumes",
+		&returns,
+	)
+	return returns
+}
+
+func (d *deployment) Metadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
+	_jsii_.Get(
+		d,
+		"metadata",
+		&returns,
+	)
+	return returns
+}
+
+func (d *deployment) Name() string {
+	var returns string
+	_jsii_.Get(
+		d,
+		"name",
+		&returns,
 	)
 	return returns
 }
 
 
-func NewDeployment(scope constructs.ConstructIface, id string, props DeploymentPropsIface) DeploymentIface {
+func NewDeployment(scope constructs.Construct, id string, props DeploymentProps) Deployment {
 	_init_.Initialize()
-	self := Deployment{}
+	d := deployment{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.Deployment",
 		[]interface{}{scope, id, props},
 		[]_jsii_.FQN{"cdk8s-plus-17.IPodTemplate"},
 		[]_jsii_.Override{},
-		&self,
+		&d,
 	)
-	return &self
+	return &d
 }
 
-func (d *Deployment) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
-		d,
-		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (d *Deployment) OnSynthesize(session constructs.ISynthesisSessionIface) {
-	var returns interface{}
-	_jsii_.Invoke(
-		d,
-		"onSynthesize",
-		[]interface{}{session},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (d *Deployment) OnValidate() []string {
-	var returns []string
-	_jsii_.Invoke(
-		d,
-		"onValidate",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (d *Deployment) ToString() string {
-	var returns string
-	_jsii_.Invoke(
-		d,
-		"toString",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (d *Deployment) AddContainer(container ContainerPropsIface) ContainerIface {
-	var returns ContainerIface
+// Add a container to the pod.
+// Experimental.
+func (d *deployment) AddContainer(container ContainerProps) Container {
+	var returns Container
 	_jsii_.Invoke(
 		d,
 		"addContainer",
 		[]interface{}{container},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (d *Deployment) AddVolume(volume VolumeIface) {
+// Add a volume to the pod.
+// Experimental.
+func (d *deployment) AddVolume(volume Volume) {
 	var returns interface{}
 	_jsii_.Invoke(
 		d,
@@ -1306,26 +768,30 @@ func (d *Deployment) AddVolume(volume VolumeIface) {
 		[]interface{}{volume},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (d *Deployment) Expose(port float64, options ExposeOptionsIface) ServiceIface {
-	var returns ServiceIface
+// Expose a deployment via a service.
+//
+// This is equivalent to running `kubectl expose deployment <deployment-name>`.
+// Experimental.
+func (d *deployment) Expose(port float64, options ExposeOptions) Service {
+	var returns Service
 	_jsii_.Invoke(
 		d,
 		"expose",
 		[]interface{}{port, options},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ServiceIface)(nil)).Elem(): reflect.TypeOf((*Service)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (d *Deployment) SelectByLabel(key string, value string) {
+// Configure a label selector to this deployment.
+//
+// Pods that have the label will be selected by deployments configured with this spec.
+// Experimental.
+func (d *deployment) SelectByLabel(key string, value string) {
 	var returns interface{}
 	_jsii_.Invoke(
 		d,
@@ -1333,30 +799,85 @@ func (d *Deployment) SelectByLabel(key string, value string) {
 		[]interface{}{key, value},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-// DeploymentPropsIface is the public interface for the custom type DeploymentProps
+// Perform final modifications before synthesis.
+//
+// This method can be implemented by derived constructs in order to perform
+// final changes before synthesis. prepare() will be called after child
+// constructs have been prepared.
+//
+// This is an advanced framework feature. Only use this if you
+// understand the implications.
 // Experimental.
-type DeploymentPropsIface interface {
-	GetMetadata() cdk8s.ApiObjectMetadataIface
-	GetContainers() []ContainerPropsIface
-	GetRestartPolicy() RestartPolicy
-	GetServiceAccount() IServiceAccountIface
-	GetVolumes() []VolumeIface
-	GetPodMetadata() cdk8s.ApiObjectMetadataIface
-	GetDefaultSelector() bool
-	GetReplicas() float64
+func (d *deployment) OnPrepare() {
+	var returns interface{}
+	_jsii_.Invoke(
+		d,
+		"onPrepare",
+		[]interface{}{},
+		false,
+		&returns,
+	)
+}
+
+// Allows this construct to emit artifacts into the cloud assembly during synthesis.
+//
+// This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
+// as they participate in synthesizing the cloud assembly.
+// Experimental.
+func (d *deployment) OnSynthesize(session constructs.ISynthesisSession) {
+	var returns interface{}
+	_jsii_.Invoke(
+		d,
+		"onSynthesize",
+		[]interface{}{session},
+		false,
+		&returns,
+	)
+}
+
+// Validate the current construct.
+//
+// This method can be implemented by derived constructs in order to perform
+// validation logic. It is called on all constructs before synthesis.
+//
+// Returns: An array of validation error messages, or an empty array if there the construct is valid.
+// Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
+// instead of overriding this method.
+func (d *deployment) OnValidate() []string {
+	var returns []string
+	_jsii_.Invoke(
+		d,
+		"onValidate",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
+}
+
+// Returns a string representation of this construct.
+// Experimental.
+func (d *deployment) ToString() string {
+	var returns string
+	_jsii_.Invoke(
+		d,
+		"toString",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
 }
 
 // Properties for initialization of `Deployment`.
 // Experimental.
-// Struct proxy
 type DeploymentProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataIface `json:"metadata"`
+	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
 	// List of containers belonging to the pod.
 	//
 	// Containers cannot currently be
@@ -1364,7 +885,7 @@ type DeploymentProps struct {
 	//
 	// You can add additionnal containers using `podSpec.addContainer()`
 	// Experimental.
-	Containers []ContainerPropsIface `json:"containers"`
+	Containers []ContainerProps `json:"containers"`
 	// Restart policy for all containers within the pod.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	//
@@ -1381,17 +902,17 @@ type DeploymentProps struct {
 	// See: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 	//
 	// Experimental.
-	ServiceAccount IServiceAccountIface `json:"serviceAccount"`
+	ServiceAccount IServiceAccount `json:"serviceAccount"`
 	// List of volumes that can be mounted by containers belonging to the pod.
 	//
 	// You can also add volumes later using `podSpec.addVolume()`
 	// See: https://kubernetes.io/docs/concepts/storage/volumes
 	//
 	// Experimental.
-	Volumes []VolumeIface `json:"volumes"`
+	Volumes []Volume `json:"volumes"`
 	// The pod metadata.
 	// Experimental.
-	PodMetadata cdk8s.ApiObjectMetadataIface `json:"podMetadata"`
+	PodMetadata cdk8s.ApiObjectMetadata `json:"podMetadata"`
 	// Automatically allocates a pod selector for this deployment.
 	//
 	// If this is set to `false` you must define your selector through
@@ -1403,126 +924,45 @@ type DeploymentProps struct {
 	Replicas float64 `json:"replicas"`
 }
 
-func (d *DeploymentProps) GetMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		d,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
+// ToResourceProps is a convenience function to obtain a new ResourceProps from this DeploymentProps.
+func (d *DeploymentProps) ToResourceProps() ResourceProps {
+	return ResourceProps {
+		Metadata: d.Metadata,
+	}
 }
 
-func (d *DeploymentProps) GetContainers() []ContainerPropsIface {
-	var returns []ContainerPropsIface
-	_jsii_.Get(
-		d,
-		"containers",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerPropsIface)(nil)).Elem(): reflect.TypeOf((*ContainerProps)(nil)).Elem(),
-		},
-	)
-	return returns
+// ToPodSpecProps is a convenience function to obtain a new PodSpecProps from this DeploymentProps.
+func (d *DeploymentProps) ToPodSpecProps() PodSpecProps {
+	return PodSpecProps {
+		Containers: d.Containers,
+		RestartPolicy: d.RestartPolicy,
+		ServiceAccount: d.ServiceAccount,
+		Volumes: d.Volumes,
+	}
 }
 
-func (d *DeploymentProps) GetRestartPolicy() RestartPolicy {
-	var returns RestartPolicy
-	_jsii_.Get(
-		d,
-		"restartPolicy",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
-	)
-	return returns
+// ToPodTemplateProps is a convenience function to obtain a new PodTemplateProps from this DeploymentProps.
+func (d *DeploymentProps) ToPodTemplateProps() PodTemplateProps {
+	return PodTemplateProps {
+		Containers: d.Containers,
+		RestartPolicy: d.RestartPolicy,
+		ServiceAccount: d.ServiceAccount,
+		Volumes: d.Volumes,
+		PodMetadata: d.PodMetadata,
+	}
 }
-
-func (d *DeploymentProps) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
-	_jsii_.Get(
-		d,
-		"serviceAccount",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (d *DeploymentProps) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		d,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (d *DeploymentProps) GetPodMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		d,
-		"podMetadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (d *DeploymentProps) GetDefaultSelector() bool {
-	var returns bool
-	_jsii_.Get(
-		d,
-		"defaultSelector",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (d *DeploymentProps) GetReplicas() float64 {
-	var returns float64
-	_jsii_.Get(
-		d,
-		"replicas",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
 
 // The medium on which to store the volume.
 // Experimental.
 type EmptyDirMedium string
 
 const (
-	EmptyDirMediumDefault EmptyDirMedium = "DEFAULT"
-	EmptyDirMediumMemory EmptyDirMedium = "MEMORY"
+	EmptyDirMedium_DEFAULT EmptyDirMedium = "DEFAULT"
+	EmptyDirMedium_MEMORY EmptyDirMedium = "MEMORY"
 )
-
-// EmptyDirVolumeOptionsIface is the public interface for the custom type EmptyDirVolumeOptions
-// Experimental.
-type EmptyDirVolumeOptionsIface interface {
-	GetMedium() EmptyDirMedium
-	GetSizeLimit() cdk8s.SizeIface
-}
 
 // Options for volumes populated with an empty directory.
 // Experimental.
-// Struct proxy
 type EmptyDirVolumeOptions struct {
 	// By default, emptyDir volumes are stored on whatever medium is backing the node - that might be disk or SSD or network storage, depending on your environment.
 	//
@@ -1540,175 +980,112 @@ type EmptyDirVolumeOptions struct {
 	// medium EmptyDir would be the minimum value between the SizeLimit specified
 	// here and the sum of memory limits of all containers in a pod.
 	// Experimental.
-	SizeLimit cdk8s.SizeIface `json:"sizeLimit"`
-}
-
-func (e *EmptyDirVolumeOptions) GetMedium() EmptyDirMedium {
-	var returns EmptyDirMedium
-	_jsii_.Get(
-		e,
-		"medium",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*EmptyDirMedium)(nil)).Elem(): reflect.TypeOf((*EmptyDirMedium)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (e *EmptyDirVolumeOptions) GetSizeLimit() cdk8s.SizeIface {
-	var returns cdk8s.SizeIface
-	_jsii_.Get(
-		e,
-		"sizeLimit",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.SizeIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Size)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-
-// Class interface
-type EnvValueIface interface {
-	GetValue() interface{}
-	GetValueFrom() interface{}
+	SizeLimit cdk8s.Size `json:"sizeLimit"`
 }
 
 // Utility class for creating reading env values from various sources.
 // Experimental.
-// Struct proxy
-type EnvValue struct {
-	// Experimental.
-	Value interface{} `json:"value"`
-	// Experimental.
-	ValueFrom interface{} `json:"valueFrom"`
+type EnvValue interface {
+	Value() interface{}
+	ValueFrom() interface{}
 }
 
-func (e *EnvValue) GetValue() interface{} {
+// The jsii proxy struct for EnvValue
+type envValue struct {
+	_ byte // padding
+}
+
+func (e *envValue) Value() interface{} {
 	var returns interface{}
 	_jsii_.Get(
 		e,
 		"value",
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
-func (e *EnvValue) GetValueFrom() interface{} {
+func (e *envValue) ValueFrom() interface{} {
 	var returns interface{}
 	_jsii_.Get(
 		e,
 		"valueFrom",
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
 
-func EnvValue_FromConfigMap(configMap IConfigMapIface, key string, options EnvValueFromConfigMapOptionsIface) EnvValueIface {
+// Create a value by reading a specific key inside a config map.
+// Experimental.
+func EnvValue_FromConfigMap(configMap IConfigMap, key string, options EnvValueFromConfigMapOptions) EnvValue {
 	_init_.Initialize()
-	var returns EnvValueIface
-	_jsii_.InvokeStatic(
+	var returns EnvValue
+	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.EnvValue",
 		"fromConfigMap",
 		[]interface{}{configMap, key, options},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*EnvValueIface)(nil)).Elem(): reflect.TypeOf((*EnvValue)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func EnvValue_FromProcess(key string, options EnvValueFromProcessOptionsIface) EnvValueIface {
+// Create a value from a key in the current process environment.
+// Experimental.
+func EnvValue_FromProcess(key string, options EnvValueFromProcessOptions) EnvValue {
 	_init_.Initialize()
-	var returns EnvValueIface
-	_jsii_.InvokeStatic(
+	var returns EnvValue
+	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.EnvValue",
 		"fromProcess",
 		[]interface{}{key, options},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*EnvValueIface)(nil)).Elem(): reflect.TypeOf((*EnvValue)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func EnvValue_FromSecretValue(secretValue SecretValueIface, options EnvValueFromSecretOptionsIface) EnvValueIface {
+// Defines an environment value from a secret JSON value.
+// Experimental.
+func EnvValue_FromSecretValue(secretValue SecretValue, options EnvValueFromSecretOptions) EnvValue {
 	_init_.Initialize()
-	var returns EnvValueIface
-	_jsii_.InvokeStatic(
+	var returns EnvValue
+	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.EnvValue",
 		"fromSecretValue",
 		[]interface{}{secretValue, options},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*EnvValueIface)(nil)).Elem(): reflect.TypeOf((*EnvValue)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func EnvValue_FromValue(value string) EnvValueIface {
+// Create a value from the given argument.
+// Experimental.
+func EnvValue_FromValue(value string) EnvValue {
 	_init_.Initialize()
-	var returns EnvValueIface
-	_jsii_.InvokeStatic(
+	var returns EnvValue
+	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.EnvValue",
 		"fromValue",
 		[]interface{}{value},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*EnvValueIface)(nil)).Elem(): reflect.TypeOf((*EnvValue)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-// EnvValueFromConfigMapOptionsIface is the public interface for the custom type EnvValueFromConfigMapOptions
-// Experimental.
-type EnvValueFromConfigMapOptionsIface interface {
-	GetOptional() bool
-}
-
 // Options to specify an envionment variable value from a ConfigMap key.
 // Experimental.
-// Struct proxy
 type EnvValueFromConfigMapOptions struct {
 	// Specify whether the ConfigMap or its key must be defined.
 	// Experimental.
 	Optional bool `json:"optional"`
 }
 
-func (e *EnvValueFromConfigMapOptions) GetOptional() bool {
-	var returns bool
-	_jsii_.Get(
-		e,
-		"optional",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// EnvValueFromProcessOptionsIface is the public interface for the custom type EnvValueFromProcessOptions
-// Experimental.
-type EnvValueFromProcessOptionsIface interface {
-	GetRequired() bool
-}
-
 // Options to specify an environment variable value from the process environment.
 // Experimental.
-// Struct proxy
 type EnvValueFromProcessOptions struct {
 	// Specify whether the key must exist in the environment.
 	//
@@ -1717,57 +1094,16 @@ type EnvValueFromProcessOptions struct {
 	Required bool `json:"required"`
 }
 
-func (e *EnvValueFromProcessOptions) GetRequired() bool {
-	var returns bool
-	_jsii_.Get(
-		e,
-		"required",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// EnvValueFromSecretOptionsIface is the public interface for the custom type EnvValueFromSecretOptions
-// Experimental.
-type EnvValueFromSecretOptionsIface interface {
-	GetOptional() bool
-}
-
 // Options to specify an environment variable value from a Secret.
 // Experimental.
-// Struct proxy
 type EnvValueFromSecretOptions struct {
 	// Specify whether the Secret or its key must be defined.
 	// Experimental.
 	Optional bool `json:"optional"`
 }
 
-func (e *EnvValueFromSecretOptions) GetOptional() bool {
-	var returns bool
-	_jsii_.Get(
-		e,
-		"optional",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// ExposeOptionsIface is the public interface for the custom type ExposeOptions
-// Experimental.
-type ExposeOptionsIface interface {
-	GetName() string
-	GetProtocol() Protocol
-	GetServiceType() ServiceType
-	GetTargetPort() float64
-}
-
 // Options for exposing a deployment via a service.
 // Experimental.
-// Struct proxy
 type ExposeOptions struct {
 	// The name of the service to expose.
 	//
@@ -1787,69 +1123,8 @@ type ExposeOptions struct {
 	TargetPort float64 `json:"targetPort"`
 }
 
-func (e *ExposeOptions) GetName() string {
-	var returns string
-	_jsii_.Get(
-		e,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (e *ExposeOptions) GetProtocol() Protocol {
-	var returns Protocol
-	_jsii_.Get(
-		e,
-		"protocol",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*Protocol)(nil)).Elem(): reflect.TypeOf((*Protocol)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (e *ExposeOptions) GetServiceType() ServiceType {
-	var returns ServiceType
-	_jsii_.Get(
-		e,
-		"serviceType",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ServiceType)(nil)).Elem(): reflect.TypeOf((*ServiceType)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (e *ExposeOptions) GetTargetPort() float64 {
-	var returns float64
-	_jsii_.Get(
-		e,
-		"targetPort",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// HttpGetProbeOptionsIface is the public interface for the custom type HttpGetProbeOptions
-// Experimental.
-type HttpGetProbeOptionsIface interface {
-	GetFailureThreshold() float64
-	GetInitialDelaySeconds() cdk8s.DurationIface
-	GetPeriodSeconds() cdk8s.DurationIface
-	GetSuccessThreshold() float64
-	GetTimeoutSeconds() cdk8s.DurationIface
-	GetPort() float64
-}
-
 // Options for `Probe.fromHttpGet()`.
 // Experimental.
-// Struct proxy
 type HttpGetProbeOptions struct {
 	// Minimum consecutive failures for the probe to be considered failed after having succeeded.
 	//
@@ -1860,12 +1135,12 @@ type HttpGetProbeOptions struct {
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
 	//
 	// Experimental.
-	InitialDelaySeconds cdk8s.DurationIface `json:"initialDelaySeconds"`
+	InitialDelaySeconds cdk8s.Duration `json:"initialDelaySeconds"`
 	// How often (in seconds) to perform the probe.
 	//
 	// Default to 10 seconds. Minimum value is 1.
 	// Experimental.
-	PeriodSeconds cdk8s.DurationIface `json:"periodSeconds"`
+	PeriodSeconds cdk8s.Duration `json:"periodSeconds"`
 	// Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1.
 	//
 	// Must be 1 for liveness and startup. Minimum value is 1.
@@ -1877,151 +1152,81 @@ type HttpGetProbeOptions struct {
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
 	//
 	// Experimental.
-	TimeoutSeconds cdk8s.DurationIface `json:"timeoutSeconds"`
+	TimeoutSeconds cdk8s.Duration `json:"timeoutSeconds"`
 	// The TCP port to use when sending the GET request.
 	// Experimental.
 	Port float64 `json:"port"`
 }
 
-func (h *HttpGetProbeOptions) GetFailureThreshold() float64 {
-	var returns float64
-	_jsii_.Get(
-		h,
-		"failureThreshold",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
+// ToProbeOptions is a convenience function to obtain a new ProbeOptions from this HttpGetProbeOptions.
+func (h *HttpGetProbeOptions) ToProbeOptions() ProbeOptions {
+	return ProbeOptions {
+		FailureThreshold: h.FailureThreshold,
+		InitialDelaySeconds: h.InitialDelaySeconds,
+		PeriodSeconds: h.PeriodSeconds,
+		SuccessThreshold: h.SuccessThreshold,
+		TimeoutSeconds: h.TimeoutSeconds,
+	}
 }
-
-func (h *HttpGetProbeOptions) GetInitialDelaySeconds() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
-	_jsii_.Get(
-		h,
-		"initialDelaySeconds",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (h *HttpGetProbeOptions) GetPeriodSeconds() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
-	_jsii_.Get(
-		h,
-		"periodSeconds",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (h *HttpGetProbeOptions) GetSuccessThreshold() float64 {
-	var returns float64
-	_jsii_.Get(
-		h,
-		"successThreshold",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (h *HttpGetProbeOptions) GetTimeoutSeconds() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
-	_jsii_.Get(
-		h,
-		"timeoutSeconds",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (h *HttpGetProbeOptions) GetPort() float64 {
-	var returns float64
-	_jsii_.Get(
-		h,
-		"port",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
 
 // Represents a config map.
 // Experimental.
-type IConfigMapIface interface {
-	IResourceIface
+type IConfigMap interface {
+	IResource
 }
 
-type IConfigMap struct {}
-
-func (i *IConfigMap) GetName() string {
-	var returns string
-	_jsii_.Get(
-		i,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
+// The jsii proxy for IConfigMap
+type iConfigMap struct {
+	iResource // extends cdk8s-plus-17.IResource
 }
 
 // Represents a resource that can be configured with a kuberenets pod spec. (e.g `Deployment`, `Job`, `Pod`, ...).
 //
 // Use the `PodSpec` class as an implementation helper.
 // Experimental.
-type IPodSpecIface interface {
+type IPodSpec interface {
 	// Add a container to the pod.
 	// Experimental.
-	AddContainer(container ContainerPropsIface) ContainerIface
+	AddContainer(container ContainerProps) Container
 	// Add a volume to the pod.
 	// Experimental.
-	AddVolume(volume VolumeIface)
+	AddVolume(volume Volume)
 	// The containers belonging to the pod.
 	//
 	// Use `addContainer` to add containers.
 	// Experimental.
-	GetContainers() []ContainerIface
+	Containers() []Container
+	// Restart policy for all containers within the pod.
+	// Experimental.
+	RestartPolicy() RestartPolicy
+	// The service account used to run this pod.
+	// Experimental.
+	ServiceAccount() IServiceAccount
 	// The volumes associated with this pod.
 	//
 	// Use `addVolume` to add volumes.
 	// Experimental.
-	GetVolumes() []VolumeIface
-	// Restart policy for all containers within the pod.
-	// Experimental.
-	GetRestartPolicy() RestartPolicy
-	// The service account used to run this pod.
-	// Experimental.
-	GetServiceAccount() IServiceAccountIface
+	Volumes() []Volume
 }
 
-type IPodSpec struct {}
+// The jsii proxy for IPodSpec
+type iPodSpec struct {
+	_ byte // padding
+}
 
-func (i *IPodSpec) AddContainer(container ContainerPropsIface) ContainerIface {
-	var returns ContainerIface
+func (i *iPodSpec) AddContainer(container ContainerProps) Container {
+	var returns Container
 	_jsii_.Invoke(
 		i,
 		"addContainer",
 		[]interface{}{container},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (i *IPodSpec) AddVolume(volume VolumeIface) {
+func (i *iPodSpec) AddVolume(volume Volume) {
 	var returns interface{}
 	_jsii_.Invoke(
 		i,
@@ -2029,58 +1234,45 @@ func (i *IPodSpec) AddVolume(volume VolumeIface) {
 		[]interface{}{volume},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (i *IPodSpec) GetContainers() []ContainerIface {
-	var returns []ContainerIface
+func (i *iPodSpec) Containers() []Container {
+	var returns []Container
 	_jsii_.Get(
 		i,
 		"containers",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (i *IPodSpec) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		i,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (i *IPodSpec) GetRestartPolicy() RestartPolicy {
+func (i *iPodSpec) RestartPolicy() RestartPolicy {
 	var returns RestartPolicy
 	_jsii_.Get(
 		i,
 		"restartPolicy",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (i *IPodSpec) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
+func (i *iPodSpec) ServiceAccount() IServiceAccount {
+	var returns IServiceAccount
 	_jsii_.Get(
 		i,
 		"serviceAccount",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
+	)
+	return returns
+}
+
+func (i *iPodSpec) Volumes() []Volume {
+	var returns []Volume
+	_jsii_.Get(
+		i,
+		"volumes",
+		&returns,
 	)
 	return returns
 }
@@ -2089,190 +1281,79 @@ func (i *IPodSpec) GetServiceAccount() IServiceAccountIface {
 //
 // Use the `PodTemplate` class as an implementation helper.
 // Experimental.
-type IPodTemplateIface interface {
-	IPodSpecIface
+type IPodTemplate interface {
+	IPodSpec
 	// Provides read/write access to the underlying pod metadata of the resource.
 	// Experimental.
-	GetPodMetadata() cdk8s.ApiObjectMetadataDefinitionIface
+	PodMetadata() cdk8s.ApiObjectMetadataDefinition
 }
 
-type IPodTemplate struct {}
-
-func (i *IPodTemplate) AddContainer(container ContainerPropsIface) ContainerIface {
-	var returns ContainerIface
-	_jsii_.Invoke(
-		i,
-		"addContainer",
-		[]interface{}{container},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
-	)
-	return returns
+// The jsii proxy for IPodTemplate
+type iPodTemplate struct {
+	iPodSpec // extends cdk8s-plus-17.IPodSpec
 }
 
-func (i *IPodTemplate) AddVolume(volume VolumeIface) {
-	var returns interface{}
-	_jsii_.Invoke(
-		i,
-		"addVolume",
-		[]interface{}{volume},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (i *IPodTemplate) GetContainers() []ContainerIface {
-	var returns []ContainerIface
-	_jsii_.Get(
-		i,
-		"containers",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (i *IPodTemplate) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		i,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (i *IPodTemplate) GetRestartPolicy() RestartPolicy {
-	var returns RestartPolicy
-	_jsii_.Get(
-		i,
-		"restartPolicy",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (i *IPodTemplate) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
-	_jsii_.Get(
-		i,
-		"serviceAccount",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (i *IPodTemplate) GetPodMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
+func (i *iPodTemplate) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
 		i,
 		"podMetadata",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
 // Represents a resource.
 // Experimental.
-type IResourceIface interface {
+type IResource interface {
 	// The Kubernetes name of this resource.
 	// Experimental.
-	GetName() string
+	Name() string
 }
 
-type IResource struct {}
+// The jsii proxy for IResource
+type iResource struct {
+	_ byte // padding
+}
 
-func (i *IResource) GetName() string {
+func (i *iResource) Name() string {
 	var returns string
 	_jsii_.Get(
 		i,
 		"name",
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
 // Experimental.
-type ISecretIface interface {
-	IResourceIface
+type ISecret interface {
+	IResource
 }
 
-type ISecret struct {}
-
-func (i *ISecret) GetName() string {
-	var returns string
-	_jsii_.Get(
-		i,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
+// The jsii proxy for ISecret
+type iSecret struct {
+	iResource // extends cdk8s-plus-17.IResource
 }
 
 // Experimental.
-type IServiceAccountIface interface {
-	IResourceIface
+type IServiceAccount interface {
+	IResource
 }
 
-type IServiceAccount struct {}
-
-func (i *IServiceAccount) GetName() string {
-	var returns string
-	_jsii_.Get(
-		i,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
+// The jsii proxy for IServiceAccount
+type iServiceAccount struct {
+	iResource // extends cdk8s-plus-17.IResource
 }
 
 // Experimental.
 type ImagePullPolicy string
 
 const (
-	ImagePullPolicyAlways ImagePullPolicy = "ALWAYS"
-	ImagePullPolicyIfNotPresent ImagePullPolicy = "IF_NOT_PRESENT"
-	ImagePullPolicyNever ImagePullPolicy = "NEVER"
+	ImagePullPolicy_ALWAYS ImagePullPolicy = "ALWAYS"
+	ImagePullPolicy_IF_NOT_PRESENT ImagePullPolicy = "IF_NOT_PRESENT"
+	ImagePullPolicy_NEVER ImagePullPolicy = "NEVER"
 )
-
-// Class interface
-type IngressV1Beta1Iface interface {
-	constructs.IConstructIface
-	IResourceIface
-	GetApiObject() cdk8s.ApiObjectIface
-	GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetName() string
-	OnPrepare()
-	OnSynthesize(session constructs.ISynthesisSessionIface)
-	OnValidate() []string
-	ToString() string
-	AddDefaultBackend(backend IngressV1Beta1BackendIface)
-	AddHostDefaultBackend(host string, backend IngressV1Beta1BackendIface)
-	AddHostRule(host string, path string, backend IngressV1Beta1BackendIface)
-	AddRule(path string, backend IngressV1Beta1BackendIface)
-	AddRules(rules IngressV1Beta1RuleIface)
-}
 
 // Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a backend.
 //
@@ -2280,124 +1361,53 @@ type IngressV1Beta1Iface interface {
 // externally-reachable urls, load balance traffic, terminate SSL, offer name
 // based virtual hosting etc.
 // Experimental.
-// Struct proxy
-type IngressV1Beta1 struct {
-	// The underlying cdk8s API object.
-	// See: base.Resource.apiObject
-	//
-	// Experimental.
-	ApiObject cdk8s.ApiObjectIface `json:"apiObject"`
-	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataDefinitionIface `json:"metadata"`
-	// The name of this API object.
-	// Experimental.
-	Name string `json:"name"`
+type IngressV1Beta1 interface {
+	Resource
+	ApiObject() cdk8s.ApiObject
+	AddDefaultBackend(backend IngressV1Beta1Backend)
+	AddHostDefaultBackend(host string, backend IngressV1Beta1Backend)
+	AddHostRule(host string, path string, backend IngressV1Beta1Backend)
+	AddRule(path string, backend IngressV1Beta1Backend)
+	AddRules(rules IngressV1Beta1Rule)
+	OnValidate() []string
 }
 
-func (i *IngressV1Beta1) GetApiObject() cdk8s.ApiObjectIface {
-	var returns cdk8s.ApiObjectIface
+// The jsii proxy struct for IngressV1Beta1
+type ingressV1Beta1 struct {
+	resource // extends cdk8s-plus-17.Resource
+}
+
+func (i *ingressV1Beta1) ApiObject() cdk8s.ApiObject {
+	var returns cdk8s.ApiObject
 	_jsii_.Get(
 		i,
 		"apiObject",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObject)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (i *IngressV1Beta1) GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
-	_jsii_.Get(
-		i,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (i *IngressV1Beta1) GetName() string {
-	var returns string
-	_jsii_.Get(
-		i,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
 
-func NewIngressV1Beta1(scope constructs.ConstructIface, id string, props IngressV1Beta1PropsIface) IngressV1Beta1Iface {
+func NewIngressV1Beta1(scope constructs.Construct, id string, props IngressV1Beta1Props) IngressV1Beta1 {
 	_init_.Initialize()
-	self := IngressV1Beta1{}
+	i := ingressV1Beta1{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.IngressV1Beta1",
 		[]interface{}{scope, id, props},
 		[]_jsii_.FQN{},
 		[]_jsii_.Override{},
-		&self,
+		&i,
 	)
-	return &self
+	return &i
 }
 
-func (i *IngressV1Beta1) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
-		i,
-		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (i *IngressV1Beta1) OnSynthesize(session constructs.ISynthesisSessionIface) {
-	var returns interface{}
-	_jsii_.Invoke(
-		i,
-		"onSynthesize",
-		[]interface{}{session},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (i *IngressV1Beta1) OnValidate() []string {
-	var returns []string
-	_jsii_.Invoke(
-		i,
-		"onValidate",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (i *IngressV1Beta1) ToString() string {
-	var returns string
-	_jsii_.Invoke(
-		i,
-		"toString",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (i *IngressV1Beta1) AddDefaultBackend(backend IngressV1Beta1BackendIface) {
+// Defines the default backend for this ingress.
+//
+// A default backend capable of
+// servicing requests that don't match any rule.
+// Experimental.
+func (i *ingressV1Beta1) AddDefaultBackend(backend IngressV1Beta1Backend) {
 	var returns interface{}
 	_jsii_.Invoke(
 		i,
@@ -2405,11 +1415,15 @@ func (i *IngressV1Beta1) AddDefaultBackend(backend IngressV1Beta1BackendIface) {
 		[]interface{}{backend},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (i *IngressV1Beta1) AddHostDefaultBackend(host string, backend IngressV1Beta1BackendIface) {
+// Specify a default backend for a specific host name.
+//
+// This backend will be used as a catch-all for requests
+// targeted to this host name (the `Host` header matches this value).
+// Experimental.
+func (i *ingressV1Beta1) AddHostDefaultBackend(host string, backend IngressV1Beta1Backend) {
 	var returns interface{}
 	_jsii_.Invoke(
 		i,
@@ -2417,11 +1431,12 @@ func (i *IngressV1Beta1) AddHostDefaultBackend(host string, backend IngressV1Bet
 		[]interface{}{host, backend},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (i *IngressV1Beta1) AddHostRule(host string, path string, backend IngressV1Beta1BackendIface) {
+// Adds an ingress rule applied to requests to a specific host and a specific HTTP path (the `Host` header matches this value).
+// Experimental.
+func (i *ingressV1Beta1) AddHostRule(host string, path string, backend IngressV1Beta1Backend) {
 	var returns interface{}
 	_jsii_.Invoke(
 		i,
@@ -2429,11 +1444,12 @@ func (i *IngressV1Beta1) AddHostRule(host string, path string, backend IngressV1
 		[]interface{}{host, path, backend},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (i *IngressV1Beta1) AddRule(path string, backend IngressV1Beta1BackendIface) {
+// Adds an ingress rule applied to requests sent to a specific HTTP path.
+// Experimental.
+func (i *ingressV1Beta1) AddRule(path string, backend IngressV1Beta1Backend) {
 	var returns interface{}
 	_jsii_.Invoke(
 		i,
@@ -2441,11 +1457,12 @@ func (i *IngressV1Beta1) AddRule(path string, backend IngressV1Beta1BackendIface
 		[]interface{}{path, backend},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (i *IngressV1Beta1) AddRules(rules IngressV1Beta1RuleIface) {
+// Adds rules to this ingress.
+// Experimental.
+func (i *ingressV1Beta1) AddRules(rules IngressV1Beta1Rule) {
 	var returns interface{}
 	_jsii_.Invoke(
 		i,
@@ -2453,57 +1470,63 @@ func (i *IngressV1Beta1) AddRules(rules IngressV1Beta1RuleIface) {
 		[]interface{}{rules},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-// Class interface
-type IngressV1Beta1BackendIface interface {
+// (deprecated) Validate the current construct.
+//
+// This method can be implemented by derived constructs in order to perform
+// validation logic. It is called on all constructs before synthesis.
+// Experimental.
+func (i *ingressV1Beta1) OnValidate() []string {
+	var returns []string
+	_jsii_.Invoke(
+		i,
+		"onValidate",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
 }
 
 // The backend for an ingress path.
 // Experimental.
-// Struct proxy
-type IngressV1Beta1Backend struct {
+type IngressV1Beta1Backend interface {
 }
 
-func IngressV1Beta1Backend_FromService(service ServiceIface, options ServiceIngressV1BetaBackendOptionsIface) IngressV1Beta1BackendIface {
+// The jsii proxy struct for IngressV1Beta1Backend
+type ingressV1Beta1Backend struct {
+	_ byte // padding
+}
+
+// A Kubernetes `Service` to use as the backend for this path.
+// Experimental.
+func IngressV1Beta1Backend_FromService(service Service, options ServiceIngressV1BetaBackendOptions) IngressV1Beta1Backend {
 	_init_.Initialize()
-	var returns IngressV1Beta1BackendIface
-	_jsii_.InvokeStatic(
+	var returns IngressV1Beta1Backend
+	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.IngressV1Beta1Backend",
 		"fromService",
 		[]interface{}{service, options},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IngressV1Beta1BackendIface)(nil)).Elem(): reflect.TypeOf((*IngressV1Beta1Backend)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-// IngressV1Beta1PropsIface is the public interface for the custom type IngressV1Beta1Props
-// Experimental.
-type IngressV1Beta1PropsIface interface {
-	GetMetadata() cdk8s.ApiObjectMetadataIface
-	GetDefaultBackend() IngressV1Beta1BackendIface
-	GetRules() []IngressV1Beta1RuleIface
-}
-
 // Properties for `Ingress`.
 // Experimental.
-// Struct proxy
 type IngressV1Beta1Props struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataIface `json:"metadata"`
+	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
 	// The default backend services requests that do not match any rule.
 	//
 	// Using this option or the `addDefaultBackend()` method is equivalent to
 	// adding a rule with both `path` and `host` undefined.
 	// Experimental.
-	DefaultBackend IngressV1Beta1BackendIface `json:"defaultBackend"`
+	DefaultBackend IngressV1Beta1Backend `json:"defaultBackend"`
 	// Routing rules for this ingress.
 	//
 	// Each rule must define an `IngressBackend` that will receive the requests
@@ -2513,55 +1536,14 @@ type IngressV1Beta1Props struct {
 	// You can also add rules later using `addRule()`, `addHostRule()`,
 	// `addDefaultBackend()` and `addHostDefaultBackend()`.
 	// Experimental.
-	Rules []IngressV1Beta1RuleIface `json:"rules"`
+	Rules []IngressV1Beta1Rule `json:"rules"`
 }
 
-func (i *IngressV1Beta1Props) GetMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		i,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (i *IngressV1Beta1Props) GetDefaultBackend() IngressV1Beta1BackendIface {
-	var returns IngressV1Beta1BackendIface
-	_jsii_.Get(
-		i,
-		"defaultBackend",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IngressV1Beta1BackendIface)(nil)).Elem(): reflect.TypeOf((*IngressV1Beta1Backend)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (i *IngressV1Beta1Props) GetRules() []IngressV1Beta1RuleIface {
-	var returns []IngressV1Beta1RuleIface
-	_jsii_.Get(
-		i,
-		"rules",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IngressV1Beta1RuleIface)(nil)).Elem(): reflect.TypeOf((*IngressV1Beta1Rule)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-
-// IngressV1Beta1RuleIface is the public interface for the custom type IngressV1Beta1Rule
-// Experimental.
-type IngressV1Beta1RuleIface interface {
-	GetBackend() IngressV1Beta1BackendIface
-	GetHost() string
-	GetPath() string
+// ToResourceProps is a convenience function to obtain a new ResourceProps from this IngressV1Beta1Props.
+func (i *IngressV1Beta1Props) ToResourceProps() ResourceProps {
+	return ResourceProps {
+		Metadata: i.Metadata,
+	}
 }
 
 // Represents the rules mapping the paths under a specified host to the related backend services.
@@ -2569,11 +1551,10 @@ type IngressV1Beta1RuleIface interface {
 // Incoming requests are first evaluated for a host match,
 // then routed to the backend associated with the matching path.
 // Experimental.
-// Struct proxy
 type IngressV1Beta1Rule struct {
 	// Backend defines the referenced service endpoint to which the traffic will be forwarded to.
 	// Experimental.
-	Backend IngressV1Beta1BackendIface `json:"backend"`
+	Backend IngressV1Beta1Backend `json:"backend"`
 	// Host is the fully qualified domain name of a network host, as defined by RFC 3986.
 	//
 	// Note the following deviations from the "host" part of the URI as
@@ -2590,67 +1571,6 @@ type IngressV1Beta1Rule struct {
 	Path string `json:"path"`
 }
 
-func (i *IngressV1Beta1Rule) GetBackend() IngressV1Beta1BackendIface {
-	var returns IngressV1Beta1BackendIface
-	_jsii_.Get(
-		i,
-		"backend",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IngressV1Beta1BackendIface)(nil)).Elem(): reflect.TypeOf((*IngressV1Beta1Backend)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (i *IngressV1Beta1Rule) GetHost() string {
-	var returns string
-	_jsii_.Get(
-		i,
-		"host",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (i *IngressV1Beta1Rule) GetPath() string {
-	var returns string
-	_jsii_.Get(
-		i,
-		"path",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// Class interface
-type JobIface interface {
-	constructs.IConstructIface
-	IResourceIface
-	IPodTemplateIface
-	IPodSpecIface
-	GetApiObject() cdk8s.ApiObjectIface
-	GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetName() string
-	GetContainers() []ContainerIface
-	GetPodMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetVolumes() []VolumeIface
-	GetActiveDeadline() cdk8s.DurationIface
-	GetBackoffLimit() float64
-	GetRestartPolicy() RestartPolicy
-	GetServiceAccount() IServiceAccountIface
-	GetTtlAfterFinished() cdk8s.DurationIface
-	OnPrepare()
-	OnSynthesize(session constructs.ISynthesisSessionIface)
-	OnValidate() []string
-	ToString() string
-	AddContainer(container ContainerPropsIface) ContainerIface
-	AddVolume(volume VolumeIface)
-}
-
 // A Job creates one or more Pods and ensures that a specified number of them successfully terminate.
 //
 // As pods successfully complete,
@@ -2659,271 +1579,170 @@ type JobIface interface {
 // The Job object will start a new Pod if the first Pod fails or is deleted (for example due to a node hardware failure or a node reboot).
 // You can also use a Job to run multiple Pods in parallel.
 // Experimental.
-// Struct proxy
-type Job struct {
-	// The underlying cdk8s API object.
-	// See: base.Resource.apiObject
-	//
-	// Experimental.
-	ApiObject cdk8s.ApiObjectIface `json:"apiObject"`
-	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataDefinitionIface `json:"metadata"`
-	// The name of this API object.
-	// Experimental.
-	Name string `json:"name"`
-	// The containers belonging to the pod.
-	//
-	// Use `addContainer` to add containers.
-	// Experimental.
-	Containers []ContainerIface `json:"containers"`
-	// Provides read/write access to the underlying pod metadata of the resource.
-	// Experimental.
-	PodMetadata cdk8s.ApiObjectMetadataDefinitionIface `json:"podMetadata"`
-	// The volumes associated with this pod.
-	//
-	// Use `addVolume` to add volumes.
-	// Experimental.
-	Volumes []VolumeIface `json:"volumes"`
-	// Duration before job is terminated.
-	//
-	// If undefined, there is no deadline.
-	// Experimental.
-	ActiveDeadline cdk8s.DurationIface `json:"activeDeadline"`
-	// Number of retries before marking failed.
-	// Experimental.
-	BackoffLimit float64 `json:"backoffLimit"`
-	// Restart policy for all containers within the pod.
-	// Experimental.
-	RestartPolicy RestartPolicy `json:"restartPolicy"`
-	// The service account used to run this pod.
-	// Experimental.
-	ServiceAccount IServiceAccountIface `json:"serviceAccount"`
-	// TTL before the job is deleted after it is finished.
-	// Experimental.
-	TtlAfterFinished cdk8s.DurationIface `json:"ttlAfterFinished"`
+type Job interface {
+	Resource
+	IPodTemplate
+	ActiveDeadline() cdk8s.Duration
+	ApiObject() cdk8s.ApiObject
+	BackoffLimit() float64
+	Containers() []Container
+	PodMetadata() cdk8s.ApiObjectMetadataDefinition
+	RestartPolicy() RestartPolicy
+	ServiceAccount() IServiceAccount
+	TtlAfterFinished() cdk8s.Duration
+	Volumes() []Volume
+	AddContainer(container ContainerProps) Container
+	AddVolume(volume Volume)
 }
 
-func (j *Job) GetApiObject() cdk8s.ApiObjectIface {
-	var returns cdk8s.ApiObjectIface
-	_jsii_.Get(
-		j,
-		"apiObject",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObject)(nil)).Elem(),
-		},
-	)
-	return returns
+// The jsii proxy struct for Job
+type job struct {
+	resource // extends cdk8s-plus-17.Resource
+	iPodTemplate // implements cdk8s-plus-17.IPodTemplate
 }
 
-func (j *Job) GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
-	_jsii_.Get(
-		j,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (j *Job) GetName() string {
-	var returns string
-	_jsii_.Get(
-		j,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (j *Job) GetContainers() []ContainerIface {
-	var returns []ContainerIface
-	_jsii_.Get(
-		j,
-		"containers",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (j *Job) GetPodMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
-	_jsii_.Get(
-		j,
-		"podMetadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (j *Job) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		j,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (j *Job) GetActiveDeadline() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
+func (j *job) ActiveDeadline() cdk8s.Duration {
+	var returns cdk8s.Duration
 	_jsii_.Get(
 		j,
 		"activeDeadline",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (j *Job) GetBackoffLimit() float64 {
+func (j *job) ApiObject() cdk8s.ApiObject {
+	var returns cdk8s.ApiObject
+	_jsii_.Get(
+		j,
+		"apiObject",
+		&returns,
+	)
+	return returns
+}
+
+func (j *job) BackoffLimit() float64 {
 	var returns float64
 	_jsii_.Get(
 		j,
 		"backoffLimit",
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
-func (j *Job) GetRestartPolicy() RestartPolicy {
+func (j *job) Containers() []Container {
+	var returns []Container
+	_jsii_.Get(
+		j,
+		"containers",
+		&returns,
+	)
+	return returns
+}
+
+func (j *job) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
+	_jsii_.Get(
+		j,
+		"podMetadata",
+		&returns,
+	)
+	return returns
+}
+
+func (j *job) RestartPolicy() RestartPolicy {
 	var returns RestartPolicy
 	_jsii_.Get(
 		j,
 		"restartPolicy",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (j *Job) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
+func (j *job) ServiceAccount() IServiceAccount {
+	var returns IServiceAccount
 	_jsii_.Get(
 		j,
 		"serviceAccount",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (j *Job) GetTtlAfterFinished() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
+func (j *job) TtlAfterFinished() cdk8s.Duration {
+	var returns cdk8s.Duration
 	_jsii_.Get(
 		j,
 		"ttlAfterFinished",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
+	)
+	return returns
+}
+
+func (j *job) Volumes() []Volume {
+	var returns []Volume
+	_jsii_.Get(
+		j,
+		"volumes",
+		&returns,
+	)
+	return returns
+}
+
+func (j *job) Metadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
+	_jsii_.Get(
+		j,
+		"metadata",
+		&returns,
+	)
+	return returns
+}
+
+func (j *job) Name() string {
+	var returns string
+	_jsii_.Get(
+		j,
+		"name",
+		&returns,
 	)
 	return returns
 }
 
 
-func NewJob(scope constructs.ConstructIface, id string, props JobPropsIface) JobIface {
+func NewJob(scope constructs.Construct, id string, props JobProps) Job {
 	_init_.Initialize()
-	self := Job{}
+	j := job{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.Job",
 		[]interface{}{scope, id, props},
 		[]_jsii_.FQN{"cdk8s-plus-17.IPodTemplate"},
 		[]_jsii_.Override{},
-		&self,
+		&j,
 	)
-	return &self
+	return &j
 }
 
-func (j *Job) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
-		j,
-		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (j *Job) OnSynthesize(session constructs.ISynthesisSessionIface) {
-	var returns interface{}
-	_jsii_.Invoke(
-		j,
-		"onSynthesize",
-		[]interface{}{session},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (j *Job) OnValidate() []string {
-	var returns []string
-	_jsii_.Invoke(
-		j,
-		"onValidate",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (j *Job) ToString() string {
-	var returns string
-	_jsii_.Invoke(
-		j,
-		"toString",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (j *Job) AddContainer(container ContainerPropsIface) ContainerIface {
-	var returns ContainerIface
+// Add a container to the pod.
+// Experimental.
+func (j *job) AddContainer(container ContainerProps) Container {
+	var returns Container
 	_jsii_.Invoke(
 		j,
 		"addContainer",
 		[]interface{}{container},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (j *Job) AddVolume(volume VolumeIface) {
+// Add a volume to the pod.
+// Experimental.
+func (j *job) AddVolume(volume Volume) {
 	var returns interface{}
 	_jsii_.Invoke(
 		j,
@@ -2931,31 +1750,85 @@ func (j *Job) AddVolume(volume VolumeIface) {
 		[]interface{}{volume},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-// JobPropsIface is the public interface for the custom type JobProps
+// Perform final modifications before synthesis.
+//
+// This method can be implemented by derived constructs in order to perform
+// final changes before synthesis. prepare() will be called after child
+// constructs have been prepared.
+//
+// This is an advanced framework feature. Only use this if you
+// understand the implications.
 // Experimental.
-type JobPropsIface interface {
-	GetMetadata() cdk8s.ApiObjectMetadataIface
-	GetContainers() []ContainerPropsIface
-	GetRestartPolicy() RestartPolicy
-	GetServiceAccount() IServiceAccountIface
-	GetVolumes() []VolumeIface
-	GetPodMetadata() cdk8s.ApiObjectMetadataIface
-	GetActiveDeadline() cdk8s.DurationIface
-	GetBackoffLimit() float64
-	GetTtlAfterFinished() cdk8s.DurationIface
+func (j *job) OnPrepare() {
+	var returns interface{}
+	_jsii_.Invoke(
+		j,
+		"onPrepare",
+		[]interface{}{},
+		false,
+		&returns,
+	)
+}
+
+// Allows this construct to emit artifacts into the cloud assembly during synthesis.
+//
+// This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
+// as they participate in synthesizing the cloud assembly.
+// Experimental.
+func (j *job) OnSynthesize(session constructs.ISynthesisSession) {
+	var returns interface{}
+	_jsii_.Invoke(
+		j,
+		"onSynthesize",
+		[]interface{}{session},
+		false,
+		&returns,
+	)
+}
+
+// Validate the current construct.
+//
+// This method can be implemented by derived constructs in order to perform
+// validation logic. It is called on all constructs before synthesis.
+//
+// Returns: An array of validation error messages, or an empty array if there the construct is valid.
+// Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
+// instead of overriding this method.
+func (j *job) OnValidate() []string {
+	var returns []string
+	_jsii_.Invoke(
+		j,
+		"onValidate",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
+}
+
+// Returns a string representation of this construct.
+// Experimental.
+func (j *job) ToString() string {
+	var returns string
+	_jsii_.Invoke(
+		j,
+		"toString",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
 }
 
 // Properties for initialization of `Job`.
 // Experimental.
-// Struct proxy
 type JobProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataIface `json:"metadata"`
+	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
 	// List of containers belonging to the pod.
 	//
 	// Containers cannot currently be
@@ -2963,7 +1836,7 @@ type JobProps struct {
 	//
 	// You can add additionnal containers using `podSpec.addContainer()`
 	// Experimental.
-	Containers []ContainerPropsIface `json:"containers"`
+	Containers []ContainerProps `json:"containers"`
 	// Restart policy for all containers within the pod.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	//
@@ -2980,20 +1853,20 @@ type JobProps struct {
 	// See: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 	//
 	// Experimental.
-	ServiceAccount IServiceAccountIface `json:"serviceAccount"`
+	ServiceAccount IServiceAccount `json:"serviceAccount"`
 	// List of volumes that can be mounted by containers belonging to the pod.
 	//
 	// You can also add volumes later using `podSpec.addVolume()`
 	// See: https://kubernetes.io/docs/concepts/storage/volumes
 	//
 	// Experimental.
-	Volumes []VolumeIface `json:"volumes"`
+	Volumes []Volume `json:"volumes"`
 	// The pod metadata.
 	// Experimental.
-	PodMetadata cdk8s.ApiObjectMetadataIface `json:"podMetadata"`
+	PodMetadata cdk8s.ApiObjectMetadata `json:"podMetadata"`
 	// Specifies the duration the job may be active before the system tries to terminate it.
 	// Experimental.
-	ActiveDeadline cdk8s.DurationIface `json:"activeDeadline"`
+	ActiveDeadline cdk8s.Duration `json:"activeDeadline"`
 	// Specifies the number of retries before marking this job failed.
 	// Experimental.
 	BackoffLimit float64 `json:"backoffLimit"`
@@ -3006,137 +1879,39 @@ type JobProps struct {
 	// field is alpha-level and is only honored by servers that enable the
 	// `TTLAfterFinished` feature.
 	// Experimental.
-	TtlAfterFinished cdk8s.DurationIface `json:"ttlAfterFinished"`
+	TtlAfterFinished cdk8s.Duration `json:"ttlAfterFinished"`
 }
 
-func (j *JobProps) GetMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		j,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
+// ToResourceProps is a convenience function to obtain a new ResourceProps from this JobProps.
+func (j *JobProps) ToResourceProps() ResourceProps {
+	return ResourceProps {
+		Metadata: j.Metadata,
+	}
 }
 
-func (j *JobProps) GetContainers() []ContainerPropsIface {
-	var returns []ContainerPropsIface
-	_jsii_.Get(
-		j,
-		"containers",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerPropsIface)(nil)).Elem(): reflect.TypeOf((*ContainerProps)(nil)).Elem(),
-		},
-	)
-	return returns
+// ToPodSpecProps is a convenience function to obtain a new PodSpecProps from this JobProps.
+func (j *JobProps) ToPodSpecProps() PodSpecProps {
+	return PodSpecProps {
+		Containers: j.Containers,
+		RestartPolicy: j.RestartPolicy,
+		ServiceAccount: j.ServiceAccount,
+		Volumes: j.Volumes,
+	}
 }
 
-func (j *JobProps) GetRestartPolicy() RestartPolicy {
-	var returns RestartPolicy
-	_jsii_.Get(
-		j,
-		"restartPolicy",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (j *JobProps) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
-	_jsii_.Get(
-		j,
-		"serviceAccount",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (j *JobProps) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		j,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (j *JobProps) GetPodMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		j,
-		"podMetadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (j *JobProps) GetActiveDeadline() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
-	_jsii_.Get(
-		j,
-		"activeDeadline",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (j *JobProps) GetBackoffLimit() float64 {
-	var returns float64
-	_jsii_.Get(
-		j,
-		"backoffLimit",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (j *JobProps) GetTtlAfterFinished() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
-	_jsii_.Get(
-		j,
-		"ttlAfterFinished",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-
-// MountOptionsIface is the public interface for the custom type MountOptions
-// Experimental.
-type MountOptionsIface interface {
-	GetPropagation() MountPropagation
-	GetReadOnly() bool
-	GetSubPath() string
-	GetSubPathExpr() string
+// ToPodTemplateProps is a convenience function to obtain a new PodTemplateProps from this JobProps.
+func (j *JobProps) ToPodTemplateProps() PodTemplateProps {
+	return PodTemplateProps {
+		Containers: j.Containers,
+		RestartPolicy: j.RestartPolicy,
+		ServiceAccount: j.ServiceAccount,
+		Volumes: j.Volumes,
+		PodMetadata: j.PodMetadata,
+	}
 }
 
 // Options for mounts.
 // Experimental.
-// Struct proxy
 type MountOptions struct {
 	// Determines how mounts are propagated from the host to container and the other way around.
 	//
@@ -3169,72 +1944,17 @@ type MountOptions struct {
 	SubPathExpr string `json:"subPathExpr"`
 }
 
-func (m *MountOptions) GetPropagation() MountPropagation {
-	var returns MountPropagation
-	_jsii_.Get(
-		m,
-		"propagation",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*MountPropagation)(nil)).Elem(): reflect.TypeOf((*MountPropagation)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (m *MountOptions) GetReadOnly() bool {
-	var returns bool
-	_jsii_.Get(
-		m,
-		"readOnly",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (m *MountOptions) GetSubPath() string {
-	var returns string
-	_jsii_.Get(
-		m,
-		"subPath",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (m *MountOptions) GetSubPathExpr() string {
-	var returns string
-	_jsii_.Get(
-		m,
-		"subPathExpr",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
 // Experimental.
 type MountPropagation string
 
 const (
-	MountPropagationNone MountPropagation = "NONE"
-	MountPropagationHostToContainer MountPropagation = "HOST_TO_CONTAINER"
-	MountPropagationBidirectional MountPropagation = "BIDIRECTIONAL"
+	MountPropagation_NONE MountPropagation = "NONE"
+	MountPropagation_HOST_TO_CONTAINER MountPropagation = "HOST_TO_CONTAINER"
+	MountPropagation_BIDIRECTIONAL MountPropagation = "BIDIRECTIONAL"
 )
-
-// PathMappingIface is the public interface for the custom type PathMapping
-// Experimental.
-type PathMappingIface interface {
-	GetPath() string
-	GetMode() float64
-}
 
 // Maps a string key to a path within a volume.
 // Experimental.
-// Struct proxy
 type PathMapping struct {
 	// The relative path of the file to map the key to.
 	//
@@ -3252,255 +1972,131 @@ type PathMapping struct {
 	Mode float64 `json:"mode"`
 }
 
-func (p *PathMapping) GetPath() string {
-	var returns string
-	_jsii_.Get(
-		p,
-		"path",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (p *PathMapping) GetMode() float64 {
-	var returns float64
-	_jsii_.Get(
-		p,
-		"mode",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// Class interface
-type PodIface interface {
-	constructs.IConstructIface
-	IResourceIface
-	IPodSpecIface
-	GetApiObject() cdk8s.ApiObjectIface
-	GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetName() string
-	GetContainers() []ContainerIface
-	GetVolumes() []VolumeIface
-	GetRestartPolicy() RestartPolicy
-	GetServiceAccount() IServiceAccountIface
-	OnPrepare()
-	OnSynthesize(session constructs.ISynthesisSessionIface)
-	OnValidate() []string
-	ToString() string
-	AddContainer(container ContainerPropsIface) ContainerIface
-	AddVolume(volume VolumeIface)
-}
-
 // Pod is a collection of containers that can run on a host.
 //
 // This resource is
 // created by clients and scheduled onto hosts.
 // Experimental.
-// Struct proxy
-type Pod struct {
-	// The underlying cdk8s API object.
-	// See: base.Resource.apiObject
-	//
-	// Experimental.
-	ApiObject cdk8s.ApiObjectIface `json:"apiObject"`
-	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataDefinitionIface `json:"metadata"`
-	// The name of this API object.
-	// Experimental.
-	Name string `json:"name"`
-	// The containers belonging to the pod.
-	//
-	// Use `addContainer` to add containers.
-	// Experimental.
-	Containers []ContainerIface `json:"containers"`
-	// The volumes associated with this pod.
-	//
-	// Use `addVolume` to add volumes.
-	// Experimental.
-	Volumes []VolumeIface `json:"volumes"`
-	// Restart policy for all containers within the pod.
-	// Experimental.
-	RestartPolicy RestartPolicy `json:"restartPolicy"`
-	// The service account used to run this pod.
-	// Experimental.
-	ServiceAccount IServiceAccountIface `json:"serviceAccount"`
+type Pod interface {
+	Resource
+	IPodSpec
+	ApiObject() cdk8s.ApiObject
+	Containers() []Container
+	RestartPolicy() RestartPolicy
+	ServiceAccount() IServiceAccount
+	Volumes() []Volume
+	AddContainer(container ContainerProps) Container
+	AddVolume(volume Volume)
 }
 
-func (p *Pod) GetApiObject() cdk8s.ApiObjectIface {
-	var returns cdk8s.ApiObjectIface
+// The jsii proxy struct for Pod
+type pod struct {
+	resource // extends cdk8s-plus-17.Resource
+	iPodSpec // implements cdk8s-plus-17.IPodSpec
+}
+
+func (p *pod) ApiObject() cdk8s.ApiObject {
+	var returns cdk8s.ApiObject
 	_jsii_.Get(
 		p,
 		"apiObject",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObject)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (p *Pod) GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
-	_jsii_.Get(
-		p,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *Pod) GetName() string {
-	var returns string
-	_jsii_.Get(
-		p,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (p *Pod) GetContainers() []ContainerIface {
-	var returns []ContainerIface
+func (p *pod) Containers() []Container {
+	var returns []Container
 	_jsii_.Get(
 		p,
 		"containers",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (p *Pod) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		p,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *Pod) GetRestartPolicy() RestartPolicy {
+func (p *pod) RestartPolicy() RestartPolicy {
 	var returns RestartPolicy
 	_jsii_.Get(
 		p,
 		"restartPolicy",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (p *Pod) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
+func (p *pod) ServiceAccount() IServiceAccount {
+	var returns IServiceAccount
 	_jsii_.Get(
 		p,
 		"serviceAccount",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
+	)
+	return returns
+}
+
+func (p *pod) Volumes() []Volume {
+	var returns []Volume
+	_jsii_.Get(
+		p,
+		"volumes",
+		&returns,
+	)
+	return returns
+}
+
+func (p *pod) Metadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
+	_jsii_.Get(
+		p,
+		"metadata",
+		&returns,
+	)
+	return returns
+}
+
+func (p *pod) Name() string {
+	var returns string
+	_jsii_.Get(
+		p,
+		"name",
+		&returns,
 	)
 	return returns
 }
 
 
-func NewPod(scope constructs.ConstructIface, id string, props PodPropsIface) PodIface {
+func NewPod(scope constructs.Construct, id string, props PodProps) Pod {
 	_init_.Initialize()
-	self := Pod{}
+	p := pod{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.Pod",
 		[]interface{}{scope, id, props},
 		[]_jsii_.FQN{"cdk8s-plus-17.IPodSpec"},
 		[]_jsii_.Override{},
-		&self,
+		&p,
 	)
-	return &self
+	return &p
 }
 
-func (p *Pod) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
-		p,
-		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (p *Pod) OnSynthesize(session constructs.ISynthesisSessionIface) {
-	var returns interface{}
-	_jsii_.Invoke(
-		p,
-		"onSynthesize",
-		[]interface{}{session},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (p *Pod) OnValidate() []string {
-	var returns []string
-	_jsii_.Invoke(
-		p,
-		"onValidate",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *Pod) ToString() string {
-	var returns string
-	_jsii_.Invoke(
-		p,
-		"toString",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (p *Pod) AddContainer(container ContainerPropsIface) ContainerIface {
-	var returns ContainerIface
+// Add a container to the pod.
+// Experimental.
+func (p *pod) AddContainer(container ContainerProps) Container {
+	var returns Container
 	_jsii_.Invoke(
 		p,
 		"addContainer",
 		[]interface{}{container},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (p *Pod) AddVolume(volume VolumeIface) {
+// Add a volume to the pod.
+// Experimental.
+func (p *pod) AddVolume(volume Volume) {
 	var returns interface{}
 	_jsii_.Invoke(
 		p,
@@ -3508,8 +2104,77 @@ func (p *Pod) AddVolume(volume VolumeIface) {
 		[]interface{}{volume},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
+}
+
+// Perform final modifications before synthesis.
+//
+// This method can be implemented by derived constructs in order to perform
+// final changes before synthesis. prepare() will be called after child
+// constructs have been prepared.
+//
+// This is an advanced framework feature. Only use this if you
+// understand the implications.
+// Experimental.
+func (p *pod) OnPrepare() {
+	var returns interface{}
+	_jsii_.Invoke(
+		p,
+		"onPrepare",
+		[]interface{}{},
+		false,
+		&returns,
+	)
+}
+
+// Allows this construct to emit artifacts into the cloud assembly during synthesis.
+//
+// This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
+// as they participate in synthesizing the cloud assembly.
+// Experimental.
+func (p *pod) OnSynthesize(session constructs.ISynthesisSession) {
+	var returns interface{}
+	_jsii_.Invoke(
+		p,
+		"onSynthesize",
+		[]interface{}{session},
+		false,
+		&returns,
+	)
+}
+
+// Validate the current construct.
+//
+// This method can be implemented by derived constructs in order to perform
+// validation logic. It is called on all constructs before synthesis.
+//
+// Returns: An array of validation error messages, or an empty array if there the construct is valid.
+// Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
+// instead of overriding this method.
+func (p *pod) OnValidate() []string {
+	var returns []string
+	_jsii_.Invoke(
+		p,
+		"onValidate",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
+}
+
+// Returns a string representation of this construct.
+// Experimental.
+func (p *pod) ToString() string {
+	var returns string
+	_jsii_.Invoke(
+		p,
+		"toString",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
 }
 
 // Controls how pods are created during initial scale up, when replacing pods on nodes, or when scaling down.
@@ -3524,27 +2189,16 @@ func (p *Pod) AddVolume(volume VolumeIface) {
 type PodManagementPolicy string
 
 const (
-	PodManagementPolicyOrderedReady PodManagementPolicy = "ORDERED_READY"
-	PodManagementPolicyParallel PodManagementPolicy = "PARALLEL"
+	PodManagementPolicy_ORDERED_READY PodManagementPolicy = "ORDERED_READY"
+	PodManagementPolicy_PARALLEL PodManagementPolicy = "PARALLEL"
 )
-
-// PodPropsIface is the public interface for the custom type PodProps
-// Experimental.
-type PodPropsIface interface {
-	GetMetadata() cdk8s.ApiObjectMetadataIface
-	GetContainers() []ContainerPropsIface
-	GetRestartPolicy() RestartPolicy
-	GetServiceAccount() IServiceAccountIface
-	GetVolumes() []VolumeIface
-}
 
 // Properties for initialization of `Pod`.
 // Experimental.
-// Struct proxy
 type PodProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataIface `json:"metadata"`
+	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
 	// List of containers belonging to the pod.
 	//
 	// Containers cannot currently be
@@ -3552,7 +2206,7 @@ type PodProps struct {
 	//
 	// You can add additionnal containers using `podSpec.addContainer()`
 	// Experimental.
-	Containers []ContainerPropsIface `json:"containers"`
+	Containers []ContainerProps `json:"containers"`
 	// Restart policy for all containers within the pod.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	//
@@ -3569,197 +2223,122 @@ type PodProps struct {
 	// See: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 	//
 	// Experimental.
-	ServiceAccount IServiceAccountIface `json:"serviceAccount"`
+	ServiceAccount IServiceAccount `json:"serviceAccount"`
 	// List of volumes that can be mounted by containers belonging to the pod.
 	//
 	// You can also add volumes later using `podSpec.addVolume()`
 	// See: https://kubernetes.io/docs/concepts/storage/volumes
 	//
 	// Experimental.
-	Volumes []VolumeIface `json:"volumes"`
+	Volumes []Volume `json:"volumes"`
 }
 
-func (p *PodProps) GetMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		p,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
+// ToResourceProps is a convenience function to obtain a new ResourceProps from this PodProps.
+func (p *PodProps) ToResourceProps() ResourceProps {
+	return ResourceProps {
+		Metadata: p.Metadata,
+	}
 }
 
-func (p *PodProps) GetContainers() []ContainerPropsIface {
-	var returns []ContainerPropsIface
-	_jsii_.Get(
-		p,
-		"containers",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerPropsIface)(nil)).Elem(): reflect.TypeOf((*ContainerProps)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodProps) GetRestartPolicy() RestartPolicy {
-	var returns RestartPolicy
-	_jsii_.Get(
-		p,
-		"restartPolicy",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodProps) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
-	_jsii_.Get(
-		p,
-		"serviceAccount",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodProps) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		p,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-
-// Class interface
-type PodSpecIface interface {
-	IPodSpecIface
-	GetContainers() []ContainerIface
-	GetVolumes() []VolumeIface
-	GetRestartPolicy() RestartPolicy
-	GetServiceAccount() IServiceAccountIface
-	AddContainer(container ContainerPropsIface) ContainerIface
-	AddVolume(volume VolumeIface)
+// ToPodSpecProps is a convenience function to obtain a new PodSpecProps from this PodProps.
+func (p *PodProps) ToPodSpecProps() PodSpecProps {
+	return PodSpecProps {
+		Containers: p.Containers,
+		RestartPolicy: p.RestartPolicy,
+		ServiceAccount: p.ServiceAccount,
+		Volumes: p.Volumes,
+	}
 }
 
 // Provides read/write capabilities ontop of a `PodSpecProps`.
 // Experimental.
-// Struct proxy
-type PodSpec struct {
-	// The containers belonging to the pod.
-	//
-	// Use `addContainer` to add containers.
-	// Experimental.
-	Containers []ContainerIface `json:"containers"`
-	// The volumes associated with this pod.
-	//
-	// Use `addVolume` to add volumes.
-	// Experimental.
-	Volumes []VolumeIface `json:"volumes"`
-	// Restart policy for all containers within the pod.
-	// Experimental.
-	RestartPolicy RestartPolicy `json:"restartPolicy"`
-	// The service account used to run this pod.
-	// Experimental.
-	ServiceAccount IServiceAccountIface `json:"serviceAccount"`
+type PodSpec interface {
+	IPodSpec
+	Containers() []Container
+	RestartPolicy() RestartPolicy
+	ServiceAccount() IServiceAccount
+	Volumes() []Volume
+	AddContainer(container ContainerProps) Container
+	AddVolume(volume Volume)
 }
 
-func (p *PodSpec) GetContainers() []ContainerIface {
-	var returns []ContainerIface
+// The jsii proxy struct for PodSpec
+type podSpec struct {
+	iPodSpec // implements cdk8s-plus-17.IPodSpec
+}
+
+func (p *podSpec) Containers() []Container {
+	var returns []Container
 	_jsii_.Get(
 		p,
 		"containers",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (p *PodSpec) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		p,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodSpec) GetRestartPolicy() RestartPolicy {
+func (p *podSpec) RestartPolicy() RestartPolicy {
 	var returns RestartPolicy
 	_jsii_.Get(
 		p,
 		"restartPolicy",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (p *PodSpec) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
+func (p *podSpec) ServiceAccount() IServiceAccount {
+	var returns IServiceAccount
 	_jsii_.Get(
 		p,
 		"serviceAccount",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
+	)
+	return returns
+}
+
+func (p *podSpec) Volumes() []Volume {
+	var returns []Volume
+	_jsii_.Get(
+		p,
+		"volumes",
+		&returns,
 	)
 	return returns
 }
 
 
-func NewPodSpec(props PodSpecPropsIface) PodSpecIface {
+func NewPodSpec(props PodSpecProps) PodSpec {
 	_init_.Initialize()
-	self := PodSpec{}
+	p := podSpec{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.PodSpec",
 		[]interface{}{props},
 		[]_jsii_.FQN{"cdk8s-plus-17.IPodSpec"},
 		[]_jsii_.Override{},
-		&self,
+		&p,
 	)
-	return &self
+	return &p
 }
 
-func (p *PodSpec) AddContainer(container ContainerPropsIface) ContainerIface {
-	var returns ContainerIface
+// Add a container to the pod.
+// Experimental.
+func (p *podSpec) AddContainer(container ContainerProps) Container {
+	var returns Container
 	_jsii_.Invoke(
 		p,
 		"addContainer",
 		[]interface{}{container},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (p *PodSpec) AddVolume(volume VolumeIface) {
+// Add a volume to the pod.
+// Experimental.
+func (p *podSpec) AddVolume(volume Volume) {
 	var returns interface{}
 	_jsii_.Invoke(
 		p,
@@ -3767,22 +2346,11 @@ func (p *PodSpec) AddVolume(volume VolumeIface) {
 		[]interface{}{volume},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
-}
-
-// PodSpecPropsIface is the public interface for the custom type PodSpecProps
-// Experimental.
-type PodSpecPropsIface interface {
-	GetContainers() []ContainerPropsIface
-	GetRestartPolicy() RestartPolicy
-	GetServiceAccount() IServiceAccountIface
-	GetVolumes() []VolumeIface
 }
 
 // Properties of a `PodSpec`.
 // Experimental.
-// Struct proxy
 type PodSpecProps struct {
 	// List of containers belonging to the pod.
 	//
@@ -3791,7 +2359,7 @@ type PodSpecProps struct {
 	//
 	// You can add additionnal containers using `podSpec.addContainer()`
 	// Experimental.
-	Containers []ContainerPropsIface `json:"containers"`
+	Containers []ContainerProps `json:"containers"`
 	// Restart policy for all containers within the pod.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	//
@@ -3808,229 +2376,59 @@ type PodSpecProps struct {
 	// See: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 	//
 	// Experimental.
-	ServiceAccount IServiceAccountIface `json:"serviceAccount"`
+	ServiceAccount IServiceAccount `json:"serviceAccount"`
 	// List of volumes that can be mounted by containers belonging to the pod.
 	//
 	// You can also add volumes later using `podSpec.addVolume()`
 	// See: https://kubernetes.io/docs/concepts/storage/volumes
 	//
 	// Experimental.
-	Volumes []VolumeIface `json:"volumes"`
-}
-
-func (p *PodSpecProps) GetContainers() []ContainerPropsIface {
-	var returns []ContainerPropsIface
-	_jsii_.Get(
-		p,
-		"containers",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerPropsIface)(nil)).Elem(): reflect.TypeOf((*ContainerProps)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodSpecProps) GetRestartPolicy() RestartPolicy {
-	var returns RestartPolicy
-	_jsii_.Get(
-		p,
-		"restartPolicy",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodSpecProps) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
-	_jsii_.Get(
-		p,
-		"serviceAccount",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodSpecProps) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		p,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-
-// Class interface
-type PodTemplateIface interface {
-	IPodSpecIface
-	IPodTemplateIface
-	IPodSpecIface
-	GetContainers() []ContainerIface
-	GetVolumes() []VolumeIface
-	GetRestartPolicy() RestartPolicy
-	GetServiceAccount() IServiceAccountIface
-	GetPodMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	AddContainer(container ContainerPropsIface) ContainerIface
-	AddVolume(volume VolumeIface)
+	Volumes []Volume `json:"volumes"`
 }
 
 // Provides read/write capabilities ontop of a `PodTemplateProps`.
 // Experimental.
-// Struct proxy
-type PodTemplate struct {
-	// The containers belonging to the pod.
-	//
-	// Use `addContainer` to add containers.
-	// Experimental.
-	Containers []ContainerIface `json:"containers"`
-	// The volumes associated with this pod.
-	//
-	// Use `addVolume` to add volumes.
-	// Experimental.
-	Volumes []VolumeIface `json:"volumes"`
-	// Restart policy for all containers within the pod.
-	// Experimental.
-	RestartPolicy RestartPolicy `json:"restartPolicy"`
-	// The service account used to run this pod.
-	// Experimental.
-	ServiceAccount IServiceAccountIface `json:"serviceAccount"`
-	// Provides read/write access to the underlying pod metadata of the resource.
-	// Experimental.
-	PodMetadata cdk8s.ApiObjectMetadataDefinitionIface `json:"podMetadata"`
+type PodTemplate interface {
+	PodSpec
+	IPodTemplate
+	PodMetadata() cdk8s.ApiObjectMetadataDefinition
 }
 
-func (p *PodTemplate) GetContainers() []ContainerIface {
-	var returns []ContainerIface
-	_jsii_.Get(
-		p,
-		"containers",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
-	)
-	return returns
+// The jsii proxy struct for PodTemplate
+type podTemplate struct {
+	podSpec // extends cdk8s-plus-17.PodSpec
+	iPodTemplate // implements cdk8s-plus-17.IPodTemplate
 }
 
-func (p *PodTemplate) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		p,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodTemplate) GetRestartPolicy() RestartPolicy {
-	var returns RestartPolicy
-	_jsii_.Get(
-		p,
-		"restartPolicy",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodTemplate) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
-	_jsii_.Get(
-		p,
-		"serviceAccount",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodTemplate) GetPodMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
+func (p *podTemplate) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
 		p,
 		"podMetadata",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
 
-func NewPodTemplate(props PodTemplatePropsIface) PodTemplateIface {
+func NewPodTemplate(props PodTemplateProps) PodTemplate {
 	_init_.Initialize()
-	self := PodTemplate{}
+	p := podTemplate{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.PodTemplate",
 		[]interface{}{props},
 		[]_jsii_.FQN{"cdk8s-plus-17.IPodTemplate"},
 		[]_jsii_.Override{},
-		&self,
+		&p,
 	)
-	return &self
-}
-
-func (p *PodTemplate) AddContainer(container ContainerPropsIface) ContainerIface {
-	var returns ContainerIface
-	_jsii_.Invoke(
-		p,
-		"addContainer",
-		[]interface{}{container},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodTemplate) AddVolume(volume VolumeIface) {
-	var returns interface{}
-	_jsii_.Invoke(
-		p,
-		"addVolume",
-		[]interface{}{volume},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-// PodTemplatePropsIface is the public interface for the custom type PodTemplateProps
-// Experimental.
-type PodTemplatePropsIface interface {
-	GetContainers() []ContainerPropsIface
-	GetRestartPolicy() RestartPolicy
-	GetServiceAccount() IServiceAccountIface
-	GetVolumes() []VolumeIface
-	GetPodMetadata() cdk8s.ApiObjectMetadataIface
+	return &p
 }
 
 // Properties of a `PodTemplate`.
 //
 // Adds metadata information on top of the spec.
 // Experimental.
-// Struct proxy
 type PodTemplateProps struct {
 	// List of containers belonging to the pod.
 	//
@@ -4039,7 +2437,7 @@ type PodTemplateProps struct {
 	//
 	// You can add additionnal containers using `podSpec.addContainer()`
 	// Experimental.
-	Containers []ContainerPropsIface `json:"containers"`
+	Containers []ContainerProps `json:"containers"`
 	// Restart policy for all containers within the pod.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	//
@@ -4056,153 +2454,85 @@ type PodTemplateProps struct {
 	// See: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 	//
 	// Experimental.
-	ServiceAccount IServiceAccountIface `json:"serviceAccount"`
+	ServiceAccount IServiceAccount `json:"serviceAccount"`
 	// List of volumes that can be mounted by containers belonging to the pod.
 	//
 	// You can also add volumes later using `podSpec.addVolume()`
 	// See: https://kubernetes.io/docs/concepts/storage/volumes
 	//
 	// Experimental.
-	Volumes []VolumeIface `json:"volumes"`
+	Volumes []Volume `json:"volumes"`
 	// The pod metadata.
 	// Experimental.
-	PodMetadata cdk8s.ApiObjectMetadataIface `json:"podMetadata"`
+	PodMetadata cdk8s.ApiObjectMetadata `json:"podMetadata"`
 }
 
-func (p *PodTemplateProps) GetContainers() []ContainerPropsIface {
-	var returns []ContainerPropsIface
-	_jsii_.Get(
-		p,
-		"containers",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerPropsIface)(nil)).Elem(): reflect.TypeOf((*ContainerProps)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodTemplateProps) GetRestartPolicy() RestartPolicy {
-	var returns RestartPolicy
-	_jsii_.Get(
-		p,
-		"restartPolicy",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodTemplateProps) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
-	_jsii_.Get(
-		p,
-		"serviceAccount",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodTemplateProps) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		p,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *PodTemplateProps) GetPodMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		p,
-		"podMetadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-
-// Class interface
-type ProbeIface interface {
+// ToPodSpecProps is a convenience function to obtain a new PodSpecProps from this PodTemplateProps.
+func (p *PodTemplateProps) ToPodSpecProps() PodSpecProps {
+	return PodSpecProps {
+		Containers: p.Containers,
+		RestartPolicy: p.RestartPolicy,
+		ServiceAccount: p.ServiceAccount,
+		Volumes: p.Volumes,
+	}
 }
 
 // Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
 // Experimental.
-// Struct proxy
-type Probe struct {
+type Probe interface {
 }
 
-func NewProbe() ProbeIface {
+// The jsii proxy struct for Probe
+type probe struct {
+	_ byte // padding
+}
+
+func NewProbe() Probe {
 	_init_.Initialize()
-	self := Probe{}
+	p := probe{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.Probe",
 		[]interface{}{},
 		[]_jsii_.FQN{},
 		[]_jsii_.Override{},
-		&self,
+		&p,
 	)
-	return &self
+	return &p
 }
 
-func Probe_FromCommand(command []string, options CommandProbeOptionsIface) ProbeIface {
+// Defines a probe based on a command which is executed within the container.
+// Experimental.
+func Probe_FromCommand(command []string, options CommandProbeOptions) Probe {
 	_init_.Initialize()
-	var returns ProbeIface
-	_jsii_.InvokeStatic(
+	var returns Probe
+	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.Probe",
 		"fromCommand",
 		[]interface{}{command, options},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ProbeIface)(nil)).Elem(): reflect.TypeOf((*Probe)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func Probe_FromHttpGet(path string, options HttpGetProbeOptionsIface) ProbeIface {
+// Defines a probe based on an HTTP GET request to the IP address of the container.
+// Experimental.
+func Probe_FromHttpGet(path string, options HttpGetProbeOptions) Probe {
 	_init_.Initialize()
-	var returns ProbeIface
-	_jsii_.InvokeStatic(
+	var returns Probe
+	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.Probe",
 		"fromHttpGet",
 		[]interface{}{path, options},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ProbeIface)(nil)).Elem(): reflect.TypeOf((*Probe)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-// ProbeOptionsIface is the public interface for the custom type ProbeOptions
-// Experimental.
-type ProbeOptionsIface interface {
-	GetFailureThreshold() float64
-	GetInitialDelaySeconds() cdk8s.DurationIface
-	GetPeriodSeconds() cdk8s.DurationIface
-	GetSuccessThreshold() float64
-	GetTimeoutSeconds() cdk8s.DurationIface
-}
-
 // Probe options.
 // Experimental.
-// Struct proxy
 type ProbeOptions struct {
 	// Minimum consecutive failures for the probe to be considered failed after having succeeded.
 	//
@@ -4213,12 +2543,12 @@ type ProbeOptions struct {
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
 	//
 	// Experimental.
-	InitialDelaySeconds cdk8s.DurationIface `json:"initialDelaySeconds"`
+	InitialDelaySeconds cdk8s.Duration `json:"initialDelaySeconds"`
 	// How often (in seconds) to perform the probe.
 	//
 	// Default to 10 seconds. Minimum value is 1.
 	// Experimental.
-	PeriodSeconds cdk8s.DurationIface `json:"periodSeconds"`
+	PeriodSeconds cdk8s.Duration `json:"periodSeconds"`
 	// Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1.
 	//
 	// Must be 1 for liveness and startup. Minimum value is 1.
@@ -4230,163 +2560,93 @@ type ProbeOptions struct {
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
 	//
 	// Experimental.
-	TimeoutSeconds cdk8s.DurationIface `json:"timeoutSeconds"`
+	TimeoutSeconds cdk8s.Duration `json:"timeoutSeconds"`
 }
-
-func (p *ProbeOptions) GetFailureThreshold() float64 {
-	var returns float64
-	_jsii_.Get(
-		p,
-		"failureThreshold",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (p *ProbeOptions) GetInitialDelaySeconds() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
-	_jsii_.Get(
-		p,
-		"initialDelaySeconds",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *ProbeOptions) GetPeriodSeconds() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
-	_jsii_.Get(
-		p,
-		"periodSeconds",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (p *ProbeOptions) GetSuccessThreshold() float64 {
-	var returns float64
-	_jsii_.Get(
-		p,
-		"successThreshold",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (p *ProbeOptions) GetTimeoutSeconds() cdk8s.DurationIface {
-	var returns cdk8s.DurationIface
-	_jsii_.Get(
-		p,
-		"timeoutSeconds",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.DurationIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.Duration)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
 
 // Experimental.
 type Protocol string
 
 const (
-	ProtocolTcp Protocol = "TCP"
-	ProtocolUdp Protocol = "UDP"
-	ProtocolSctp Protocol = "SCTP"
+	Protocol_TCP Protocol = "TCP"
+	Protocol_UDP Protocol = "UDP"
+	Protocol_SCTP Protocol = "SCTP"
 )
-
-// Class interface
-type ResourceIface interface {
-	constructs.IConstructIface
-	IResourceIface
-	GetApiObject() cdk8s.ApiObjectIface
-	GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetName() string
-	OnPrepare()
-	OnSynthesize(session constructs.ISynthesisSessionIface)
-	OnValidate() []string
-	ToString() string
-}
 
 // Base class for all Kubernetes objects in stdk8s.
 //
 // Represents a single
 // resource.
 // Experimental.
-// Struct proxy
-type Resource struct {
-	// The underlying cdk8s API object.
-	// Experimental.
-	ApiObject cdk8s.ApiObjectIface `json:"apiObject"`
-	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataDefinitionIface `json:"metadata"`
-	// The name of this API object.
-	// Experimental.
-	Name string `json:"name"`
+type Resource interface {
+	constructs.Construct
+	IResource
+	ApiObject() cdk8s.ApiObject
+	Metadata() cdk8s.ApiObjectMetadataDefinition
+	Name() string
 }
 
-func (r *Resource) GetApiObject() cdk8s.ApiObjectIface {
-	var returns cdk8s.ApiObjectIface
+// The jsii proxy struct for Resource
+type resource struct {
+	constructs.Construct // extends constructs.Construct
+	iResource // implements cdk8s-plus-17.IResource
+}
+
+func (r *resource) ApiObject() cdk8s.ApiObject {
+	var returns cdk8s.ApiObject
 	_jsii_.Get(
 		r,
 		"apiObject",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObject)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (r *Resource) GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
+func (r *resource) Metadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
 		r,
 		"metadata",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (r *Resource) GetName() string {
+func (r *resource) Name() string {
 	var returns string
 	_jsii_.Get(
 		r,
 		"name",
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
 
 // Creates a new construct node.
-func NewResource(scope constructs.ConstructIface, id string, options constructs.ConstructOptionsIface) ResourceIface {
+func NewResource(scope constructs.Construct, id string, options constructs.ConstructOptions) Resource {
 	_init_.Initialize()
-	self := Resource{}
+	r := resource{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.Resource",
 		[]interface{}{scope, id, options},
 		[]_jsii_.FQN{"cdk8s-plus-17.IResource"},
 		[]_jsii_.Override{},
-		&self,
+		&r,
 	)
-	return &self
+	return &r
 }
 
-func (r *Resource) OnPrepare() {
+// Perform final modifications before synthesis.
+//
+// This method can be implemented by derived constructs in order to perform
+// final changes before synthesis. prepare() will be called after child
+// constructs have been prepared.
+//
+// This is an advanced framework feature. Only use this if you
+// understand the implications.
+// Experimental.
+func (r *resource) OnPrepare() {
 	var returns interface{}
 	_jsii_.Invoke(
 		r,
@@ -4394,11 +2654,15 @@ func (r *Resource) OnPrepare() {
 		[]interface{}{},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (r *Resource) OnSynthesize(session constructs.ISynthesisSessionIface) {
+// Allows this construct to emit artifacts into the cloud assembly during synthesis.
+//
+// This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
+// as they participate in synthesizing the cloud assembly.
+// Experimental.
+func (r *resource) OnSynthesize(session constructs.ISynthesisSession) {
 	var returns interface{}
 	_jsii_.Invoke(
 		r,
@@ -4406,11 +2670,18 @@ func (r *Resource) OnSynthesize(session constructs.ISynthesisSessionIface) {
 		[]interface{}{session},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (r *Resource) OnValidate() []string {
+// Validate the current construct.
+//
+// This method can be implemented by derived constructs in order to perform
+// validation logic. It is called on all constructs before synthesis.
+//
+// Returns: An array of validation error messages, or an empty array if there the construct is valid.
+// Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
+// instead of overriding this method.
+func (r *resource) OnValidate() []string {
 	var returns []string
 	_jsii_.Invoke(
 		r,
@@ -4418,14 +2689,13 @@ func (r *Resource) OnValidate() []string {
 		[]interface{}{},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (r *Resource) ToString() string {
+// Returns a string representation of this construct.
+// Experimental.
+func (r *resource) ToString() string {
 	var returns string
 	_jsii_.Invoke(
 		r,
@@ -4433,66 +2703,27 @@ func (r *Resource) ToString() string {
 		[]interface{}{},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
-}
-
-// ResourcePropsIface is the public interface for the custom type ResourceProps
-// Experimental.
-type ResourcePropsIface interface {
-	GetMetadata() cdk8s.ApiObjectMetadataIface
 }
 
 // Initialization properties for resources.
 // Experimental.
-// Struct proxy
 type ResourceProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataIface `json:"metadata"`
+	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
 }
-
-func (r *ResourceProps) GetMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		r,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
 
 // Restart policy for all containers within the pod.
 // Experimental.
 type RestartPolicy string
 
 const (
-	RestartPolicyAlways RestartPolicy = "ALWAYS"
-	RestartPolicyOnFailure RestartPolicy = "ON_FAILURE"
-	RestartPolicyNever RestartPolicy = "NEVER"
+	RestartPolicy_ALWAYS RestartPolicy = "ALWAYS"
+	RestartPolicy_ON_FAILURE RestartPolicy = "ON_FAILURE"
+	RestartPolicy_NEVER RestartPolicy = "NEVER"
 )
-
-// Class interface
-type SecretIface interface {
-	constructs.IConstructIface
-	IResourceIface
-	ISecretIface
-	IResourceIface
-	GetApiObject() cdk8s.ApiObjectIface
-	GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetName() string
-	OnPrepare()
-	OnSynthesize(session constructs.ISynthesisSessionIface)
-	OnValidate() []string
-	ToString() string
-	AddStringData(key string, value string)
-	GetStringData(key string) string
-}
 
 // Kubernetes Secrets let you store and manage sensitive information, such as passwords, OAuth tokens, and ssh keys.
 //
@@ -4502,140 +2733,83 @@ type SecretIface interface {
 // See: https://kubernetes.io/docs/concepts/configuration/secret
 //
 // Experimental.
-// Struct proxy
-type Secret struct {
-	// The underlying cdk8s API object.
-	// See: base.Resource.apiObject
-	//
-	// Experimental.
-	ApiObject cdk8s.ApiObjectIface `json:"apiObject"`
-	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataDefinitionIface `json:"metadata"`
-	// The name of this API object.
-	// Experimental.
-	Name string `json:"name"`
+type Secret interface {
+	Resource
+	ISecret
+	ApiObject() cdk8s.ApiObject
+	AddStringData(key string, value string)
+	GetStringData(key string) string
 }
 
-func (s *Secret) GetApiObject() cdk8s.ApiObjectIface {
-	var returns cdk8s.ApiObjectIface
+// The jsii proxy struct for Secret
+type secret struct {
+	resource // extends cdk8s-plus-17.Resource
+	iSecret // implements cdk8s-plus-17.ISecret
+}
+
+func (s *secret) ApiObject() cdk8s.ApiObject {
+	var returns cdk8s.ApiObject
 	_jsii_.Get(
 		s,
 		"apiObject",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObject)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *Secret) GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
+func (s *secret) Metadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
 		s,
 		"metadata",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *Secret) GetName() string {
+func (s *secret) Name() string {
 	var returns string
 	_jsii_.Get(
 		s,
 		"name",
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
 
-func NewSecret(scope constructs.ConstructIface, id string, props SecretPropsIface) SecretIface {
+func NewSecret(scope constructs.Construct, id string, props SecretProps) Secret {
 	_init_.Initialize()
-	self := Secret{}
+	s := secret{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.Secret",
 		[]interface{}{scope, id, props},
 		[]_jsii_.FQN{"cdk8s-plus-17.ISecret"},
 		[]_jsii_.Override{},
-		&self,
+		&s,
 	)
-	return &self
+	return &s
 }
 
-func Secret_FromSecretName(name string) ISecretIface {
+// Imports a secret from the cluster as a reference.
+// Experimental.
+func Secret_FromSecretName(name string) ISecret {
 	_init_.Initialize()
-	var returns ISecretIface
-	_jsii_.InvokeStatic(
+	var returns ISecret
+	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.Secret",
 		"fromSecretName",
 		[]interface{}{name},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ISecretIface)(nil)).Elem(): reflect.TypeOf((*ISecret)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *Secret) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
-		s,
-		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (s *Secret) OnSynthesize(session constructs.ISynthesisSessionIface) {
-	var returns interface{}
-	_jsii_.Invoke(
-		s,
-		"onSynthesize",
-		[]interface{}{session},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (s *Secret) OnValidate() []string {
-	var returns []string
-	_jsii_.Invoke(
-		s,
-		"onValidate",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *Secret) ToString() string {
-	var returns string
-	_jsii_.Invoke(
-		s,
-		"toString",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *Secret) AddStringData(key string, value string) {
+// Adds a string data field to the secert.
+// Experimental.
+func (s *secret) AddStringData(key string, value string) {
 	var returns interface{}
 	_jsii_.Invoke(
 		s,
@@ -4643,11 +2817,12 @@ func (s *Secret) AddStringData(key string, value string) {
 		[]interface{}{key, value},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (s *Secret) GetStringData(key string) string {
+// Gets a string data by key or undefined.
+// Experimental.
+func (s *secret) GetStringData(key string) string {
 	var returns string
 	_jsii_.Invoke(
 		s,
@@ -4655,25 +2830,85 @@ func (s *Secret) GetStringData(key string) string {
 		[]interface{}{key},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
-// SecretPropsIface is the public interface for the custom type SecretProps
+// Perform final modifications before synthesis.
+//
+// This method can be implemented by derived constructs in order to perform
+// final changes before synthesis. prepare() will be called after child
+// constructs have been prepared.
+//
+// This is an advanced framework feature. Only use this if you
+// understand the implications.
 // Experimental.
-type SecretPropsIface interface {
-	GetMetadata() cdk8s.ApiObjectMetadataIface
-	GetStringData() map[string]string
-	GetType() string
+func (s *secret) OnPrepare() {
+	var returns interface{}
+	_jsii_.Invoke(
+		s,
+		"onPrepare",
+		[]interface{}{},
+		false,
+		&returns,
+	)
+}
+
+// Allows this construct to emit artifacts into the cloud assembly during synthesis.
+//
+// This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
+// as they participate in synthesizing the cloud assembly.
+// Experimental.
+func (s *secret) OnSynthesize(session constructs.ISynthesisSession) {
+	var returns interface{}
+	_jsii_.Invoke(
+		s,
+		"onSynthesize",
+		[]interface{}{session},
+		false,
+		&returns,
+	)
+}
+
+// Validate the current construct.
+//
+// This method can be implemented by derived constructs in order to perform
+// validation logic. It is called on all constructs before synthesis.
+//
+// Returns: An array of validation error messages, or an empty array if there the construct is valid.
+// Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
+// instead of overriding this method.
+func (s *secret) OnValidate() []string {
+	var returns []string
+	_jsii_.Invoke(
+		s,
+		"onValidate",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
+}
+
+// Returns a string representation of this construct.
+// Experimental.
+func (s *secret) ToString() string {
+	var returns string
+	_jsii_.Invoke(
+		s,
+		"toString",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
 }
 
 // Experimental.
-// Struct proxy
 type SecretProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataIface `json:"metadata"`
+	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
 	// stringData allows specifying non-binary secret data in string form.
 	//
 	// It is
@@ -4690,107 +2925,22 @@ type SecretProps struct {
 	Type string `json:"type"`
 }
 
-func (s *SecretProps) GetMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		s,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *SecretProps) GetStringData() map[string]string {
-	var returns map[string]string
-	_jsii_.Get(
-		s,
-		"stringData",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *SecretProps) GetType() string {
-	var returns string
-	_jsii_.Get(
-		s,
-		"type",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// SecretValueIface is the public interface for the custom type SecretValue
-// Experimental.
-type SecretValueIface interface {
-	GetKey() string
-	GetSecret() ISecretIface
+// ToResourceProps is a convenience function to obtain a new ResourceProps from this SecretProps.
+func (s *SecretProps) ToResourceProps() ResourceProps {
+	return ResourceProps {
+		Metadata: s.Metadata,
+	}
 }
 
 // Represents a specific value in JSON secret.
 // Experimental.
-// Struct proxy
 type SecretValue struct {
 	// The JSON key.
 	// Experimental.
 	Key string `json:"key"`
 	// The secret.
 	// Experimental.
-	Secret ISecretIface `json:"secret"`
-}
-
-func (s *SecretValue) GetKey() string {
-	var returns string
-	_jsii_.Get(
-		s,
-		"key",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *SecretValue) GetSecret() ISecretIface {
-	var returns ISecretIface
-	_jsii_.Get(
-		s,
-		"secret",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ISecretIface)(nil)).Elem(): reflect.TypeOf((*ISecret)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-
-// Class interface
-type ServiceIface interface {
-	constructs.IConstructIface
-	IResourceIface
-	GetApiObject() cdk8s.ApiObjectIface
-	GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetName() string
-	GetPorts() []ServicePortIface
-	GetSelector() map[string]string
-	GetType() ServiceType
-	GetClusterIp() string
-	GetExternalName() string
-	OnPrepare()
-	OnSynthesize(session constructs.ISynthesisSessionIface)
-	OnValidate() []string
-	ToString() string
-	AddDeployment(deployment DeploymentIface, port float64, options ServicePortOptionsIface)
-	AddSelector(label string, value string)
-	Serve(port float64, options ServicePortOptionsIface)
+	Secret ISecret `json:"secret"`
 }
 
 // An abstract way to expose an application running on a set of Pods as a network service.
@@ -4807,202 +2957,106 @@ type ServiceIface interface {
 // that get updated whenever the set of Pods in a Service changes. For non-native applications, Kubernetes offers ways to place a network port
 // or load balancer in between your application and the backend Pods.
 // Experimental.
-// Struct proxy
-type Service struct {
-	// The underlying cdk8s API object.
-	// See: base.Resource.apiObject
-	//
-	// Experimental.
-	ApiObject cdk8s.ApiObjectIface `json:"apiObject"`
-	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataDefinitionIface `json:"metadata"`
-	// The name of this API object.
-	// Experimental.
-	Name string `json:"name"`
-	// Ports for this service.
-	//
-	// Use `serve()` to expose additional service ports.
-	// Experimental.
-	Ports []ServicePortIface `json:"ports"`
-	// Returns the labels which are used to select pods for this service.
-	// Experimental.
-	Selector map[string]string `json:"selector"`
-	// Determines how the Service is exposed.
-	// Experimental.
-	Type ServiceType `json:"type"`
-	// The IP address of the service and is usually assigned randomly by the master.
-	// Experimental.
-	ClusterIp string `json:"clusterIP"`
-	// The externalName to be used for EXTERNAL_NAME types.
-	// Experimental.
-	ExternalName string `json:"externalName"`
+type Service interface {
+	Resource
+	ApiObject() cdk8s.ApiObject
+	ClusterIp() string
+	ExternalName() string
+	Ports() []ServicePort
+	Selector() map[string]string
+	Type() ServiceType
+	AddDeployment(deployment Deployment, port float64, options ServicePortOptions)
+	AddSelector(label string, value string)
+	Serve(port float64, options ServicePortOptions)
 }
 
-func (s *Service) GetApiObject() cdk8s.ApiObjectIface {
-	var returns cdk8s.ApiObjectIface
+// The jsii proxy struct for Service
+type service struct {
+	resource // extends cdk8s-plus-17.Resource
+}
+
+func (s *service) ApiObject() cdk8s.ApiObject {
+	var returns cdk8s.ApiObject
 	_jsii_.Get(
 		s,
 		"apiObject",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObject)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *Service) GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
-	_jsii_.Get(
-		s,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *Service) GetName() string {
-	var returns string
-	_jsii_.Get(
-		s,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *Service) GetPorts() []ServicePortIface {
-	var returns []ServicePortIface
-	_jsii_.Get(
-		s,
-		"ports",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ServicePortIface)(nil)).Elem(): reflect.TypeOf((*ServicePort)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *Service) GetSelector() map[string]string {
-	var returns map[string]string
-	_jsii_.Get(
-		s,
-		"selector",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *Service) GetType() ServiceType {
-	var returns ServiceType
-	_jsii_.Get(
-		s,
-		"type",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ServiceType)(nil)).Elem(): reflect.TypeOf((*ServiceType)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *Service) GetClusterIp() string {
+func (s *service) ClusterIp() string {
 	var returns string
 	_jsii_.Get(
 		s,
 		"clusterIP",
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
-func (s *Service) GetExternalName() string {
+func (s *service) ExternalName() string {
 	var returns string
 	_jsii_.Get(
 		s,
 		"externalName",
 		&returns,
-		map[reflect.Type]reflect.Type{},
+	)
+	return returns
+}
+
+func (s *service) Ports() []ServicePort {
+	var returns []ServicePort
+	_jsii_.Get(
+		s,
+		"ports",
+		&returns,
+	)
+	return returns
+}
+
+func (s *service) Selector() map[string]string {
+	var returns map[string]string
+	_jsii_.Get(
+		s,
+		"selector",
+		&returns,
+	)
+	return returns
+}
+
+func (s *service) Type() ServiceType {
+	var returns ServiceType
+	_jsii_.Get(
+		s,
+		"type",
+		&returns,
 	)
 	return returns
 }
 
 
-func NewService(scope constructs.ConstructIface, id string, props ServicePropsIface) ServiceIface {
+func NewService(scope constructs.Construct, id string, props ServiceProps) Service {
 	_init_.Initialize()
-	self := Service{}
+	s := service{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.Service",
 		[]interface{}{scope, id, props},
 		[]_jsii_.FQN{},
 		[]_jsii_.Override{},
-		&self,
+		&s,
 	)
-	return &self
+	return &s
 }
 
-func (s *Service) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
-		s,
-		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (s *Service) OnSynthesize(session constructs.ISynthesisSessionIface) {
-	var returns interface{}
-	_jsii_.Invoke(
-		s,
-		"onSynthesize",
-		[]interface{}{session},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (s *Service) OnValidate() []string {
-	var returns []string
-	_jsii_.Invoke(
-		s,
-		"onValidate",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *Service) ToString() string {
-	var returns string
-	_jsii_.Invoke(
-		s,
-		"toString",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *Service) AddDeployment(deployment DeploymentIface, port float64, options ServicePortOptionsIface) {
+// Associate a deployment to this service.
+//
+// If not targetPort is specific in the portOptions, then requests will be routed
+// to the port exposed by the first container in the deployment's pods.
+// The deployment's `labelSelector` will be used to select pods.
+// Experimental.
+func (s *service) AddDeployment(deployment Deployment, port float64, options ServicePortOptions) {
 	var returns interface{}
 	_jsii_.Invoke(
 		s,
@@ -5010,11 +3064,12 @@ func (s *Service) AddDeployment(deployment DeploymentIface, port float64, option
 		[]interface{}{deployment, port, options},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (s *Service) AddSelector(label string, value string) {
+// Services defined using this spec will select pods according the provided label.
+// Experimental.
+func (s *service) AddSelector(label string, value string) {
 	var returns interface{}
 	_jsii_.Invoke(
 		s,
@@ -5022,11 +3077,14 @@ func (s *Service) AddSelector(label string, value string) {
 		[]interface{}{label, value},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (s *Service) Serve(port float64, options ServicePortOptionsIface) {
+// Configure a port the service will bind to.
+//
+// This method can be called multiple times.
+// Experimental.
+func (s *service) Serve(port float64, options ServicePortOptions) {
 	var returns interface{}
 	_jsii_.Invoke(
 		s,
@@ -5034,25 +3092,7 @@ func (s *Service) Serve(port float64, options ServicePortOptionsIface) {
 		[]interface{}{port, options},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
-}
-
-// Class interface
-type ServiceAccountIface interface {
-	constructs.IConstructIface
-	IResourceIface
-	IServiceAccountIface
-	IResourceIface
-	GetApiObject() cdk8s.ApiObjectIface
-	GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetName() string
-	GetSecrets() []ISecretIface
-	OnPrepare()
-	OnSynthesize(session constructs.ISynthesisSessionIface)
-	OnValidate() []string
-	ToString() string
-	AddSecret(secret ISecretIface)
 }
 
 // A service account provides an identity for processes that run in a Pod.
@@ -5066,158 +3106,93 @@ type ServiceAccountIface interface {
 // See: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account
 //
 // Experimental.
-// Struct proxy
-type ServiceAccount struct {
-	// The underlying cdk8s API object.
-	// See: base.Resource.apiObject
-	//
-	// Experimental.
-	ApiObject cdk8s.ApiObjectIface `json:"apiObject"`
-	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataDefinitionIface `json:"metadata"`
-	// The name of this API object.
-	// Experimental.
-	Name string `json:"name"`
-	// List of secrets allowed to be used by pods running using this service account.
-	//
-	// Returns a copy. To add a secret, use `addSecret()`.
-	// Experimental.
-	Secrets []ISecretIface `json:"secrets"`
+type ServiceAccount interface {
+	Resource
+	IServiceAccount
+	ApiObject() cdk8s.ApiObject
+	Secrets() []ISecret
+	AddSecret(secret ISecret)
 }
 
-func (s *ServiceAccount) GetApiObject() cdk8s.ApiObjectIface {
-	var returns cdk8s.ApiObjectIface
+// The jsii proxy struct for ServiceAccount
+type serviceAccount struct {
+	resource // extends cdk8s-plus-17.Resource
+	iServiceAccount // implements cdk8s-plus-17.IServiceAccount
+}
+
+func (s *serviceAccount) ApiObject() cdk8s.ApiObject {
+	var returns cdk8s.ApiObject
 	_jsii_.Get(
 		s,
 		"apiObject",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObject)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *ServiceAccount) GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
+func (s *serviceAccount) Secrets() []ISecret {
+	var returns []ISecret
+	_jsii_.Get(
+		s,
+		"secrets",
+		&returns,
+	)
+	return returns
+}
+
+func (s *serviceAccount) Metadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
 		s,
 		"metadata",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *ServiceAccount) GetName() string {
+func (s *serviceAccount) Name() string {
 	var returns string
 	_jsii_.Get(
 		s,
 		"name",
 		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *ServiceAccount) GetSecrets() []ISecretIface {
-	var returns []ISecretIface
-	_jsii_.Get(
-		s,
-		"secrets",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ISecretIface)(nil)).Elem(): reflect.TypeOf((*ISecret)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
 
-func NewServiceAccount(scope constructs.ConstructIface, id string, props ServiceAccountPropsIface) ServiceAccountIface {
+func NewServiceAccount(scope constructs.Construct, id string, props ServiceAccountProps) ServiceAccount {
 	_init_.Initialize()
-	self := ServiceAccount{}
+	s := serviceAccount{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.ServiceAccount",
 		[]interface{}{scope, id, props},
 		[]_jsii_.FQN{"cdk8s-plus-17.IServiceAccount"},
 		[]_jsii_.Override{},
-		&self,
+		&s,
 	)
-	return &self
+	return &s
 }
 
-func ServiceAccount_FromServiceAccountName(name string) IServiceAccountIface {
+// Imports a service account from the cluster as a reference.
+// Experimental.
+func ServiceAccount_FromServiceAccountName(name string) IServiceAccount {
 	_init_.Initialize()
-	var returns IServiceAccountIface
-	_jsii_.InvokeStatic(
+	var returns IServiceAccount
+	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.ServiceAccount",
 		"fromServiceAccountName",
 		[]interface{}{name},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *ServiceAccount) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
-		s,
-		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (s *ServiceAccount) OnSynthesize(session constructs.ISynthesisSessionIface) {
-	var returns interface{}
-	_jsii_.Invoke(
-		s,
-		"onSynthesize",
-		[]interface{}{session},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (s *ServiceAccount) OnValidate() []string {
-	var returns []string
-	_jsii_.Invoke(
-		s,
-		"onValidate",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *ServiceAccount) ToString() string {
-	var returns string
-	_jsii_.Invoke(
-		s,
-		"toString",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *ServiceAccount) AddSecret(secret ISecretIface) {
+// Allow a secret to be accessed by pods using this service account.
+// Experimental.
+func (s *serviceAccount) AddSecret(secret ISecret) {
 	var returns interface{}
 	_jsii_.Invoke(
 		s,
@@ -5225,69 +3200,103 @@ func (s *ServiceAccount) AddSecret(secret ISecretIface) {
 		[]interface{}{secret},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-// ServiceAccountPropsIface is the public interface for the custom type ServiceAccountProps
+// Perform final modifications before synthesis.
+//
+// This method can be implemented by derived constructs in order to perform
+// final changes before synthesis. prepare() will be called after child
+// constructs have been prepared.
+//
+// This is an advanced framework feature. Only use this if you
+// understand the implications.
 // Experimental.
-type ServiceAccountPropsIface interface {
-	GetMetadata() cdk8s.ApiObjectMetadataIface
-	GetSecrets() []ISecretIface
+func (s *serviceAccount) OnPrepare() {
+	var returns interface{}
+	_jsii_.Invoke(
+		s,
+		"onPrepare",
+		[]interface{}{},
+		false,
+		&returns,
+	)
+}
+
+// Allows this construct to emit artifacts into the cloud assembly during synthesis.
+//
+// This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
+// as they participate in synthesizing the cloud assembly.
+// Experimental.
+func (s *serviceAccount) OnSynthesize(session constructs.ISynthesisSession) {
+	var returns interface{}
+	_jsii_.Invoke(
+		s,
+		"onSynthesize",
+		[]interface{}{session},
+		false,
+		&returns,
+	)
+}
+
+// Validate the current construct.
+//
+// This method can be implemented by derived constructs in order to perform
+// validation logic. It is called on all constructs before synthesis.
+//
+// Returns: An array of validation error messages, or an empty array if there the construct is valid.
+// Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
+// instead of overriding this method.
+func (s *serviceAccount) OnValidate() []string {
+	var returns []string
+	_jsii_.Invoke(
+		s,
+		"onValidate",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
+}
+
+// Returns a string representation of this construct.
+// Experimental.
+func (s *serviceAccount) ToString() string {
+	var returns string
+	_jsii_.Invoke(
+		s,
+		"toString",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
 }
 
 // Properties for initialization of `ServiceAccount`.
 //
 // Properties for initialization of `ServiceAccount`.
 // Experimental.
-// Struct proxy
 type ServiceAccountProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataIface `json:"metadata"`
+	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
 	// List of secrets allowed to be used by pods running using this ServiceAccount.
 	// See: https://kubernetes.io/docs/concepts/configuration/secret
 	//
 	// Experimental.
-	Secrets []ISecretIface `json:"secrets"`
+	Secrets []ISecret `json:"secrets"`
 }
 
-func (s *ServiceAccountProps) GetMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		s,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *ServiceAccountProps) GetSecrets() []ISecretIface {
-	var returns []ISecretIface
-	_jsii_.Get(
-		s,
-		"secrets",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ISecretIface)(nil)).Elem(): reflect.TypeOf((*ISecret)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-
-// ServiceIngressV1BetaBackendOptionsIface is the public interface for the custom type ServiceIngressV1BetaBackendOptions
-// Experimental.
-type ServiceIngressV1BetaBackendOptionsIface interface {
-	GetPort() float64
+// ToResourceProps is a convenience function to obtain a new ResourceProps from this ServiceAccountProps.
+func (s *ServiceAccountProps) ToResourceProps() ResourceProps {
+	return ResourceProps {
+		Metadata: s.Metadata,
+	}
 }
 
 // Options for setting up backends for ingress rules.
 // Experimental.
-// Struct proxy
 type ServiceIngressV1BetaBackendOptions struct {
 	// The port to use to access the service.
 	//
@@ -5299,31 +3308,8 @@ type ServiceIngressV1BetaBackendOptions struct {
 	Port float64 `json:"port"`
 }
 
-func (s *ServiceIngressV1BetaBackendOptions) GetPort() float64 {
-	var returns float64
-	_jsii_.Get(
-		s,
-		"port",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// ServicePortIface is the public interface for the custom type ServicePort
-// Experimental.
-type ServicePortIface interface {
-	GetName() string
-	GetNodePort() float64
-	GetProtocol() Protocol
-	GetTargetPort() float64
-	GetPort() float64
-}
-
 // Definition of a service port.
 // Experimental.
-// Struct proxy
 type ServicePort struct {
 	// The name of this port within the service.
 	//
@@ -5356,75 +3342,17 @@ type ServicePort struct {
 	Port float64 `json:"port"`
 }
 
-func (s *ServicePort) GetName() string {
-	var returns string
-	_jsii_.Get(
-		s,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *ServicePort) GetNodePort() float64 {
-	var returns float64
-	_jsii_.Get(
-		s,
-		"nodePort",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *ServicePort) GetProtocol() Protocol {
-	var returns Protocol
-	_jsii_.Get(
-		s,
-		"protocol",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*Protocol)(nil)).Elem(): reflect.TypeOf((*Protocol)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *ServicePort) GetTargetPort() float64 {
-	var returns float64
-	_jsii_.Get(
-		s,
-		"targetPort",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *ServicePort) GetPort() float64 {
-	var returns float64
-	_jsii_.Get(
-		s,
-		"port",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// ServicePortOptionsIface is the public interface for the custom type ServicePortOptions
-// Experimental.
-type ServicePortOptionsIface interface {
-	GetName() string
-	GetNodePort() float64
-	GetProtocol() Protocol
-	GetTargetPort() float64
+// ToServicePortOptions is a convenience function to obtain a new ServicePortOptions from this ServicePort.
+func (s *ServicePort) ToServicePortOptions() ServicePortOptions {
+	return ServicePortOptions {
+		Name: s.Name,
+		NodePort: s.NodePort,
+		Protocol: s.Protocol,
+		TargetPort: s.TargetPort,
+	}
 }
 
 // Experimental.
-// Struct proxy
 type ServicePortOptions struct {
 	// The name of this port within the service.
 	//
@@ -5454,72 +3382,12 @@ type ServicePortOptions struct {
 	TargetPort float64 `json:"targetPort"`
 }
 
-func (s *ServicePortOptions) GetName() string {
-	var returns string
-	_jsii_.Get(
-		s,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *ServicePortOptions) GetNodePort() float64 {
-	var returns float64
-	_jsii_.Get(
-		s,
-		"nodePort",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *ServicePortOptions) GetProtocol() Protocol {
-	var returns Protocol
-	_jsii_.Get(
-		s,
-		"protocol",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*Protocol)(nil)).Elem(): reflect.TypeOf((*Protocol)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *ServicePortOptions) GetTargetPort() float64 {
-	var returns float64
-	_jsii_.Get(
-		s,
-		"targetPort",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// ServicePropsIface is the public interface for the custom type ServiceProps
-// Experimental.
-type ServicePropsIface interface {
-	GetMetadata() cdk8s.ApiObjectMetadataIface
-	GetClusterIp() string
-	GetExternalIPs() []string
-	GetExternalName() string
-	GetLoadBalancerSourceRanges() []string
-	GetPorts() []ServicePortIface
-	GetType() ServiceType
-}
-
 // Properties for initialization of `Service`.
 // Experimental.
-// Struct proxy
 type ServiceProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataIface `json:"metadata"`
+	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
 	// The IP address of the service and is usually assigned randomly by the master.
 	//
 	// If an address is specified manually and is not in use by others, it
@@ -5552,7 +3420,7 @@ type ServiceProps struct {
 	//
 	// More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
 	// Experimental.
-	Ports []ServicePortIface `json:"ports"`
+	Ports []ServicePort `json:"ports"`
 	// Determines how the Service is exposed.
 	//
 	// More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
@@ -5560,93 +3428,12 @@ type ServiceProps struct {
 	Type ServiceType `json:"type"`
 }
 
-func (s *ServiceProps) GetMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		s,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
+// ToResourceProps is a convenience function to obtain a new ResourceProps from this ServiceProps.
+func (s *ServiceProps) ToResourceProps() ResourceProps {
+	return ResourceProps {
+		Metadata: s.Metadata,
+	}
 }
-
-func (s *ServiceProps) GetClusterIp() string {
-	var returns string
-	_jsii_.Get(
-		s,
-		"clusterIP",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *ServiceProps) GetExternalIPs() []string {
-	var returns []string
-	_jsii_.Get(
-		s,
-		"externalIPs",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *ServiceProps) GetExternalName() string {
-	var returns string
-	_jsii_.Get(
-		s,
-		"externalName",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *ServiceProps) GetLoadBalancerSourceRanges() []string {
-	var returns []string
-	_jsii_.Get(
-		s,
-		"loadBalancerSourceRanges",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *ServiceProps) GetPorts() []ServicePortIface {
-	var returns []ServicePortIface
-	_jsii_.Get(
-		s,
-		"ports",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ServicePortIface)(nil)).Elem(): reflect.TypeOf((*ServicePort)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *ServiceProps) GetType() ServiceType {
-	var returns ServiceType
-	_jsii_.Get(
-		s,
-		"type",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ServiceType)(nil)).Elem(): reflect.TypeOf((*ServiceType)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
 
 // For some parts of your application (for example, frontends) you may want to expose a Service onto an external IP address, that's outside of your cluster.
 //
@@ -5656,37 +3443,11 @@ func (s *ServiceProps) GetType() ServiceType {
 type ServiceType string
 
 const (
-	ServiceTypeClusterIp ServiceType = "CLUSTER_IP"
-	ServiceTypeNodePort ServiceType = "NODE_PORT"
-	ServiceTypeLoadBalancer ServiceType = "LOAD_BALANCER"
-	ServiceTypeExternalName ServiceType = "EXTERNAL_NAME"
+	ServiceType_CLUSTER_IP ServiceType = "CLUSTER_IP"
+	ServiceType_NODE_PORT ServiceType = "NODE_PORT"
+	ServiceType_LOAD_BALANCER ServiceType = "LOAD_BALANCER"
+	ServiceType_EXTERNAL_NAME ServiceType = "EXTERNAL_NAME"
 )
-
-// Class interface
-type StatefulSetIface interface {
-	constructs.IConstructIface
-	IResourceIface
-	IPodTemplateIface
-	IPodSpecIface
-	GetApiObject() cdk8s.ApiObjectIface
-	GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetName() string
-	GetContainers() []ContainerIface
-	GetLabelSelector() map[string]string
-	GetPodManagementPolicy() PodManagementPolicy
-	GetPodMetadata() cdk8s.ApiObjectMetadataDefinitionIface
-	GetReplicas() float64
-	GetVolumes() []VolumeIface
-	GetRestartPolicy() RestartPolicy
-	GetServiceAccount() IServiceAccountIface
-	OnPrepare()
-	OnSynthesize(session constructs.ISynthesisSessionIface)
-	OnValidate() []string
-	ToString() string
-	AddContainer(container ContainerPropsIface) ContainerIface
-	AddVolume(volume VolumeIface)
-	SelectByLabel(key string, value string)
-}
 
 // StatefulSet is the workload API object used to manage stateful applications.
 //
@@ -5713,271 +3474,171 @@ type StatefulSetIface interface {
 // - Ordered, graceful deployment and scaling.
 // - Ordered, automated rolling updates.
 // Experimental.
-// Struct proxy
-type StatefulSet struct {
-	// The underlying cdk8s API object.
-	// See: base.Resource.apiObject
-	//
-	// Experimental.
-	ApiObject cdk8s.ApiObjectIface `json:"apiObject"`
-	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataDefinitionIface `json:"metadata"`
-	// The name of this API object.
-	// Experimental.
-	Name string `json:"name"`
-	// The containers belonging to the pod.
-	//
-	// Use `addContainer` to add containers.
-	// Experimental.
-	Containers []ContainerIface `json:"containers"`
-	// The labels this statefulset will match against in order to select pods.
-	//
-	// Returns a a copy. Use `selectByLabel()` to add labels.
-	// Experimental.
-	LabelSelector map[string]string `json:"labelSelector"`
-	// Management policy to use for the set.
-	// Experimental.
-	PodManagementPolicy PodManagementPolicy `json:"podManagementPolicy"`
-	// Provides read/write access to the underlying pod metadata of the resource.
-	// Experimental.
-	PodMetadata cdk8s.ApiObjectMetadataDefinitionIface `json:"podMetadata"`
-	// Number of desired pods.
-	// Experimental.
-	Replicas float64 `json:"replicas"`
-	// The volumes associated with this pod.
-	//
-	// Use `addVolume` to add volumes.
-	// Experimental.
-	Volumes []VolumeIface `json:"volumes"`
-	// Restart policy for all containers within the pod.
-	// Experimental.
-	RestartPolicy RestartPolicy `json:"restartPolicy"`
-	// The service account used to run this pod.
-	// Experimental.
-	ServiceAccount IServiceAccountIface `json:"serviceAccount"`
+type StatefulSet interface {
+	Resource
+	IPodTemplate
+	ApiObject() cdk8s.ApiObject
+	Containers() []Container
+	LabelSelector() map[string]string
+	PodManagementPolicy() PodManagementPolicy
+	PodMetadata() cdk8s.ApiObjectMetadataDefinition
+	Replicas() float64
+	RestartPolicy() RestartPolicy
+	ServiceAccount() IServiceAccount
+	Volumes() []Volume
+	AddContainer(container ContainerProps) Container
+	AddVolume(volume Volume)
+	SelectByLabel(key string, value string)
 }
 
-func (s *StatefulSet) GetApiObject() cdk8s.ApiObjectIface {
-	var returns cdk8s.ApiObjectIface
+// The jsii proxy struct for StatefulSet
+type statefulSet struct {
+	resource // extends cdk8s-plus-17.Resource
+	iPodTemplate // implements cdk8s-plus-17.IPodTemplate
+}
+
+func (s *statefulSet) ApiObject() cdk8s.ApiObject {
+	var returns cdk8s.ApiObject
 	_jsii_.Get(
 		s,
 		"apiObject",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObject)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *StatefulSet) GetMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
-	_jsii_.Get(
-		s,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *StatefulSet) GetName() string {
-	var returns string
-	_jsii_.Get(
-		s,
-		"name",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *StatefulSet) GetContainers() []ContainerIface {
-	var returns []ContainerIface
+func (s *statefulSet) Containers() []Container {
+	var returns []Container
 	_jsii_.Get(
 		s,
 		"containers",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *StatefulSet) GetLabelSelector() map[string]string {
+func (s *statefulSet) LabelSelector() map[string]string {
 	var returns map[string]string
 	_jsii_.Get(
 		s,
 		"labelSelector",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *StatefulSet) GetPodManagementPolicy() PodManagementPolicy {
+func (s *statefulSet) PodManagementPolicy() PodManagementPolicy {
 	var returns PodManagementPolicy
 	_jsii_.Get(
 		s,
 		"podManagementPolicy",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*PodManagementPolicy)(nil)).Elem(): reflect.TypeOf((*PodManagementPolicy)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *StatefulSet) GetPodMetadata() cdk8s.ApiObjectMetadataDefinitionIface {
-	var returns cdk8s.ApiObjectMetadataDefinitionIface
+func (s *statefulSet) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
 		s,
 		"podMetadata",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinitionIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadataDefinition)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *StatefulSet) GetReplicas() float64 {
+func (s *statefulSet) Replicas() float64 {
 	var returns float64
 	_jsii_.Get(
 		s,
 		"replicas",
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
-func (s *StatefulSet) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		s,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *StatefulSet) GetRestartPolicy() RestartPolicy {
+func (s *statefulSet) RestartPolicy() RestartPolicy {
 	var returns RestartPolicy
 	_jsii_.Get(
 		s,
 		"restartPolicy",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *StatefulSet) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
+func (s *statefulSet) ServiceAccount() IServiceAccount {
+	var returns IServiceAccount
 	_jsii_.Get(
 		s,
 		"serviceAccount",
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
+	)
+	return returns
+}
+
+func (s *statefulSet) Volumes() []Volume {
+	var returns []Volume
+	_jsii_.Get(
+		s,
+		"volumes",
+		&returns,
+	)
+	return returns
+}
+
+func (s *statefulSet) Metadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
+	_jsii_.Get(
+		s,
+		"metadata",
+		&returns,
+	)
+	return returns
+}
+
+func (s *statefulSet) Name() string {
+	var returns string
+	_jsii_.Get(
+		s,
+		"name",
+		&returns,
 	)
 	return returns
 }
 
 
-func NewStatefulSet(scope constructs.ConstructIface, id string, props StatefulSetPropsIface) StatefulSetIface {
+func NewStatefulSet(scope constructs.Construct, id string, props StatefulSetProps) StatefulSet {
 	_init_.Initialize()
-	self := StatefulSet{}
+	s := statefulSet{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.StatefulSet",
 		[]interface{}{scope, id, props},
 		[]_jsii_.FQN{"cdk8s-plus-17.IPodTemplate"},
 		[]_jsii_.Override{},
-		&self,
+		&s,
 	)
-	return &self
+	return &s
 }
 
-func (s *StatefulSet) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
-		s,
-		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (s *StatefulSet) OnSynthesize(session constructs.ISynthesisSessionIface) {
-	var returns interface{}
-	_jsii_.Invoke(
-		s,
-		"onSynthesize",
-		[]interface{}{session},
-		false,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-}
-
-func (s *StatefulSet) OnValidate() []string {
-	var returns []string
-	_jsii_.Invoke(
-		s,
-		"onValidate",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*string)(nil)).Elem(): reflect.TypeOf((*string)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *StatefulSet) ToString() string {
-	var returns string
-	_jsii_.Invoke(
-		s,
-		"toString",
-		[]interface{}{},
-		true,
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *StatefulSet) AddContainer(container ContainerPropsIface) ContainerIface {
-	var returns ContainerIface
+// Add a container to the pod.
+// Experimental.
+func (s *statefulSet) AddContainer(container ContainerProps) Container {
+	var returns Container
 	_jsii_.Invoke(
 		s,
 		"addContainer",
 		[]interface{}{container},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerIface)(nil)).Elem(): reflect.TypeOf((*Container)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func (s *StatefulSet) AddVolume(volume VolumeIface) {
+// Add a volume to the pod.
+// Experimental.
+func (s *statefulSet) AddVolume(volume Volume) {
 	var returns interface{}
 	_jsii_.Invoke(
 		s,
@@ -5985,11 +3646,14 @@ func (s *StatefulSet) AddVolume(volume VolumeIface) {
 		[]interface{}{volume},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-func (s *StatefulSet) SelectByLabel(key string, value string) {
+// Configure a label selector to this deployment.
+//
+// Pods that have the label will be selected by deployments configured with this spec.
+// Experimental.
+func (s *statefulSet) SelectByLabel(key string, value string) {
 	var returns interface{}
 	_jsii_.Invoke(
 		s,
@@ -5997,32 +3661,85 @@ func (s *StatefulSet) SelectByLabel(key string, value string) {
 		[]interface{}{key, value},
 		false,
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 }
 
-// StatefulSetPropsIface is the public interface for the custom type StatefulSetProps
+// Perform final modifications before synthesis.
+//
+// This method can be implemented by derived constructs in order to perform
+// final changes before synthesis. prepare() will be called after child
+// constructs have been prepared.
+//
+// This is an advanced framework feature. Only use this if you
+// understand the implications.
 // Experimental.
-type StatefulSetPropsIface interface {
-	GetMetadata() cdk8s.ApiObjectMetadataIface
-	GetContainers() []ContainerPropsIface
-	GetRestartPolicy() RestartPolicy
-	GetServiceAccount() IServiceAccountIface
-	GetVolumes() []VolumeIface
-	GetPodMetadata() cdk8s.ApiObjectMetadataIface
-	GetService() ServiceIface
-	GetDefaultSelector() bool
-	GetPodManagementPolicy() PodManagementPolicy
-	GetReplicas() float64
+func (s *statefulSet) OnPrepare() {
+	var returns interface{}
+	_jsii_.Invoke(
+		s,
+		"onPrepare",
+		[]interface{}{},
+		false,
+		&returns,
+	)
+}
+
+// Allows this construct to emit artifacts into the cloud assembly during synthesis.
+//
+// This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
+// as they participate in synthesizing the cloud assembly.
+// Experimental.
+func (s *statefulSet) OnSynthesize(session constructs.ISynthesisSession) {
+	var returns interface{}
+	_jsii_.Invoke(
+		s,
+		"onSynthesize",
+		[]interface{}{session},
+		false,
+		&returns,
+	)
+}
+
+// Validate the current construct.
+//
+// This method can be implemented by derived constructs in order to perform
+// validation logic. It is called on all constructs before synthesis.
+//
+// Returns: An array of validation error messages, or an empty array if there the construct is valid.
+// Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
+// instead of overriding this method.
+func (s *statefulSet) OnValidate() []string {
+	var returns []string
+	_jsii_.Invoke(
+		s,
+		"onValidate",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
+}
+
+// Returns a string representation of this construct.
+// Experimental.
+func (s *statefulSet) ToString() string {
+	var returns string
+	_jsii_.Invoke(
+		s,
+		"toString",
+		[]interface{}{},
+		true,
+		&returns,
+	)
+	return returns
 }
 
 // Properties for initialization of `StatefulSet`.
 // Experimental.
-// Struct proxy
 type StatefulSetProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadataIface `json:"metadata"`
+	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
 	// List of containers belonging to the pod.
 	//
 	// Containers cannot currently be
@@ -6030,7 +3747,7 @@ type StatefulSetProps struct {
 	//
 	// You can add additionnal containers using `podSpec.addContainer()`
 	// Experimental.
-	Containers []ContainerPropsIface `json:"containers"`
+	Containers []ContainerProps `json:"containers"`
 	// Restart policy for all containers within the pod.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	//
@@ -6047,20 +3764,20 @@ type StatefulSetProps struct {
 	// See: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 	//
 	// Experimental.
-	ServiceAccount IServiceAccountIface `json:"serviceAccount"`
+	ServiceAccount IServiceAccount `json:"serviceAccount"`
 	// List of volumes that can be mounted by containers belonging to the pod.
 	//
 	// You can also add volumes later using `podSpec.addVolume()`
 	// See: https://kubernetes.io/docs/concepts/storage/volumes
 	//
 	// Experimental.
-	Volumes []VolumeIface `json:"volumes"`
+	Volumes []Volume `json:"volumes"`
 	// The pod metadata.
 	// Experimental.
-	PodMetadata cdk8s.ApiObjectMetadataIface `json:"podMetadata"`
+	PodMetadata cdk8s.ApiObjectMetadata `json:"podMetadata"`
 	// Service to associate with the statefulset.
 	// Experimental.
-	Service ServiceIface `json:"service"`
+	Service Service `json:"service"`
 	// Automatically allocates a pod selector for this statefulset.
 	//
 	// If this is set to `false` you must define your selector through
@@ -6075,136 +3792,32 @@ type StatefulSetProps struct {
 	Replicas float64 `json:"replicas"`
 }
 
-func (s *StatefulSetProps) GetMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		s,
-		"metadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
+// ToResourceProps is a convenience function to obtain a new ResourceProps from this StatefulSetProps.
+func (s *StatefulSetProps) ToResourceProps() ResourceProps {
+	return ResourceProps {
+		Metadata: s.Metadata,
+	}
 }
 
-func (s *StatefulSetProps) GetContainers() []ContainerPropsIface {
-	var returns []ContainerPropsIface
-	_jsii_.Get(
-		s,
-		"containers",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ContainerPropsIface)(nil)).Elem(): reflect.TypeOf((*ContainerProps)(nil)).Elem(),
-		},
-	)
-	return returns
+// ToPodSpecProps is a convenience function to obtain a new PodSpecProps from this StatefulSetProps.
+func (s *StatefulSetProps) ToPodSpecProps() PodSpecProps {
+	return PodSpecProps {
+		Containers: s.Containers,
+		RestartPolicy: s.RestartPolicy,
+		ServiceAccount: s.ServiceAccount,
+		Volumes: s.Volumes,
+	}
 }
 
-func (s *StatefulSetProps) GetRestartPolicy() RestartPolicy {
-	var returns RestartPolicy
-	_jsii_.Get(
-		s,
-		"restartPolicy",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*RestartPolicy)(nil)).Elem(): reflect.TypeOf((*RestartPolicy)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *StatefulSetProps) GetServiceAccount() IServiceAccountIface {
-	var returns IServiceAccountIface
-	_jsii_.Get(
-		s,
-		"serviceAccount",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*IServiceAccountIface)(nil)).Elem(): reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *StatefulSetProps) GetVolumes() []VolumeIface {
-	var returns []VolumeIface
-	_jsii_.Get(
-		s,
-		"volumes",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *StatefulSetProps) GetPodMetadata() cdk8s.ApiObjectMetadataIface {
-	var returns cdk8s.ApiObjectMetadataIface
-	_jsii_.Get(
-		s,
-		"podMetadata",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*cdk8s.ApiObjectMetadataIface)(nil)).Elem(): reflect.TypeOf((*cdk8s.ApiObjectMetadata)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *StatefulSetProps) GetService() ServiceIface {
-	var returns ServiceIface
-	_jsii_.Get(
-		s,
-		"service",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*ServiceIface)(nil)).Elem(): reflect.TypeOf((*Service)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *StatefulSetProps) GetDefaultSelector() bool {
-	var returns bool
-	_jsii_.Get(
-		s,
-		"defaultSelector",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (s *StatefulSetProps) GetPodManagementPolicy() PodManagementPolicy {
-	var returns PodManagementPolicy
-	_jsii_.Get(
-		s,
-		"podManagementPolicy",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*PodManagementPolicy)(nil)).Elem(): reflect.TypeOf((*PodManagementPolicy)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
-func (s *StatefulSetProps) GetReplicas() float64 {
-	var returns float64
-	_jsii_.Get(
-		s,
-		"replicas",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-
-// Class interface
-type VolumeIface interface {
-	GetName() string
+// ToPodTemplateProps is a convenience function to obtain a new PodTemplateProps from this StatefulSetProps.
+func (s *StatefulSetProps) ToPodTemplateProps() PodTemplateProps {
+	return PodTemplateProps {
+		Containers: s.Containers,
+		RestartPolicy: s.RestartPolicy,
+		ServiceAccount: s.ServiceAccount,
+		Volumes: s.Volumes,
+		PodMetadata: s.PodMetadata,
+	}
 }
 
 // Volume represents a named volume in a pod that may be accessed by any container in the pod.
@@ -6238,83 +3851,89 @@ type VolumeIface interface {
 // hierarchy, and any volumes are mounted at the specified paths within the
 // image. Volumes can not mount onto other volumes
 // Experimental.
-// Struct proxy
-type Volume struct {
-	// Experimental.
-	Name string `json:"name"`
+type Volume interface {
+	Name() string
 }
 
-func (v *Volume) GetName() string {
+// The jsii proxy struct for Volume
+type volume struct {
+	_ byte // padding
+}
+
+func (v *volume) Name() string {
 	var returns string
 	_jsii_.Get(
 		v,
 		"name",
 		&returns,
-		map[reflect.Type]reflect.Type{},
 	)
 	return returns
 }
 
 
-func NewVolume(name string, config interface{}) VolumeIface {
+func NewVolume(name string, config interface{}) Volume {
 	_init_.Initialize()
-	self := Volume{}
+	v := volume{}
+
 	_jsii_.Create(
 		"cdk8s-plus-17.Volume",
 		[]interface{}{name, config},
 		[]_jsii_.FQN{},
 		[]_jsii_.Override{},
-		&self,
+		&v,
 	)
-	return &self
+	return &v
 }
 
-func Volume_FromConfigMap(configMap IConfigMapIface, options ConfigMapVolumeOptionsIface) VolumeIface {
+// Populate the volume from a ConfigMap.
+//
+// The configMap resource provides a way to inject configuration data into
+// Pods. The data stored in a ConfigMap object can be referenced in a volume
+// of type configMap and then consumed by containerized applications running
+// in a Pod.
+//
+// When referencing a configMap object, you can simply provide its name in the
+// volume to reference it. You can also customize the path to use for a
+// specific entry in the ConfigMap.
+// Experimental.
+func Volume_FromConfigMap(configMap IConfigMap, options ConfigMapVolumeOptions) Volume {
 	_init_.Initialize()
-	var returns VolumeIface
-	_jsii_.InvokeStatic(
+	var returns Volume
+	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.Volume",
 		"fromConfigMap",
 		[]interface{}{configMap, options},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-func Volume_FromEmptyDir(name string, options EmptyDirVolumeOptionsIface) VolumeIface {
+// An emptyDir volume is first created when a Pod is assigned to a Node, and exists as long as that Pod is running on that node.
+//
+// As the name says, it is
+// initially empty. Containers in the Pod can all read and write the same
+// files in the emptyDir volume, though that volume can be mounted at the same
+// or different paths in each Container. When a Pod is removed from a node for
+// any reason, the data in the emptyDir is deleted forever.
+// See: http://kubernetes.io/docs/user-guide/volumes#emptydir
+//
+// Experimental.
+func Volume_FromEmptyDir(name string, options EmptyDirVolumeOptions) Volume {
 	_init_.Initialize()
-	var returns VolumeIface
-	_jsii_.InvokeStatic(
+	var returns Volume
+	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.Volume",
 		"fromEmptyDir",
 		[]interface{}{name, options},
 		true,
 		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
 	)
 	return returns
 }
 
-// VolumeMountIface is the public interface for the custom type VolumeMount
-// Experimental.
-type VolumeMountIface interface {
-	GetPropagation() MountPropagation
-	GetReadOnly() bool
-	GetSubPath() string
-	GetSubPathExpr() string
-	GetPath() string
-	GetVolume() VolumeIface
-}
-
 // Mount a volume from the pod to the container.
 // Experimental.
-// Struct proxy
 type VolumeMount struct {
 	// Determines how mounts are propagated from the host to container and the other way around.
 	//
@@ -6353,77 +3972,16 @@ type VolumeMount struct {
 	Path string `json:"path"`
 	// The volume to mount.
 	// Experimental.
-	Volume VolumeIface `json:"volume"`
+	Volume Volume `json:"volume"`
 }
 
-func (v *VolumeMount) GetPropagation() MountPropagation {
-	var returns MountPropagation
-	_jsii_.Get(
-		v,
-		"propagation",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*MountPropagation)(nil)).Elem(): reflect.TypeOf((*MountPropagation)(nil)).Elem(),
-		},
-	)
-	return returns
+// ToMountOptions is a convenience function to obtain a new MountOptions from this VolumeMount.
+func (v *VolumeMount) ToMountOptions() MountOptions {
+	return MountOptions {
+		Propagation: v.Propagation,
+		ReadOnly: v.ReadOnly,
+		SubPath: v.SubPath,
+		SubPathExpr: v.SubPathExpr,
+	}
 }
-
-func (v *VolumeMount) GetReadOnly() bool {
-	var returns bool
-	_jsii_.Get(
-		v,
-		"readOnly",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (v *VolumeMount) GetSubPath() string {
-	var returns string
-	_jsii_.Get(
-		v,
-		"subPath",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (v *VolumeMount) GetSubPathExpr() string {
-	var returns string
-	_jsii_.Get(
-		v,
-		"subPathExpr",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (v *VolumeMount) GetPath() string {
-	var returns string
-	_jsii_.Get(
-		v,
-		"path",
-		&returns,
-		map[reflect.Type]reflect.Type{},
-	)
-	return returns
-}
-
-func (v *VolumeMount) GetVolume() VolumeIface {
-	var returns VolumeIface
-	_jsii_.Get(
-		v,
-		"volume",
-		&returns,
-		map[reflect.Type]reflect.Type{
-			reflect.TypeOf((*VolumeIface)(nil)).Elem(): reflect.TypeOf((*Volume)(nil)).Elem(),
-		},
-	)
-	return returns
-}
-
 
