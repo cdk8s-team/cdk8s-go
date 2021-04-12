@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/constructs-go/constructs/v3"
 	"github.com/awslabs/cdk8s-go/cdk8s"
+	"github.com/awslabs/cdk8s-go/cdk8splus17/internal"
 )
 
 // Options for `configmap.addDirectory()`.
@@ -14,10 +15,10 @@ import (
 type AddDirectoryOptions struct {
 	// Glob patterns to exclude when adding files.
 	// Experimental.
-	Exclude []string `json:"exclude"`
+	Exclude *[]*string `json:"exclude"`
 	// A prefix to add to all keys in the config map.
 	// Experimental.
-	KeyPrefix string `json:"keyPrefix"`
+	KeyPrefix *string `json:"keyPrefix"`
 }
 
 // Options for `Probe.fromCommand()`.
@@ -27,7 +28,7 @@ type CommandProbeOptions struct {
 	//
 	// Defaults to 3. Minimum value is 1.
 	// Experimental.
-	FailureThreshold float64 `json:"failureThreshold"`
+	FailureThreshold *float64 `json:"failureThreshold"`
 	// Number of seconds after the container has started before liveness probes are initiated.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
 	//
@@ -42,7 +43,7 @@ type CommandProbeOptions struct {
 	//
 	// Must be 1 for liveness and startup. Minimum value is 1.
 	// Experimental.
-	SuccessThreshold float64 `json:"successThreshold"`
+	SuccessThreshold *float64 `json:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	//
 	// Defaults to 1 second. Minimum value is 1.
@@ -52,81 +53,76 @@ type CommandProbeOptions struct {
 	TimeoutSeconds cdk8s.Duration `json:"timeoutSeconds"`
 }
 
-// ToProbeOptions is a convenience function to obtain a new ProbeOptions from this CommandProbeOptions.
-func (c *CommandProbeOptions) ToProbeOptions() ProbeOptions {
-	return ProbeOptions {
-		FailureThreshold: c.FailureThreshold,
-		InitialDelaySeconds: c.InitialDelaySeconds,
-		PeriodSeconds: c.PeriodSeconds,
-		SuccessThreshold: c.SuccessThreshold,
-		TimeoutSeconds: c.TimeoutSeconds,
-	}
-}
-
 // ConfigMap holds configuration data for pods to consume.
 // Experimental.
 type ConfigMap interface {
 	Resource
 	IConfigMap
 	ApiObject() cdk8s.ApiObject
-	BinaryData() map[string]string
-	Data() map[string]string
-	AddBinaryData(key string, value string)
-	AddData(key string, value string)
-	AddDirectory(localDir string, options AddDirectoryOptions)
-	AddFile(localFile string, key string)
+	BinaryData() *map[string]*string
+	Data() *map[string]*string
+	Metadata() cdk8s.ApiObjectMetadataDefinition
+	Name() *string
+	AddBinaryData(key *string, value *string)
+	AddData(key *string, value *string)
+	AddDirectory(localDir *string, options *AddDirectoryOptions)
+	AddFile(localFile *string, key *string)
+	OnPrepare()
+	OnSynthesize(session constructs.ISynthesisSession)
+	OnValidate() *[]*string
+	ToString() *string
 }
 
 // The jsii proxy struct for ConfigMap
-type configMap struct {
-	resource // extends cdk8s-plus-17.Resource
-	iConfigMap // implements cdk8s-plus-17.IConfigMap
+type jsiiProxy_ConfigMap struct {
+	jsiiProxy_Resource
+	jsiiProxy_IConfigMap
 }
 
-func (c *configMap) ApiObject() cdk8s.ApiObject {
+func (j *jsiiProxy_ConfigMap) ApiObject() cdk8s.ApiObject {
 	var returns cdk8s.ApiObject
 	_jsii_.Get(
-		c,
+		j,
 		"apiObject",
 		&returns,
 	)
 	return returns
 }
 
-func (c *configMap) BinaryData() map[string]string {
-	var returns map[string]string
+func (j *jsiiProxy_ConfigMap) BinaryData() *map[string]*string {
+	var returns *map[string]*string
 	_jsii_.Get(
-		c,
+		j,
 		"binaryData",
 		&returns,
 	)
 	return returns
 }
 
-func (c *configMap) Data() map[string]string {
-	var returns map[string]string
+func (j *jsiiProxy_ConfigMap) Data() *map[string]*string {
+	var returns *map[string]*string
 	_jsii_.Get(
-		c,
+		j,
 		"data",
 		&returns,
 	)
 	return returns
 }
 
-func (c *configMap) Metadata() cdk8s.ApiObjectMetadataDefinition {
+func (j *jsiiProxy_ConfigMap) Metadata() cdk8s.ApiObjectMetadataDefinition {
 	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
-		c,
+		j,
 		"metadata",
 		&returns,
 	)
 	return returns
 }
 
-func (c *configMap) Name() string {
-	var returns string
+func (j *jsiiProxy_ConfigMap) Name() *string {
+	var returns *string
 	_jsii_.Get(
-		c,
+		j,
 		"name",
 		&returns,
 	)
@@ -134,32 +130,46 @@ func (c *configMap) Name() string {
 }
 
 
-func NewConfigMap(scope constructs.Construct, id string, props ConfigMapProps) ConfigMap {
+// Experimental.
+func NewConfigMap(scope constructs.Construct, id *string, props *ConfigMapProps) ConfigMap {
 	_init_.Initialize()
-	c := configMap{}
+
+	j := jsiiProxy_ConfigMap{}
 
 	_jsii_.Create(
 		"cdk8s-plus-17.ConfigMap",
 		[]interface{}{scope, id, props},
-		[]_jsii_.FQN{"cdk8s-plus-17.IConfigMap"},
-		[]_jsii_.Override{},
-		&c,
+		&j,
 	)
-	return &c
+
+	return &j
+}
+
+// Experimental.
+func NewConfigMap_Override(c ConfigMap, scope constructs.Construct, id *string, props *ConfigMapProps) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.ConfigMap",
+		[]interface{}{scope, id, props},
+		c,
+	)
 }
 
 // Represents a ConfigMap created elsewhere.
 // Experimental.
-func ConfigMap_FromConfigMapName(name string) IConfigMap {
+func ConfigMap_FromConfigMapName(name *string) IConfigMap {
 	_init_.Initialize()
+
 	var returns IConfigMap
+
 	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.ConfigMap",
 		"fromConfigMapName",
 		[]interface{}{name},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
@@ -168,53 +178,41 @@ func ConfigMap_FromConfigMapName(name string) IConfigMap {
 // BinaryData can contain byte
 // sequences that are not in the UTF-8 range.
 // Experimental.
-func (c *configMap) AddBinaryData(key string, value string) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (c *jsiiProxy_ConfigMap) AddBinaryData(key *string, value *string) {
+	_jsii_.InvokeVoid(
 		c,
 		"addBinaryData",
 		[]interface{}{key, value},
-		false,
-		&returns,
 	)
 }
 
 // Adds a data entry to the config map.
 // Experimental.
-func (c *configMap) AddData(key string, value string) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (c *jsiiProxy_ConfigMap) AddData(key *string, value *string) {
+	_jsii_.InvokeVoid(
 		c,
 		"addData",
 		[]interface{}{key, value},
-		false,
-		&returns,
 	)
 }
 
 // Adds a directory to the ConfigMap.
 // Experimental.
-func (c *configMap) AddDirectory(localDir string, options AddDirectoryOptions) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (c *jsiiProxy_ConfigMap) AddDirectory(localDir *string, options *AddDirectoryOptions) {
+	_jsii_.InvokeVoid(
 		c,
 		"addDirectory",
 		[]interface{}{localDir, options},
-		false,
-		&returns,
 	)
 }
 
 // Adds a file to the ConfigMap.
 // Experimental.
-func (c *configMap) AddFile(localFile string, key string) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (c *jsiiProxy_ConfigMap) AddFile(localFile *string, key *string) {
+	_jsii_.InvokeVoid(
 		c,
 		"addFile",
 		[]interface{}{localFile, key},
-		false,
-		&returns,
 	)
 }
 
@@ -227,14 +225,11 @@ func (c *configMap) AddFile(localFile string, key string) {
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
 // Experimental.
-func (c *configMap) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
+func (c *jsiiProxy_ConfigMap) OnPrepare() {
+	_jsii_.InvokeVoid(
 		c,
 		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
+		nil, // no parameters
 	)
 }
 
@@ -243,14 +238,11 @@ func (c *configMap) OnPrepare() {
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
 // Experimental.
-func (c *configMap) OnSynthesize(session constructs.ISynthesisSession) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (c *jsiiProxy_ConfigMap) OnSynthesize(session constructs.ISynthesisSession) {
+	_jsii_.InvokeVoid(
 		c,
 		"onSynthesize",
 		[]interface{}{session},
-		false,
-		&returns,
 	)
 }
 
@@ -262,29 +254,31 @@ func (c *configMap) OnSynthesize(session constructs.ISynthesisSession) {
 // Returns: An array of validation error messages, or an empty array if there the construct is valid.
 // Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
 // instead of overriding this method.
-func (c *configMap) OnValidate() []string {
-	var returns []string
+func (c *jsiiProxy_ConfigMap) OnValidate() *[]*string {
+	var returns *[]*string
+
 	_jsii_.Invoke(
 		c,
 		"onValidate",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
 // Returns a string representation of this construct.
 // Experimental.
-func (c *configMap) ToString() string {
-	var returns string
+func (c *jsiiProxy_ConfigMap) ToString() *string {
+	var returns *string
+
 	_jsii_.Invoke(
 		c,
 		"toString",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
@@ -293,7 +287,7 @@ func (c *configMap) ToString() string {
 type ConfigMapProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
+	Metadata *cdk8s.ApiObjectMetadata `json:"metadata"`
 	// BinaryData contains the binary data.
 	//
 	// Each key must consist of alphanumeric characters, '-', '_' or '.'.
@@ -304,7 +298,7 @@ type ConfigMapProps struct {
 	//
 	// You can also add binary data using `configMap.addBinaryData()`.
 	// Experimental.
-	BinaryData map[string]string `json:"binaryData"`
+	BinaryData *map[string]*string `json:"binaryData"`
 	// Data contains the configuration data.
 	//
 	// Each key must consist of alphanumeric characters, '-', '_' or '.'. Values
@@ -314,14 +308,7 @@ type ConfigMapProps struct {
 	//
 	// You can also add data using `configMap.addData()`.
 	// Experimental.
-	Data map[string]string `json:"data"`
-}
-
-// ToResourceProps is a convenience function to obtain a new ResourceProps from this ConfigMapProps.
-func (c *ConfigMapProps) ToResourceProps() ResourceProps {
-	return ResourceProps {
-		Metadata: c.Metadata,
-	}
+	Data *map[string]*string `json:"data"`
 }
 
 // Options for the ConfigMap-based volume.
@@ -334,7 +321,7 @@ type ConfigMapVolumeOptions struct {
 	// this setting. This might be in conflict with other options that affect the
 	// file mode, like fsGroup, and the result can be other mode bits set.
 	// Experimental.
-	DefaultMode float64 `json:"defaultMode"`
+	DefaultMode *float64 `json:"defaultMode"`
 	// If unspecified, each key-value pair in the Data field of the referenced ConfigMap will be projected into the volume as a file whose name is the key and content is the value.
 	//
 	// If specified, the listed keys will be projected
@@ -343,120 +330,120 @@ type ConfigMapVolumeOptions struct {
 	// error unless it is marked optional. Paths must be relative and may not
 	// contain the '..' path or start with '..'.
 	// Experimental.
-	Items map[string]PathMapping `json:"items"`
+	Items *map[string]*PathMapping `json:"items"`
 	// The volume name.
 	// Experimental.
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// Specify whether the ConfigMap or its keys must be defined.
 	// Experimental.
-	Optional bool `json:"optional"`
+	Optional *bool `json:"optional"`
 }
 
 // A single application container that you want to run within a pod.
 // Experimental.
 type Container interface {
-	Args() []string
-	Command() []string
-	Env() map[string]EnvValue
-	Image() string
+	Args() *[]*string
+	Command() *[]*string
+	Env() *map[string]EnvValue
+	Image() *string
 	ImagePullPolicy() ImagePullPolicy
-	Mounts() []VolumeMount
-	Name() string
-	Port() float64
-	WorkingDir() string
-	AddEnv(name string, value EnvValue)
-	Mount(path string, volume Volume, options MountOptions)
+	Mounts() *[]*VolumeMount
+	Name() *string
+	Port() *float64
+	WorkingDir() *string
+	AddEnv(name *string, value EnvValue)
+	Mount(path *string, volume Volume, options *MountOptions)
 }
 
 // The jsii proxy struct for Container
-type container struct {
+type jsiiProxy_Container struct {
 	_ byte // padding
 }
 
-func (c *container) Args() []string {
-	var returns []string
+func (j *jsiiProxy_Container) Args() *[]*string {
+	var returns *[]*string
 	_jsii_.Get(
-		c,
+		j,
 		"args",
 		&returns,
 	)
 	return returns
 }
 
-func (c *container) Command() []string {
-	var returns []string
+func (j *jsiiProxy_Container) Command() *[]*string {
+	var returns *[]*string
 	_jsii_.Get(
-		c,
+		j,
 		"command",
 		&returns,
 	)
 	return returns
 }
 
-func (c *container) Env() map[string]EnvValue {
-	var returns map[string]EnvValue
+func (j *jsiiProxy_Container) Env() *map[string]EnvValue {
+	var returns *map[string]EnvValue
 	_jsii_.Get(
-		c,
+		j,
 		"env",
 		&returns,
 	)
 	return returns
 }
 
-func (c *container) Image() string {
-	var returns string
+func (j *jsiiProxy_Container) Image() *string {
+	var returns *string
 	_jsii_.Get(
-		c,
+		j,
 		"image",
 		&returns,
 	)
 	return returns
 }
 
-func (c *container) ImagePullPolicy() ImagePullPolicy {
+func (j *jsiiProxy_Container) ImagePullPolicy() ImagePullPolicy {
 	var returns ImagePullPolicy
 	_jsii_.Get(
-		c,
+		j,
 		"imagePullPolicy",
 		&returns,
 	)
 	return returns
 }
 
-func (c *container) Mounts() []VolumeMount {
-	var returns []VolumeMount
+func (j *jsiiProxy_Container) Mounts() *[]*VolumeMount {
+	var returns *[]*VolumeMount
 	_jsii_.Get(
-		c,
+		j,
 		"mounts",
 		&returns,
 	)
 	return returns
 }
 
-func (c *container) Name() string {
-	var returns string
+func (j *jsiiProxy_Container) Name() *string {
+	var returns *string
 	_jsii_.Get(
-		c,
+		j,
 		"name",
 		&returns,
 	)
 	return returns
 }
 
-func (c *container) Port() float64 {
-	var returns float64
+func (j *jsiiProxy_Container) Port() *float64 {
+	var returns *float64
 	_jsii_.Get(
-		c,
+		j,
 		"port",
 		&returns,
 	)
 	return returns
 }
 
-func (c *container) WorkingDir() string {
-	var returns string
+func (j *jsiiProxy_Container) WorkingDir() *string {
+	var returns *string
 	_jsii_.Get(
-		c,
+		j,
 		"workingDir",
 		&returns,
 	)
@@ -464,18 +451,30 @@ func (c *container) WorkingDir() string {
 }
 
 
-func NewContainer(props ContainerProps) Container {
+// Experimental.
+func NewContainer(props *ContainerProps) Container {
 	_init_.Initialize()
-	c := container{}
+
+	j := jsiiProxy_Container{}
 
 	_jsii_.Create(
 		"cdk8s-plus-17.Container",
 		[]interface{}{props},
-		[]_jsii_.FQN{},
-		[]_jsii_.Override{},
-		&c,
+		&j,
 	)
-	return &c
+
+	return &j
+}
+
+// Experimental.
+func NewContainer_Override(c Container, props *ContainerProps) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.Container",
+		[]interface{}{props},
+		c,
+	)
 }
 
 // Add an environment value to the container.
@@ -485,14 +484,11 @@ func NewContainer(props ContainerProps) Container {
 // See: EnvValue.fromXXX
 //
 // Experimental.
-func (c *container) AddEnv(name string, value EnvValue) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (c *jsiiProxy_Container) AddEnv(name *string, value EnvValue) {
+	_jsii_.InvokeVoid(
 		c,
 		"addEnv",
 		[]interface{}{name, value},
-		false,
-		&returns,
 	)
 }
 
@@ -500,14 +496,11 @@ func (c *container) AddEnv(name string, value EnvValue) {
 //
 // Every pod that is configured to use this container will autmoatically have access to the volume.
 // Experimental.
-func (c *container) Mount(path string, volume Volume, options MountOptions) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (c *jsiiProxy_Container) Mount(path *string, volume Volume, options *MountOptions) {
+	_jsii_.InvokeVoid(
 		c,
 		"mount",
 		[]interface{}{path, volume, options},
-		false,
-		&returns,
 	)
 }
 
@@ -516,7 +509,7 @@ func (c *container) Mount(path string, volume Volume, options MountOptions) {
 type ContainerProps struct {
 	// Docker image name.
 	// Experimental.
-	Image string `json:"image"`
+	Image *string `json:"image"`
 	// Arguments to the entrypoint. The docker image's CMD is used if `command` is not provided.
 	//
 	// Variable references $(VAR_NAME) are expanded using the container's
@@ -529,7 +522,7 @@ type ContainerProps struct {
 	// See: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
 	//
 	// Experimental.
-	Args []string `json:"args"`
+	Args *[]*string `json:"args"`
 	// Entrypoint array.
 	//
 	// Not executed within a shell. The docker image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment.
@@ -537,12 +530,12 @@ type ContainerProps struct {
 	// Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated.
 	// More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
 	// Experimental.
-	Command []string `json:"command"`
+	Command *[]*string `json:"command"`
 	// List of environment variables to set in the container.
 	//
 	// Cannot be updated.
 	// Experimental.
-	Env map[string]EnvValue `json:"env"`
+	Env *map[string]EnvValue `json:"env"`
 	// Image pull policy for this container.
 	// Experimental.
 	ImagePullPolicy ImagePullPolicy `json:"imagePullPolicy"`
@@ -555,12 +548,12 @@ type ContainerProps struct {
 	//
 	// Each container in a pod must have a unique name (DNS_LABEL). Cannot be updated.
 	// Experimental.
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// Number of port to expose on the pod's IP address.
 	//
 	// This must be a valid port number, 0 < x < 65536.
 	// Experimental.
-	Port float64 `json:"port"`
+	Port *float64 `json:"port"`
 	// Determines when the container is ready to serve traffic.
 	// Experimental.
 	Readiness Probe `json:"readiness"`
@@ -573,12 +566,12 @@ type ContainerProps struct {
 	//
 	// Cannot be updated.
 	// Experimental.
-	VolumeMounts []VolumeMount `json:"volumeMounts"`
+	VolumeMounts *[]*VolumeMount `json:"volumeMounts"`
 	// Container's working directory.
 	//
 	// If not specified, the container runtime's default will be used, which might be configured in the container image. Cannot be updated.
 	// Experimental.
-	WorkingDir string `json:"workingDir"`
+	WorkingDir *string `json:"workingDir"`
 }
 
 // A Deployment provides declarative updates for Pods and ReplicaSets.
@@ -610,164 +603,180 @@ type Deployment interface {
 	Resource
 	IPodTemplate
 	ApiObject() cdk8s.ApiObject
-	Containers() []Container
-	LabelSelector() map[string]string
+	Containers() *[]Container
+	LabelSelector() *map[string]*string
+	Metadata() cdk8s.ApiObjectMetadataDefinition
+	Name() *string
 	PodMetadata() cdk8s.ApiObjectMetadataDefinition
-	Replicas() float64
+	Replicas() *float64
 	RestartPolicy() RestartPolicy
 	ServiceAccount() IServiceAccount
-	Volumes() []Volume
-	AddContainer(container ContainerProps) Container
+	Volumes() *[]Volume
+	AddContainer(container *ContainerProps) Container
 	AddVolume(volume Volume)
-	Expose(port float64, options ExposeOptions) Service
-	SelectByLabel(key string, value string)
+	Expose(port *float64, options *ExposeOptions) Service
+	OnPrepare()
+	OnSynthesize(session constructs.ISynthesisSession)
+	OnValidate() *[]*string
+	SelectByLabel(key *string, value *string)
+	ToString() *string
 }
 
 // The jsii proxy struct for Deployment
-type deployment struct {
-	resource // extends cdk8s-plus-17.Resource
-	iPodTemplate // implements cdk8s-plus-17.IPodTemplate
+type jsiiProxy_Deployment struct {
+	jsiiProxy_Resource
+	jsiiProxy_IPodTemplate
 }
 
-func (d *deployment) ApiObject() cdk8s.ApiObject {
+func (j *jsiiProxy_Deployment) ApiObject() cdk8s.ApiObject {
 	var returns cdk8s.ApiObject
 	_jsii_.Get(
-		d,
+		j,
 		"apiObject",
 		&returns,
 	)
 	return returns
 }
 
-func (d *deployment) Containers() []Container {
-	var returns []Container
+func (j *jsiiProxy_Deployment) Containers() *[]Container {
+	var returns *[]Container
 	_jsii_.Get(
-		d,
+		j,
 		"containers",
 		&returns,
 	)
 	return returns
 }
 
-func (d *deployment) LabelSelector() map[string]string {
-	var returns map[string]string
+func (j *jsiiProxy_Deployment) LabelSelector() *map[string]*string {
+	var returns *map[string]*string
 	_jsii_.Get(
-		d,
+		j,
 		"labelSelector",
 		&returns,
 	)
 	return returns
 }
 
-func (d *deployment) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
+func (j *jsiiProxy_Deployment) Metadata() cdk8s.ApiObjectMetadataDefinition {
 	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
-		d,
-		"podMetadata",
-		&returns,
-	)
-	return returns
-}
-
-func (d *deployment) Replicas() float64 {
-	var returns float64
-	_jsii_.Get(
-		d,
-		"replicas",
-		&returns,
-	)
-	return returns
-}
-
-func (d *deployment) RestartPolicy() RestartPolicy {
-	var returns RestartPolicy
-	_jsii_.Get(
-		d,
-		"restartPolicy",
-		&returns,
-	)
-	return returns
-}
-
-func (d *deployment) ServiceAccount() IServiceAccount {
-	var returns IServiceAccount
-	_jsii_.Get(
-		d,
-		"serviceAccount",
-		&returns,
-	)
-	return returns
-}
-
-func (d *deployment) Volumes() []Volume {
-	var returns []Volume
-	_jsii_.Get(
-		d,
-		"volumes",
-		&returns,
-	)
-	return returns
-}
-
-func (d *deployment) Metadata() cdk8s.ApiObjectMetadataDefinition {
-	var returns cdk8s.ApiObjectMetadataDefinition
-	_jsii_.Get(
-		d,
+		j,
 		"metadata",
 		&returns,
 	)
 	return returns
 }
 
-func (d *deployment) Name() string {
-	var returns string
+func (j *jsiiProxy_Deployment) Name() *string {
+	var returns *string
 	_jsii_.Get(
-		d,
+		j,
 		"name",
 		&returns,
 	)
 	return returns
 }
 
-
-func NewDeployment(scope constructs.Construct, id string, props DeploymentProps) Deployment {
-	_init_.Initialize()
-	d := deployment{}
-
-	_jsii_.Create(
-		"cdk8s-plus-17.Deployment",
-		[]interface{}{scope, id, props},
-		[]_jsii_.FQN{"cdk8s-plus-17.IPodTemplate"},
-		[]_jsii_.Override{},
-		&d,
-	)
-	return &d
-}
-
-// Add a container to the pod.
-// Experimental.
-func (d *deployment) AddContainer(container ContainerProps) Container {
-	var returns Container
-	_jsii_.Invoke(
-		d,
-		"addContainer",
-		[]interface{}{container},
-		true,
+func (j *jsiiProxy_Deployment) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
+	_jsii_.Get(
+		j,
+		"podMetadata",
 		&returns,
 	)
 	return returns
 }
 
+func (j *jsiiProxy_Deployment) Replicas() *float64 {
+	var returns *float64
+	_jsii_.Get(
+		j,
+		"replicas",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_Deployment) RestartPolicy() RestartPolicy {
+	var returns RestartPolicy
+	_jsii_.Get(
+		j,
+		"restartPolicy",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_Deployment) ServiceAccount() IServiceAccount {
+	var returns IServiceAccount
+	_jsii_.Get(
+		j,
+		"serviceAccount",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_Deployment) Volumes() *[]Volume {
+	var returns *[]Volume
+	_jsii_.Get(
+		j,
+		"volumes",
+		&returns,
+	)
+	return returns
+}
+
+
+// Experimental.
+func NewDeployment(scope constructs.Construct, id *string, props *DeploymentProps) Deployment {
+	_init_.Initialize()
+
+	j := jsiiProxy_Deployment{}
+
+	_jsii_.Create(
+		"cdk8s-plus-17.Deployment",
+		[]interface{}{scope, id, props},
+		&j,
+	)
+
+	return &j
+}
+
+// Experimental.
+func NewDeployment_Override(d Deployment, scope constructs.Construct, id *string, props *DeploymentProps) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.Deployment",
+		[]interface{}{scope, id, props},
+		d,
+	)
+}
+
+// Add a container to the pod.
+// Experimental.
+func (d *jsiiProxy_Deployment) AddContainer(container *ContainerProps) Container {
+	var returns Container
+
+	_jsii_.Invoke(
+		d,
+		"addContainer",
+		[]interface{}{container},
+		&returns,
+	)
+
+	return returns
+}
+
 // Add a volume to the pod.
 // Experimental.
-func (d *deployment) AddVolume(volume Volume) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (d *jsiiProxy_Deployment) AddVolume(volume Volume) {
+	_jsii_.InvokeVoid(
 		d,
 		"addVolume",
 		[]interface{}{volume},
-		false,
-		&returns,
 	)
 }
 
@@ -775,31 +784,17 @@ func (d *deployment) AddVolume(volume Volume) {
 //
 // This is equivalent to running `kubectl expose deployment <deployment-name>`.
 // Experimental.
-func (d *deployment) Expose(port float64, options ExposeOptions) Service {
+func (d *jsiiProxy_Deployment) Expose(port *float64, options *ExposeOptions) Service {
 	var returns Service
+
 	_jsii_.Invoke(
 		d,
 		"expose",
 		[]interface{}{port, options},
-		true,
 		&returns,
 	)
-	return returns
-}
 
-// Configure a label selector to this deployment.
-//
-// Pods that have the label will be selected by deployments configured with this spec.
-// Experimental.
-func (d *deployment) SelectByLabel(key string, value string) {
-	var returns interface{}
-	_jsii_.Invoke(
-		d,
-		"selectByLabel",
-		[]interface{}{key, value},
-		false,
-		&returns,
-	)
+	return returns
 }
 
 // Perform final modifications before synthesis.
@@ -811,14 +806,11 @@ func (d *deployment) SelectByLabel(key string, value string) {
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
 // Experimental.
-func (d *deployment) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
+func (d *jsiiProxy_Deployment) OnPrepare() {
+	_jsii_.InvokeVoid(
 		d,
 		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
+		nil, // no parameters
 	)
 }
 
@@ -827,14 +819,11 @@ func (d *deployment) OnPrepare() {
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
 // Experimental.
-func (d *deployment) OnSynthesize(session constructs.ISynthesisSession) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (d *jsiiProxy_Deployment) OnSynthesize(session constructs.ISynthesisSession) {
+	_jsii_.InvokeVoid(
 		d,
 		"onSynthesize",
 		[]interface{}{session},
-		false,
-		&returns,
 	)
 }
 
@@ -846,29 +835,43 @@ func (d *deployment) OnSynthesize(session constructs.ISynthesisSession) {
 // Returns: An array of validation error messages, or an empty array if there the construct is valid.
 // Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
 // instead of overriding this method.
-func (d *deployment) OnValidate() []string {
-	var returns []string
+func (d *jsiiProxy_Deployment) OnValidate() *[]*string {
+	var returns *[]*string
+
 	_jsii_.Invoke(
 		d,
 		"onValidate",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
+}
+
+// Configure a label selector to this deployment.
+//
+// Pods that have the label will be selected by deployments configured with this spec.
+// Experimental.
+func (d *jsiiProxy_Deployment) SelectByLabel(key *string, value *string) {
+	_jsii_.InvokeVoid(
+		d,
+		"selectByLabel",
+		[]interface{}{key, value},
+	)
 }
 
 // Returns a string representation of this construct.
 // Experimental.
-func (d *deployment) ToString() string {
-	var returns string
+func (d *jsiiProxy_Deployment) ToString() *string {
+	var returns *string
+
 	_jsii_.Invoke(
 		d,
 		"toString",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
@@ -877,7 +880,7 @@ func (d *deployment) ToString() string {
 type DeploymentProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
+	Metadata *cdk8s.ApiObjectMetadata `json:"metadata"`
 	// List of containers belonging to the pod.
 	//
 	// Containers cannot currently be
@@ -885,7 +888,7 @@ type DeploymentProps struct {
 	//
 	// You can add additionnal containers using `podSpec.addContainer()`
 	// Experimental.
-	Containers []ContainerProps `json:"containers"`
+	Containers *[]*ContainerProps `json:"containers"`
 	// Restart policy for all containers within the pod.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	//
@@ -909,47 +912,19 @@ type DeploymentProps struct {
 	// See: https://kubernetes.io/docs/concepts/storage/volumes
 	//
 	// Experimental.
-	Volumes []Volume `json:"volumes"`
+	Volumes *[]Volume `json:"volumes"`
 	// The pod metadata.
 	// Experimental.
-	PodMetadata cdk8s.ApiObjectMetadata `json:"podMetadata"`
+	PodMetadata *cdk8s.ApiObjectMetadata `json:"podMetadata"`
 	// Automatically allocates a pod selector for this deployment.
 	//
 	// If this is set to `false` you must define your selector through
 	// `deployment.podMetadata.addLabel()` and `deployment.selectByLabel()`.
 	// Experimental.
-	DefaultSelector bool `json:"defaultSelector"`
+	DefaultSelector *bool `json:"defaultSelector"`
 	// Number of desired pods.
 	// Experimental.
-	Replicas float64 `json:"replicas"`
-}
-
-// ToResourceProps is a convenience function to obtain a new ResourceProps from this DeploymentProps.
-func (d *DeploymentProps) ToResourceProps() ResourceProps {
-	return ResourceProps {
-		Metadata: d.Metadata,
-	}
-}
-
-// ToPodSpecProps is a convenience function to obtain a new PodSpecProps from this DeploymentProps.
-func (d *DeploymentProps) ToPodSpecProps() PodSpecProps {
-	return PodSpecProps {
-		Containers: d.Containers,
-		RestartPolicy: d.RestartPolicy,
-		ServiceAccount: d.ServiceAccount,
-		Volumes: d.Volumes,
-	}
-}
-
-// ToPodTemplateProps is a convenience function to obtain a new PodTemplateProps from this DeploymentProps.
-func (d *DeploymentProps) ToPodTemplateProps() PodTemplateProps {
-	return PodTemplateProps {
-		Containers: d.Containers,
-		RestartPolicy: d.RestartPolicy,
-		ServiceAccount: d.ServiceAccount,
-		Volumes: d.Volumes,
-		PodMetadata: d.PodMetadata,
-	}
+	Replicas *float64 `json:"replicas"`
 }
 
 // The medium on which to store the volume.
@@ -991,24 +966,24 @@ type EnvValue interface {
 }
 
 // The jsii proxy struct for EnvValue
-type envValue struct {
+type jsiiProxy_EnvValue struct {
 	_ byte // padding
 }
 
-func (e *envValue) Value() interface{} {
+func (j *jsiiProxy_EnvValue) Value() interface{} {
 	var returns interface{}
 	_jsii_.Get(
-		e,
+		j,
 		"value",
 		&returns,
 	)
 	return returns
 }
 
-func (e *envValue) ValueFrom() interface{} {
+func (j *jsiiProxy_EnvValue) ValueFrom() interface{} {
 	var returns interface{}
 	_jsii_.Get(
-		e,
+		j,
 		"valueFrom",
 		&returns,
 	)
@@ -1018,61 +993,69 @@ func (e *envValue) ValueFrom() interface{} {
 
 // Create a value by reading a specific key inside a config map.
 // Experimental.
-func EnvValue_FromConfigMap(configMap IConfigMap, key string, options EnvValueFromConfigMapOptions) EnvValue {
+func EnvValue_FromConfigMap(configMap IConfigMap, key *string, options *EnvValueFromConfigMapOptions) EnvValue {
 	_init_.Initialize()
+
 	var returns EnvValue
+
 	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.EnvValue",
 		"fromConfigMap",
 		[]interface{}{configMap, key, options},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
 // Create a value from a key in the current process environment.
 // Experimental.
-func EnvValue_FromProcess(key string, options EnvValueFromProcessOptions) EnvValue {
+func EnvValue_FromProcess(key *string, options *EnvValueFromProcessOptions) EnvValue {
 	_init_.Initialize()
+
 	var returns EnvValue
+
 	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.EnvValue",
 		"fromProcess",
 		[]interface{}{key, options},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
 // Defines an environment value from a secret JSON value.
 // Experimental.
-func EnvValue_FromSecretValue(secretValue SecretValue, options EnvValueFromSecretOptions) EnvValue {
+func EnvValue_FromSecretValue(secretValue *SecretValue, options *EnvValueFromSecretOptions) EnvValue {
 	_init_.Initialize()
+
 	var returns EnvValue
+
 	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.EnvValue",
 		"fromSecretValue",
 		[]interface{}{secretValue, options},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
 // Create a value from the given argument.
 // Experimental.
-func EnvValue_FromValue(value string) EnvValue {
+func EnvValue_FromValue(value *string) EnvValue {
 	_init_.Initialize()
+
 	var returns EnvValue
+
 	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.EnvValue",
 		"fromValue",
 		[]interface{}{value},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
@@ -1081,7 +1064,7 @@ func EnvValue_FromValue(value string) EnvValue {
 type EnvValueFromConfigMapOptions struct {
 	// Specify whether the ConfigMap or its key must be defined.
 	// Experimental.
-	Optional bool `json:"optional"`
+	Optional *bool `json:"optional"`
 }
 
 // Options to specify an environment variable value from the process environment.
@@ -1091,7 +1074,7 @@ type EnvValueFromProcessOptions struct {
 	//
 	// If this is set to true, and the key does not exist, an error will thrown.
 	// Experimental.
-	Required bool `json:"required"`
+	Required *bool `json:"required"`
 }
 
 // Options to specify an environment variable value from a Secret.
@@ -1099,7 +1082,7 @@ type EnvValueFromProcessOptions struct {
 type EnvValueFromSecretOptions struct {
 	// Specify whether the Secret or its key must be defined.
 	// Experimental.
-	Optional bool `json:"optional"`
+	Optional *bool `json:"optional"`
 }
 
 // Options for exposing a deployment via a service.
@@ -1109,7 +1092,7 @@ type ExposeOptions struct {
 	//
 	// This will be set on the Service.metadata and must be a DNS_LABEL
 	// Experimental.
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The IP protocol for this port.
 	//
 	// Supports "TCP", "UDP", and "SCTP". Default is TCP.
@@ -1120,7 +1103,7 @@ type ExposeOptions struct {
 	ServiceType ServiceType `json:"serviceType"`
 	// The port number the service will redirect to.
 	// Experimental.
-	TargetPort float64 `json:"targetPort"`
+	TargetPort *float64 `json:"targetPort"`
 }
 
 // Options for `Probe.fromHttpGet()`.
@@ -1130,7 +1113,7 @@ type HttpGetProbeOptions struct {
 	//
 	// Defaults to 3. Minimum value is 1.
 	// Experimental.
-	FailureThreshold float64 `json:"failureThreshold"`
+	FailureThreshold *float64 `json:"failureThreshold"`
 	// Number of seconds after the container has started before liveness probes are initiated.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
 	//
@@ -1145,7 +1128,7 @@ type HttpGetProbeOptions struct {
 	//
 	// Must be 1 for liveness and startup. Minimum value is 1.
 	// Experimental.
-	SuccessThreshold float64 `json:"successThreshold"`
+	SuccessThreshold *float64 `json:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	//
 	// Defaults to 1 second. Minimum value is 1.
@@ -1155,18 +1138,7 @@ type HttpGetProbeOptions struct {
 	TimeoutSeconds cdk8s.Duration `json:"timeoutSeconds"`
 	// The TCP port to use when sending the GET request.
 	// Experimental.
-	Port float64 `json:"port"`
-}
-
-// ToProbeOptions is a convenience function to obtain a new ProbeOptions from this HttpGetProbeOptions.
-func (h *HttpGetProbeOptions) ToProbeOptions() ProbeOptions {
-	return ProbeOptions {
-		FailureThreshold: h.FailureThreshold,
-		InitialDelaySeconds: h.InitialDelaySeconds,
-		PeriodSeconds: h.PeriodSeconds,
-		SuccessThreshold: h.SuccessThreshold,
-		TimeoutSeconds: h.TimeoutSeconds,
-	}
+	Port *float64 `json:"port"`
 }
 
 // Represents a config map.
@@ -1176,8 +1148,8 @@ type IConfigMap interface {
 }
 
 // The jsii proxy for IConfigMap
-type iConfigMap struct {
-	iResource // extends cdk8s-plus-17.IResource
+type jsiiProxy_IConfigMap struct {
+	jsiiProxy_IResource
 }
 
 // Represents a resource that can be configured with a kuberenets pod spec. (e.g `Deployment`, `Job`, `Pod`, ...).
@@ -1187,7 +1159,7 @@ type iConfigMap struct {
 type IPodSpec interface {
 	// Add a container to the pod.
 	// Experimental.
-	AddContainer(container ContainerProps) Container
+	AddContainer(container *ContainerProps) Container
 	// Add a volume to the pod.
 	// Experimental.
 	AddVolume(volume Volume)
@@ -1195,7 +1167,7 @@ type IPodSpec interface {
 	//
 	// Use `addContainer` to add containers.
 	// Experimental.
-	Containers() []Container
+	Containers() *[]Container
 	// Restart policy for all containers within the pod.
 	// Experimental.
 	RestartPolicy() RestartPolicy
@@ -1206,71 +1178,69 @@ type IPodSpec interface {
 	//
 	// Use `addVolume` to add volumes.
 	// Experimental.
-	Volumes() []Volume
+	Volumes() *[]Volume
 }
 
 // The jsii proxy for IPodSpec
-type iPodSpec struct {
+type jsiiProxy_IPodSpec struct {
 	_ byte // padding
 }
 
-func (i *iPodSpec) AddContainer(container ContainerProps) Container {
+func (i *jsiiProxy_IPodSpec) AddContainer(container *ContainerProps) Container {
 	var returns Container
+
 	_jsii_.Invoke(
 		i,
 		"addContainer",
 		[]interface{}{container},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
-func (i *iPodSpec) AddVolume(volume Volume) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (i *jsiiProxy_IPodSpec) AddVolume(volume Volume) {
+	_jsii_.InvokeVoid(
 		i,
 		"addVolume",
 		[]interface{}{volume},
-		false,
-		&returns,
 	)
 }
 
-func (i *iPodSpec) Containers() []Container {
-	var returns []Container
+func (j *jsiiProxy_IPodSpec) Containers() *[]Container {
+	var returns *[]Container
 	_jsii_.Get(
-		i,
+		j,
 		"containers",
 		&returns,
 	)
 	return returns
 }
 
-func (i *iPodSpec) RestartPolicy() RestartPolicy {
+func (j *jsiiProxy_IPodSpec) RestartPolicy() RestartPolicy {
 	var returns RestartPolicy
 	_jsii_.Get(
-		i,
+		j,
 		"restartPolicy",
 		&returns,
 	)
 	return returns
 }
 
-func (i *iPodSpec) ServiceAccount() IServiceAccount {
+func (j *jsiiProxy_IPodSpec) ServiceAccount() IServiceAccount {
 	var returns IServiceAccount
 	_jsii_.Get(
-		i,
+		j,
 		"serviceAccount",
 		&returns,
 	)
 	return returns
 }
 
-func (i *iPodSpec) Volumes() []Volume {
-	var returns []Volume
+func (j *jsiiProxy_IPodSpec) Volumes() *[]Volume {
+	var returns *[]Volume
 	_jsii_.Get(
-		i,
+		j,
 		"volumes",
 		&returns,
 	)
@@ -1289,14 +1259,14 @@ type IPodTemplate interface {
 }
 
 // The jsii proxy for IPodTemplate
-type iPodTemplate struct {
-	iPodSpec // extends cdk8s-plus-17.IPodSpec
+type jsiiProxy_IPodTemplate struct {
+	jsiiProxy_IPodSpec
 }
 
-func (i *iPodTemplate) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
+func (j *jsiiProxy_IPodTemplate) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
 	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
-		i,
+		j,
 		"podMetadata",
 		&returns,
 	)
@@ -1308,18 +1278,18 @@ func (i *iPodTemplate) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
 type IResource interface {
 	// The Kubernetes name of this resource.
 	// Experimental.
-	Name() string
+	Name() *string
 }
 
 // The jsii proxy for IResource
-type iResource struct {
+type jsiiProxy_IResource struct {
 	_ byte // padding
 }
 
-func (i *iResource) Name() string {
-	var returns string
+func (j *jsiiProxy_IResource) Name() *string {
+	var returns *string
 	_jsii_.Get(
-		i,
+		j,
 		"name",
 		&returns,
 	)
@@ -1332,8 +1302,8 @@ type ISecret interface {
 }
 
 // The jsii proxy for ISecret
-type iSecret struct {
-	iResource // extends cdk8s-plus-17.IResource
+type jsiiProxy_ISecret struct {
+	jsiiProxy_IResource
 }
 
 // Experimental.
@@ -1342,8 +1312,8 @@ type IServiceAccount interface {
 }
 
 // The jsii proxy for IServiceAccount
-type iServiceAccount struct {
-	iResource // extends cdk8s-plus-17.IResource
+type jsiiProxy_IServiceAccount struct {
+	jsiiProxy_IResource
 }
 
 // Experimental.
@@ -1364,42 +1334,79 @@ const (
 type IngressV1Beta1 interface {
 	Resource
 	ApiObject() cdk8s.ApiObject
+	Metadata() cdk8s.ApiObjectMetadataDefinition
+	Name() *string
 	AddDefaultBackend(backend IngressV1Beta1Backend)
-	AddHostDefaultBackend(host string, backend IngressV1Beta1Backend)
-	AddHostRule(host string, path string, backend IngressV1Beta1Backend)
-	AddRule(path string, backend IngressV1Beta1Backend)
-	AddRules(rules IngressV1Beta1Rule)
-	OnValidate() []string
+	AddHostDefaultBackend(host *string, backend IngressV1Beta1Backend)
+	AddHostRule(host *string, path *string, backend IngressV1Beta1Backend)
+	AddRule(path *string, backend IngressV1Beta1Backend)
+	AddRules(rules ...*IngressV1Beta1Rule)
+	OnPrepare()
+	OnSynthesize(session constructs.ISynthesisSession)
+	OnValidate() *[]*string
+	ToString() *string
 }
 
 // The jsii proxy struct for IngressV1Beta1
-type ingressV1Beta1 struct {
-	resource // extends cdk8s-plus-17.Resource
+type jsiiProxy_IngressV1Beta1 struct {
+	jsiiProxy_Resource
 }
 
-func (i *ingressV1Beta1) ApiObject() cdk8s.ApiObject {
+func (j *jsiiProxy_IngressV1Beta1) ApiObject() cdk8s.ApiObject {
 	var returns cdk8s.ApiObject
 	_jsii_.Get(
-		i,
+		j,
 		"apiObject",
 		&returns,
 	)
 	return returns
 }
 
+func (j *jsiiProxy_IngressV1Beta1) Metadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
+	_jsii_.Get(
+		j,
+		"metadata",
+		&returns,
+	)
+	return returns
+}
 
-func NewIngressV1Beta1(scope constructs.Construct, id string, props IngressV1Beta1Props) IngressV1Beta1 {
+func (j *jsiiProxy_IngressV1Beta1) Name() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"name",
+		&returns,
+	)
+	return returns
+}
+
+
+// Experimental.
+func NewIngressV1Beta1(scope constructs.Construct, id *string, props *IngressV1Beta1Props) IngressV1Beta1 {
 	_init_.Initialize()
-	i := ingressV1Beta1{}
+
+	j := jsiiProxy_IngressV1Beta1{}
 
 	_jsii_.Create(
 		"cdk8s-plus-17.IngressV1Beta1",
 		[]interface{}{scope, id, props},
-		[]_jsii_.FQN{},
-		[]_jsii_.Override{},
-		&i,
+		&j,
 	)
-	return &i
+
+	return &j
+}
+
+// Experimental.
+func NewIngressV1Beta1_Override(i IngressV1Beta1, scope constructs.Construct, id *string, props *IngressV1Beta1Props) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.IngressV1Beta1",
+		[]interface{}{scope, id, props},
+		i,
+	)
 }
 
 // Defines the default backend for this ingress.
@@ -1407,14 +1414,11 @@ func NewIngressV1Beta1(scope constructs.Construct, id string, props IngressV1Bet
 // A default backend capable of
 // servicing requests that don't match any rule.
 // Experimental.
-func (i *ingressV1Beta1) AddDefaultBackend(backend IngressV1Beta1Backend) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (i *jsiiProxy_IngressV1Beta1) AddDefaultBackend(backend IngressV1Beta1Backend) {
+	_jsii_.InvokeVoid(
 		i,
 		"addDefaultBackend",
 		[]interface{}{backend},
-		false,
-		&returns,
 	)
 }
 
@@ -1423,53 +1427,76 @@ func (i *ingressV1Beta1) AddDefaultBackend(backend IngressV1Beta1Backend) {
 // This backend will be used as a catch-all for requests
 // targeted to this host name (the `Host` header matches this value).
 // Experimental.
-func (i *ingressV1Beta1) AddHostDefaultBackend(host string, backend IngressV1Beta1Backend) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (i *jsiiProxy_IngressV1Beta1) AddHostDefaultBackend(host *string, backend IngressV1Beta1Backend) {
+	_jsii_.InvokeVoid(
 		i,
 		"addHostDefaultBackend",
 		[]interface{}{host, backend},
-		false,
-		&returns,
 	)
 }
 
 // Adds an ingress rule applied to requests to a specific host and a specific HTTP path (the `Host` header matches this value).
 // Experimental.
-func (i *ingressV1Beta1) AddHostRule(host string, path string, backend IngressV1Beta1Backend) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (i *jsiiProxy_IngressV1Beta1) AddHostRule(host *string, path *string, backend IngressV1Beta1Backend) {
+	_jsii_.InvokeVoid(
 		i,
 		"addHostRule",
 		[]interface{}{host, path, backend},
-		false,
-		&returns,
 	)
 }
 
 // Adds an ingress rule applied to requests sent to a specific HTTP path.
 // Experimental.
-func (i *ingressV1Beta1) AddRule(path string, backend IngressV1Beta1Backend) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (i *jsiiProxy_IngressV1Beta1) AddRule(path *string, backend IngressV1Beta1Backend) {
+	_jsii_.InvokeVoid(
 		i,
 		"addRule",
 		[]interface{}{path, backend},
-		false,
-		&returns,
 	)
 }
 
 // Adds rules to this ingress.
 // Experimental.
-func (i *ingressV1Beta1) AddRules(rules IngressV1Beta1Rule) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (i *jsiiProxy_IngressV1Beta1) AddRules(rules ...*IngressV1Beta1Rule) {
+	args := []interface{}{}
+	for _, a := range rules {
+		args = append(args, a)
+	}
+
+	_jsii_.InvokeVoid(
 		i,
 		"addRules",
-		[]interface{}{rules},
-		false,
-		&returns,
+		args,
+	)
+}
+
+// Perform final modifications before synthesis.
+//
+// This method can be implemented by derived constructs in order to perform
+// final changes before synthesis. prepare() will be called after child
+// constructs have been prepared.
+//
+// This is an advanced framework feature. Only use this if you
+// understand the implications.
+// Experimental.
+func (i *jsiiProxy_IngressV1Beta1) OnPrepare() {
+	_jsii_.InvokeVoid(
+		i,
+		"onPrepare",
+		nil, // no parameters
+	)
+}
+
+// Allows this construct to emit artifacts into the cloud assembly during synthesis.
+//
+// This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
+// as they participate in synthesizing the cloud assembly.
+// Experimental.
+func (i *jsiiProxy_IngressV1Beta1) OnSynthesize(session constructs.ISynthesisSession) {
+	_jsii_.InvokeVoid(
+		i,
+		"onSynthesize",
+		[]interface{}{session},
 	)
 }
 
@@ -1478,15 +1505,31 @@ func (i *ingressV1Beta1) AddRules(rules IngressV1Beta1Rule) {
 // This method can be implemented by derived constructs in order to perform
 // validation logic. It is called on all constructs before synthesis.
 // Experimental.
-func (i *ingressV1Beta1) OnValidate() []string {
-	var returns []string
+func (i *jsiiProxy_IngressV1Beta1) OnValidate() *[]*string {
+	var returns *[]*string
+
 	_jsii_.Invoke(
 		i,
 		"onValidate",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
+	return returns
+}
+
+// Returns a string representation of this construct.
+// Experimental.
+func (i *jsiiProxy_IngressV1Beta1) ToString() *string {
+	var returns *string
+
+	_jsii_.Invoke(
+		i,
+		"toString",
+		nil, // no parameters
+		&returns,
+	)
+
 	return returns
 }
 
@@ -1496,22 +1539,24 @@ type IngressV1Beta1Backend interface {
 }
 
 // The jsii proxy struct for IngressV1Beta1Backend
-type ingressV1Beta1Backend struct {
+type jsiiProxy_IngressV1Beta1Backend struct {
 	_ byte // padding
 }
 
 // A Kubernetes `Service` to use as the backend for this path.
 // Experimental.
-func IngressV1Beta1Backend_FromService(service Service, options ServiceIngressV1BetaBackendOptions) IngressV1Beta1Backend {
+func IngressV1Beta1Backend_FromService(service Service, options *ServiceIngressV1BetaBackendOptions) IngressV1Beta1Backend {
 	_init_.Initialize()
+
 	var returns IngressV1Beta1Backend
+
 	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.IngressV1Beta1Backend",
 		"fromService",
 		[]interface{}{service, options},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
@@ -1520,7 +1565,7 @@ func IngressV1Beta1Backend_FromService(service Service, options ServiceIngressV1
 type IngressV1Beta1Props struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
+	Metadata *cdk8s.ApiObjectMetadata `json:"metadata"`
 	// The default backend services requests that do not match any rule.
 	//
 	// Using this option or the `addDefaultBackend()` method is equivalent to
@@ -1536,14 +1581,7 @@ type IngressV1Beta1Props struct {
 	// You can also add rules later using `addRule()`, `addHostRule()`,
 	// `addDefaultBackend()` and `addHostDefaultBackend()`.
 	// Experimental.
-	Rules []IngressV1Beta1Rule `json:"rules"`
-}
-
-// ToResourceProps is a convenience function to obtain a new ResourceProps from this IngressV1Beta1Props.
-func (i *IngressV1Beta1Props) ToResourceProps() ResourceProps {
-	return ResourceProps {
-		Metadata: i.Metadata,
-	}
+	Rules *[]*IngressV1Beta1Rule `json:"rules"`
 }
 
 // Represents the rules mapping the paths under a specified host to the related backend services.
@@ -1565,10 +1603,10 @@ type IngressV1Beta1Rule struct {
 	// these may change in the future. Incoming requests are matched against the
 	// host before the IngressRuleValue.
 	// Experimental.
-	Host string `json:"host"`
+	Host *string `json:"host"`
 	// Path is an extended POSIX regex as defined by IEEE Std 1003.1, (i.e this follows the egrep/unix syntax, not the perl syntax) matched against the path of an incoming request. Currently it can contain characters disallowed from the conventional "path" part of a URL as defined by RFC 3986. Paths must begin with a '/'.
 	// Experimental.
-	Path string `json:"path"`
+	Path *string `json:"path"`
 }
 
 // A Job creates one or more Pods and ensures that a specified number of them successfully terminate.
@@ -1584,24 +1622,30 @@ type Job interface {
 	IPodTemplate
 	ActiveDeadline() cdk8s.Duration
 	ApiObject() cdk8s.ApiObject
-	BackoffLimit() float64
-	Containers() []Container
+	BackoffLimit() *float64
+	Containers() *[]Container
+	Metadata() cdk8s.ApiObjectMetadataDefinition
+	Name() *string
 	PodMetadata() cdk8s.ApiObjectMetadataDefinition
 	RestartPolicy() RestartPolicy
 	ServiceAccount() IServiceAccount
 	TtlAfterFinished() cdk8s.Duration
-	Volumes() []Volume
-	AddContainer(container ContainerProps) Container
+	Volumes() *[]Volume
+	AddContainer(container *ContainerProps) Container
 	AddVolume(volume Volume)
+	OnPrepare()
+	OnSynthesize(session constructs.ISynthesisSession)
+	OnValidate() *[]*string
+	ToString() *string
 }
 
 // The jsii proxy struct for Job
-type job struct {
-	resource // extends cdk8s-plus-17.Resource
-	iPodTemplate // implements cdk8s-plus-17.IPodTemplate
+type jsiiProxy_Job struct {
+	jsiiProxy_Resource
+	jsiiProxy_IPodTemplate
 }
 
-func (j *job) ActiveDeadline() cdk8s.Duration {
+func (j *jsiiProxy_Job) ActiveDeadline() cdk8s.Duration {
 	var returns cdk8s.Duration
 	_jsii_.Get(
 		j,
@@ -1611,7 +1655,7 @@ func (j *job) ActiveDeadline() cdk8s.Duration {
 	return returns
 }
 
-func (j *job) ApiObject() cdk8s.ApiObject {
+func (j *jsiiProxy_Job) ApiObject() cdk8s.ApiObject {
 	var returns cdk8s.ApiObject
 	_jsii_.Get(
 		j,
@@ -1621,8 +1665,8 @@ func (j *job) ApiObject() cdk8s.ApiObject {
 	return returns
 }
 
-func (j *job) BackoffLimit() float64 {
-	var returns float64
+func (j *jsiiProxy_Job) BackoffLimit() *float64 {
+	var returns *float64
 	_jsii_.Get(
 		j,
 		"backoffLimit",
@@ -1631,8 +1675,8 @@ func (j *job) BackoffLimit() float64 {
 	return returns
 }
 
-func (j *job) Containers() []Container {
-	var returns []Container
+func (j *jsiiProxy_Job) Containers() *[]Container {
+	var returns *[]Container
 	_jsii_.Get(
 		j,
 		"containers",
@@ -1641,57 +1685,7 @@ func (j *job) Containers() []Container {
 	return returns
 }
 
-func (j *job) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
-	var returns cdk8s.ApiObjectMetadataDefinition
-	_jsii_.Get(
-		j,
-		"podMetadata",
-		&returns,
-	)
-	return returns
-}
-
-func (j *job) RestartPolicy() RestartPolicy {
-	var returns RestartPolicy
-	_jsii_.Get(
-		j,
-		"restartPolicy",
-		&returns,
-	)
-	return returns
-}
-
-func (j *job) ServiceAccount() IServiceAccount {
-	var returns IServiceAccount
-	_jsii_.Get(
-		j,
-		"serviceAccount",
-		&returns,
-	)
-	return returns
-}
-
-func (j *job) TtlAfterFinished() cdk8s.Duration {
-	var returns cdk8s.Duration
-	_jsii_.Get(
-		j,
-		"ttlAfterFinished",
-		&returns,
-	)
-	return returns
-}
-
-func (j *job) Volumes() []Volume {
-	var returns []Volume
-	_jsii_.Get(
-		j,
-		"volumes",
-		&returns,
-	)
-	return returns
-}
-
-func (j *job) Metadata() cdk8s.ApiObjectMetadataDefinition {
+func (j *jsiiProxy_Job) Metadata() cdk8s.ApiObjectMetadataDefinition {
 	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
 		j,
@@ -1701,8 +1695,8 @@ func (j *job) Metadata() cdk8s.ApiObjectMetadataDefinition {
 	return returns
 }
 
-func (j *job) Name() string {
-	var returns string
+func (j *jsiiProxy_Job) Name() *string {
+	var returns *string
 	_jsii_.Get(
 		j,
 		"name",
@@ -1711,45 +1705,105 @@ func (j *job) Name() string {
 	return returns
 }
 
-
-func NewJob(scope constructs.Construct, id string, props JobProps) Job {
-	_init_.Initialize()
-	j := job{}
-
-	_jsii_.Create(
-		"cdk8s-plus-17.Job",
-		[]interface{}{scope, id, props},
-		[]_jsii_.FQN{"cdk8s-plus-17.IPodTemplate"},
-		[]_jsii_.Override{},
-		&j,
-	)
-	return &j
-}
-
-// Add a container to the pod.
-// Experimental.
-func (j *job) AddContainer(container ContainerProps) Container {
-	var returns Container
-	_jsii_.Invoke(
+func (j *jsiiProxy_Job) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
+	_jsii_.Get(
 		j,
-		"addContainer",
-		[]interface{}{container},
-		true,
+		"podMetadata",
 		&returns,
 	)
 	return returns
 }
 
+func (j *jsiiProxy_Job) RestartPolicy() RestartPolicy {
+	var returns RestartPolicy
+	_jsii_.Get(
+		j,
+		"restartPolicy",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_Job) ServiceAccount() IServiceAccount {
+	var returns IServiceAccount
+	_jsii_.Get(
+		j,
+		"serviceAccount",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_Job) TtlAfterFinished() cdk8s.Duration {
+	var returns cdk8s.Duration
+	_jsii_.Get(
+		j,
+		"ttlAfterFinished",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_Job) Volumes() *[]Volume {
+	var returns *[]Volume
+	_jsii_.Get(
+		j,
+		"volumes",
+		&returns,
+	)
+	return returns
+}
+
+
+// Experimental.
+func NewJob(scope constructs.Construct, id *string, props *JobProps) Job {
+	_init_.Initialize()
+
+	j := jsiiProxy_Job{}
+
+	_jsii_.Create(
+		"cdk8s-plus-17.Job",
+		[]interface{}{scope, id, props},
+		&j,
+	)
+
+	return &j
+}
+
+// Experimental.
+func NewJob_Override(j Job, scope constructs.Construct, id *string, props *JobProps) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.Job",
+		[]interface{}{scope, id, props},
+		j,
+	)
+}
+
+// Add a container to the pod.
+// Experimental.
+func (j *jsiiProxy_Job) AddContainer(container *ContainerProps) Container {
+	var returns Container
+
+	_jsii_.Invoke(
+		j,
+		"addContainer",
+		[]interface{}{container},
+		&returns,
+	)
+
+	return returns
+}
+
 // Add a volume to the pod.
 // Experimental.
-func (j *job) AddVolume(volume Volume) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (j *jsiiProxy_Job) AddVolume(volume Volume) {
+	_jsii_.InvokeVoid(
 		j,
 		"addVolume",
 		[]interface{}{volume},
-		false,
-		&returns,
 	)
 }
 
@@ -1762,14 +1816,11 @@ func (j *job) AddVolume(volume Volume) {
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
 // Experimental.
-func (j *job) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
+func (j *jsiiProxy_Job) OnPrepare() {
+	_jsii_.InvokeVoid(
 		j,
 		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
+		nil, // no parameters
 	)
 }
 
@@ -1778,14 +1829,11 @@ func (j *job) OnPrepare() {
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
 // Experimental.
-func (j *job) OnSynthesize(session constructs.ISynthesisSession) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (j *jsiiProxy_Job) OnSynthesize(session constructs.ISynthesisSession) {
+	_jsii_.InvokeVoid(
 		j,
 		"onSynthesize",
 		[]interface{}{session},
-		false,
-		&returns,
 	)
 }
 
@@ -1797,29 +1845,31 @@ func (j *job) OnSynthesize(session constructs.ISynthesisSession) {
 // Returns: An array of validation error messages, or an empty array if there the construct is valid.
 // Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
 // instead of overriding this method.
-func (j *job) OnValidate() []string {
-	var returns []string
+func (j *jsiiProxy_Job) OnValidate() *[]*string {
+	var returns *[]*string
+
 	_jsii_.Invoke(
 		j,
 		"onValidate",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
 // Returns a string representation of this construct.
 // Experimental.
-func (j *job) ToString() string {
-	var returns string
+func (j *jsiiProxy_Job) ToString() *string {
+	var returns *string
+
 	_jsii_.Invoke(
 		j,
 		"toString",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
@@ -1828,7 +1878,7 @@ func (j *job) ToString() string {
 type JobProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
+	Metadata *cdk8s.ApiObjectMetadata `json:"metadata"`
 	// List of containers belonging to the pod.
 	//
 	// Containers cannot currently be
@@ -1836,7 +1886,7 @@ type JobProps struct {
 	//
 	// You can add additionnal containers using `podSpec.addContainer()`
 	// Experimental.
-	Containers []ContainerProps `json:"containers"`
+	Containers *[]*ContainerProps `json:"containers"`
 	// Restart policy for all containers within the pod.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	//
@@ -1860,16 +1910,16 @@ type JobProps struct {
 	// See: https://kubernetes.io/docs/concepts/storage/volumes
 	//
 	// Experimental.
-	Volumes []Volume `json:"volumes"`
+	Volumes *[]Volume `json:"volumes"`
 	// The pod metadata.
 	// Experimental.
-	PodMetadata cdk8s.ApiObjectMetadata `json:"podMetadata"`
+	PodMetadata *cdk8s.ApiObjectMetadata `json:"podMetadata"`
 	// Specifies the duration the job may be active before the system tries to terminate it.
 	// Experimental.
 	ActiveDeadline cdk8s.Duration `json:"activeDeadline"`
 	// Specifies the number of retries before marking this job failed.
 	// Experimental.
-	BackoffLimit float64 `json:"backoffLimit"`
+	BackoffLimit *float64 `json:"backoffLimit"`
 	// Limits the lifetime of a Job that has finished execution (either Complete or Failed).
 	//
 	// If this field is set, after the Job finishes, it is eligible to
@@ -1880,34 +1930,6 @@ type JobProps struct {
 	// `TTLAfterFinished` feature.
 	// Experimental.
 	TtlAfterFinished cdk8s.Duration `json:"ttlAfterFinished"`
-}
-
-// ToResourceProps is a convenience function to obtain a new ResourceProps from this JobProps.
-func (j *JobProps) ToResourceProps() ResourceProps {
-	return ResourceProps {
-		Metadata: j.Metadata,
-	}
-}
-
-// ToPodSpecProps is a convenience function to obtain a new PodSpecProps from this JobProps.
-func (j *JobProps) ToPodSpecProps() PodSpecProps {
-	return PodSpecProps {
-		Containers: j.Containers,
-		RestartPolicy: j.RestartPolicy,
-		ServiceAccount: j.ServiceAccount,
-		Volumes: j.Volumes,
-	}
-}
-
-// ToPodTemplateProps is a convenience function to obtain a new PodTemplateProps from this JobProps.
-func (j *JobProps) ToPodTemplateProps() PodTemplateProps {
-	return PodTemplateProps {
-		Containers: j.Containers,
-		RestartPolicy: j.RestartPolicy,
-		ServiceAccount: j.ServiceAccount,
-		Volumes: j.Volumes,
-		PodMetadata: j.PodMetadata,
-	}
 }
 
 // Options for mounts.
@@ -1927,10 +1949,10 @@ type MountOptions struct {
 	//
 	// Defaults to false.
 	// Experimental.
-	ReadOnly bool `json:"readOnly"`
+	ReadOnly *bool `json:"readOnly"`
 	// Path within the volume from which the container's volume should be mounted.).
 	// Experimental.
-	SubPath string `json:"subPath"`
+	SubPath *string `json:"subPath"`
 	// Expanded path within the volume from which the container's volume should be mounted.
 	//
 	// Behaves similarly to SubPath but environment variable references
@@ -1941,7 +1963,7 @@ type MountOptions struct {
 	// `subPathExpr` and `subPath` are mutually exclusive. This field is beta in
 	// 1.15.
 	// Experimental.
-	SubPathExpr string `json:"subPathExpr"`
+	SubPathExpr *string `json:"subPathExpr"`
 }
 
 // Experimental.
@@ -1962,14 +1984,14 @@ type PathMapping struct {
 	// path. May not contain the path element '..'. May not start with the string
 	// '..'.
 	// Experimental.
-	Path string `json:"path"`
+	Path *string `json:"path"`
 	// Optional: mode bits to use on this file, must be a value between 0 and 0777.
 	//
 	// If not specified, the volume defaultMode will be used. This might be
 	// in conflict with other options that affect the file mode, like fsGroup, and
 	// the result can be other mode bits set.
 	// Experimental.
-	Mode float64 `json:"mode"`
+	Mode *float64 `json:"mode"`
 }
 
 // Pod is a collection of containers that can run on a host.
@@ -1981,129 +2003,145 @@ type Pod interface {
 	Resource
 	IPodSpec
 	ApiObject() cdk8s.ApiObject
-	Containers() []Container
+	Containers() *[]Container
+	Metadata() cdk8s.ApiObjectMetadataDefinition
+	Name() *string
 	RestartPolicy() RestartPolicy
 	ServiceAccount() IServiceAccount
-	Volumes() []Volume
-	AddContainer(container ContainerProps) Container
+	Volumes() *[]Volume
+	AddContainer(container *ContainerProps) Container
 	AddVolume(volume Volume)
+	OnPrepare()
+	OnSynthesize(session constructs.ISynthesisSession)
+	OnValidate() *[]*string
+	ToString() *string
 }
 
 // The jsii proxy struct for Pod
-type pod struct {
-	resource // extends cdk8s-plus-17.Resource
-	iPodSpec // implements cdk8s-plus-17.IPodSpec
+type jsiiProxy_Pod struct {
+	jsiiProxy_Resource
+	jsiiProxy_IPodSpec
 }
 
-func (p *pod) ApiObject() cdk8s.ApiObject {
+func (j *jsiiProxy_Pod) ApiObject() cdk8s.ApiObject {
 	var returns cdk8s.ApiObject
 	_jsii_.Get(
-		p,
+		j,
 		"apiObject",
 		&returns,
 	)
 	return returns
 }
 
-func (p *pod) Containers() []Container {
-	var returns []Container
+func (j *jsiiProxy_Pod) Containers() *[]Container {
+	var returns *[]Container
 	_jsii_.Get(
-		p,
+		j,
 		"containers",
 		&returns,
 	)
 	return returns
 }
 
-func (p *pod) RestartPolicy() RestartPolicy {
-	var returns RestartPolicy
-	_jsii_.Get(
-		p,
-		"restartPolicy",
-		&returns,
-	)
-	return returns
-}
-
-func (p *pod) ServiceAccount() IServiceAccount {
-	var returns IServiceAccount
-	_jsii_.Get(
-		p,
-		"serviceAccount",
-		&returns,
-	)
-	return returns
-}
-
-func (p *pod) Volumes() []Volume {
-	var returns []Volume
-	_jsii_.Get(
-		p,
-		"volumes",
-		&returns,
-	)
-	return returns
-}
-
-func (p *pod) Metadata() cdk8s.ApiObjectMetadataDefinition {
+func (j *jsiiProxy_Pod) Metadata() cdk8s.ApiObjectMetadataDefinition {
 	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
-		p,
+		j,
 		"metadata",
 		&returns,
 	)
 	return returns
 }
 
-func (p *pod) Name() string {
-	var returns string
+func (j *jsiiProxy_Pod) Name() *string {
+	var returns *string
 	_jsii_.Get(
-		p,
+		j,
 		"name",
 		&returns,
 	)
 	return returns
 }
 
-
-func NewPod(scope constructs.Construct, id string, props PodProps) Pod {
-	_init_.Initialize()
-	p := pod{}
-
-	_jsii_.Create(
-		"cdk8s-plus-17.Pod",
-		[]interface{}{scope, id, props},
-		[]_jsii_.FQN{"cdk8s-plus-17.IPodSpec"},
-		[]_jsii_.Override{},
-		&p,
-	)
-	return &p
-}
-
-// Add a container to the pod.
-// Experimental.
-func (p *pod) AddContainer(container ContainerProps) Container {
-	var returns Container
-	_jsii_.Invoke(
-		p,
-		"addContainer",
-		[]interface{}{container},
-		true,
+func (j *jsiiProxy_Pod) RestartPolicy() RestartPolicy {
+	var returns RestartPolicy
+	_jsii_.Get(
+		j,
+		"restartPolicy",
 		&returns,
 	)
 	return returns
 }
 
+func (j *jsiiProxy_Pod) ServiceAccount() IServiceAccount {
+	var returns IServiceAccount
+	_jsii_.Get(
+		j,
+		"serviceAccount",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_Pod) Volumes() *[]Volume {
+	var returns *[]Volume
+	_jsii_.Get(
+		j,
+		"volumes",
+		&returns,
+	)
+	return returns
+}
+
+
+// Experimental.
+func NewPod(scope constructs.Construct, id *string, props *PodProps) Pod {
+	_init_.Initialize()
+
+	j := jsiiProxy_Pod{}
+
+	_jsii_.Create(
+		"cdk8s-plus-17.Pod",
+		[]interface{}{scope, id, props},
+		&j,
+	)
+
+	return &j
+}
+
+// Experimental.
+func NewPod_Override(p Pod, scope constructs.Construct, id *string, props *PodProps) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.Pod",
+		[]interface{}{scope, id, props},
+		p,
+	)
+}
+
+// Add a container to the pod.
+// Experimental.
+func (p *jsiiProxy_Pod) AddContainer(container *ContainerProps) Container {
+	var returns Container
+
+	_jsii_.Invoke(
+		p,
+		"addContainer",
+		[]interface{}{container},
+		&returns,
+	)
+
+	return returns
+}
+
 // Add a volume to the pod.
 // Experimental.
-func (p *pod) AddVolume(volume Volume) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (p *jsiiProxy_Pod) AddVolume(volume Volume) {
+	_jsii_.InvokeVoid(
 		p,
 		"addVolume",
 		[]interface{}{volume},
-		false,
-		&returns,
 	)
 }
 
@@ -2116,14 +2154,11 @@ func (p *pod) AddVolume(volume Volume) {
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
 // Experimental.
-func (p *pod) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
+func (p *jsiiProxy_Pod) OnPrepare() {
+	_jsii_.InvokeVoid(
 		p,
 		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
+		nil, // no parameters
 	)
 }
 
@@ -2132,14 +2167,11 @@ func (p *pod) OnPrepare() {
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
 // Experimental.
-func (p *pod) OnSynthesize(session constructs.ISynthesisSession) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (p *jsiiProxy_Pod) OnSynthesize(session constructs.ISynthesisSession) {
+	_jsii_.InvokeVoid(
 		p,
 		"onSynthesize",
 		[]interface{}{session},
-		false,
-		&returns,
 	)
 }
 
@@ -2151,29 +2183,31 @@ func (p *pod) OnSynthesize(session constructs.ISynthesisSession) {
 // Returns: An array of validation error messages, or an empty array if there the construct is valid.
 // Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
 // instead of overriding this method.
-func (p *pod) OnValidate() []string {
-	var returns []string
+func (p *jsiiProxy_Pod) OnValidate() *[]*string {
+	var returns *[]*string
+
 	_jsii_.Invoke(
 		p,
 		"onValidate",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
 // Returns a string representation of this construct.
 // Experimental.
-func (p *pod) ToString() string {
-	var returns string
+func (p *jsiiProxy_Pod) ToString() *string {
+	var returns *string
+
 	_jsii_.Invoke(
 		p,
 		"toString",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
@@ -2198,7 +2232,7 @@ const (
 type PodProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
+	Metadata *cdk8s.ApiObjectMetadata `json:"metadata"`
 	// List of containers belonging to the pod.
 	//
 	// Containers cannot currently be
@@ -2206,7 +2240,7 @@ type PodProps struct {
 	//
 	// You can add additionnal containers using `podSpec.addContainer()`
 	// Experimental.
-	Containers []ContainerProps `json:"containers"`
+	Containers *[]*ContainerProps `json:"containers"`
 	// Restart policy for all containers within the pod.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	//
@@ -2230,77 +2264,60 @@ type PodProps struct {
 	// See: https://kubernetes.io/docs/concepts/storage/volumes
 	//
 	// Experimental.
-	Volumes []Volume `json:"volumes"`
-}
-
-// ToResourceProps is a convenience function to obtain a new ResourceProps from this PodProps.
-func (p *PodProps) ToResourceProps() ResourceProps {
-	return ResourceProps {
-		Metadata: p.Metadata,
-	}
-}
-
-// ToPodSpecProps is a convenience function to obtain a new PodSpecProps from this PodProps.
-func (p *PodProps) ToPodSpecProps() PodSpecProps {
-	return PodSpecProps {
-		Containers: p.Containers,
-		RestartPolicy: p.RestartPolicy,
-		ServiceAccount: p.ServiceAccount,
-		Volumes: p.Volumes,
-	}
+	Volumes *[]Volume `json:"volumes"`
 }
 
 // Provides read/write capabilities ontop of a `PodSpecProps`.
 // Experimental.
 type PodSpec interface {
 	IPodSpec
-	Containers() []Container
+	Containers() *[]Container
 	RestartPolicy() RestartPolicy
 	ServiceAccount() IServiceAccount
-	Volumes() []Volume
-	AddContainer(container ContainerProps) Container
+	Volumes() *[]Volume
+	AddContainer(container *ContainerProps) Container
 	AddVolume(volume Volume)
 }
 
 // The jsii proxy struct for PodSpec
-type podSpec struct {
-	iPodSpec // implements cdk8s-plus-17.IPodSpec
+type jsiiProxy_PodSpec struct {
+	jsiiProxy_IPodSpec
 }
 
-func (p *podSpec) Containers() []Container {
-	var returns []Container
+func (j *jsiiProxy_PodSpec) Containers() *[]Container {
+	var returns *[]Container
 	_jsii_.Get(
-		p,
+		j,
 		"containers",
 		&returns,
 	)
 	return returns
 }
 
-func (p *podSpec) RestartPolicy() RestartPolicy {
+func (j *jsiiProxy_PodSpec) RestartPolicy() RestartPolicy {
 	var returns RestartPolicy
 	_jsii_.Get(
-		p,
+		j,
 		"restartPolicy",
 		&returns,
 	)
 	return returns
 }
 
-func (p *podSpec) ServiceAccount() IServiceAccount {
+func (j *jsiiProxy_PodSpec) ServiceAccount() IServiceAccount {
 	var returns IServiceAccount
 	_jsii_.Get(
-		p,
+		j,
 		"serviceAccount",
 		&returns,
 	)
 	return returns
 }
 
-func (p *podSpec) Volumes() []Volume {
-	var returns []Volume
+func (j *jsiiProxy_PodSpec) Volumes() *[]Volume {
+	var returns *[]Volume
 	_jsii_.Get(
-		p,
+		j,
 		"volumes",
 		&returns,
 	)
@@ -2308,44 +2325,54 @@ func (p *podSpec) Volumes() []Volume {
 }
 
 
-func NewPodSpec(props PodSpecProps) PodSpec {
+// Experimental.
+func NewPodSpec(props *PodSpecProps) PodSpec {
 	_init_.Initialize()
-	p := podSpec{}
+
+	j := jsiiProxy_PodSpec{}
 
 	_jsii_.Create(
 		"cdk8s-plus-17.PodSpec",
 		[]interface{}{props},
-		[]_jsii_.FQN{"cdk8s-plus-17.IPodSpec"},
-		[]_jsii_.Override{},
-		&p,
+		&j,
 	)
-	return &p
+
+	return &j
+}
+
+// Experimental.
+func NewPodSpec_Override(p PodSpec, props *PodSpecProps) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.PodSpec",
+		[]interface{}{props},
+		p,
+	)
 }
 
 // Add a container to the pod.
 // Experimental.
-func (p *podSpec) AddContainer(container ContainerProps) Container {
+func (p *jsiiProxy_PodSpec) AddContainer(container *ContainerProps) Container {
 	var returns Container
+
 	_jsii_.Invoke(
 		p,
 		"addContainer",
 		[]interface{}{container},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
 // Add a volume to the pod.
 // Experimental.
-func (p *podSpec) AddVolume(volume Volume) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (p *jsiiProxy_PodSpec) AddVolume(volume Volume) {
+	_jsii_.InvokeVoid(
 		p,
 		"addVolume",
 		[]interface{}{volume},
-		false,
-		&returns,
 	)
 }
 
@@ -2359,7 +2386,7 @@ type PodSpecProps struct {
 	//
 	// You can add additionnal containers using `podSpec.addContainer()`
 	// Experimental.
-	Containers []ContainerProps `json:"containers"`
+	Containers *[]*ContainerProps `json:"containers"`
 	// Restart policy for all containers within the pod.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	//
@@ -2383,7 +2410,7 @@ type PodSpecProps struct {
 	// See: https://kubernetes.io/docs/concepts/storage/volumes
 	//
 	// Experimental.
-	Volumes []Volume `json:"volumes"`
+	Volumes *[]Volume `json:"volumes"`
 }
 
 // Provides read/write capabilities ontop of a `PodTemplateProps`.
@@ -2391,38 +2418,121 @@ type PodSpecProps struct {
 type PodTemplate interface {
 	PodSpec
 	IPodTemplate
+	Containers() *[]Container
 	PodMetadata() cdk8s.ApiObjectMetadataDefinition
+	RestartPolicy() RestartPolicy
+	ServiceAccount() IServiceAccount
+	Volumes() *[]Volume
+	AddContainer(container *ContainerProps) Container
+	AddVolume(volume Volume)
 }
 
 // The jsii proxy struct for PodTemplate
-type podTemplate struct {
-	podSpec // extends cdk8s-plus-17.PodSpec
-	iPodTemplate // implements cdk8s-plus-17.IPodTemplate
+type jsiiProxy_PodTemplate struct {
+	jsiiProxy_PodSpec
+	jsiiProxy_IPodTemplate
 }
 
-func (p *podTemplate) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
+func (j *jsiiProxy_PodTemplate) Containers() *[]Container {
+	var returns *[]Container
+	_jsii_.Get(
+		j,
+		"containers",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_PodTemplate) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
 	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
-		p,
+		j,
 		"podMetadata",
 		&returns,
 	)
 	return returns
 }
 
+func (j *jsiiProxy_PodTemplate) RestartPolicy() RestartPolicy {
+	var returns RestartPolicy
+	_jsii_.Get(
+		j,
+		"restartPolicy",
+		&returns,
+	)
+	return returns
+}
 
-func NewPodTemplate(props PodTemplateProps) PodTemplate {
+func (j *jsiiProxy_PodTemplate) ServiceAccount() IServiceAccount {
+	var returns IServiceAccount
+	_jsii_.Get(
+		j,
+		"serviceAccount",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_PodTemplate) Volumes() *[]Volume {
+	var returns *[]Volume
+	_jsii_.Get(
+		j,
+		"volumes",
+		&returns,
+	)
+	return returns
+}
+
+
+// Experimental.
+func NewPodTemplate(props *PodTemplateProps) PodTemplate {
 	_init_.Initialize()
-	p := podTemplate{}
+
+	j := jsiiProxy_PodTemplate{}
 
 	_jsii_.Create(
 		"cdk8s-plus-17.PodTemplate",
 		[]interface{}{props},
-		[]_jsii_.FQN{"cdk8s-plus-17.IPodTemplate"},
-		[]_jsii_.Override{},
-		&p,
+		&j,
 	)
-	return &p
+
+	return &j
+}
+
+// Experimental.
+func NewPodTemplate_Override(p PodTemplate, props *PodTemplateProps) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.PodTemplate",
+		[]interface{}{props},
+		p,
+	)
+}
+
+// Add a container to the pod.
+// Experimental.
+func (p *jsiiProxy_PodTemplate) AddContainer(container *ContainerProps) Container {
+	var returns Container
+
+	_jsii_.Invoke(
+		p,
+		"addContainer",
+		[]interface{}{container},
+		&returns,
+	)
+
+	return returns
+}
+
+// Add a volume to the pod.
+// Experimental.
+func (p *jsiiProxy_PodTemplate) AddVolume(volume Volume) {
+	_jsii_.InvokeVoid(
+		p,
+		"addVolume",
+		[]interface{}{volume},
+	)
 }
 
 // Properties of a `PodTemplate`.
@@ -2437,7 +2547,7 @@ type PodTemplateProps struct {
 	//
 	// You can add additionnal containers using `podSpec.addContainer()`
 	// Experimental.
-	Containers []ContainerProps `json:"containers"`
+	Containers *[]*ContainerProps `json:"containers"`
 	// Restart policy for all containers within the pod.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	//
@@ -2461,20 +2571,10 @@ type PodTemplateProps struct {
 	// See: https://kubernetes.io/docs/concepts/storage/volumes
 	//
 	// Experimental.
-	Volumes []Volume `json:"volumes"`
+	Volumes *[]Volume `json:"volumes"`
 	// The pod metadata.
 	// Experimental.
-	PodMetadata cdk8s.ApiObjectMetadata `json:"podMetadata"`
-}
-
-// ToPodSpecProps is a convenience function to obtain a new PodSpecProps from this PodTemplateProps.
-func (p *PodTemplateProps) ToPodSpecProps() PodSpecProps {
-	return PodSpecProps {
-		Containers: p.Containers,
-		RestartPolicy: p.RestartPolicy,
-		ServiceAccount: p.ServiceAccount,
-		Volumes: p.Volumes,
-	}
+	PodMetadata *cdk8s.ApiObjectMetadata `json:"podMetadata"`
 }
 
 // Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
@@ -2483,51 +2583,52 @@ type Probe interface {
 }
 
 // The jsii proxy struct for Probe
-type probe struct {
+type jsiiProxy_Probe struct {
 	_ byte // padding
 }
 
-func NewProbe() Probe {
+// Experimental.
+func NewProbe_Override(p Probe) {
 	_init_.Initialize()
-	p := probe{}
 
 	_jsii_.Create(
 		"cdk8s-plus-17.Probe",
-		[]interface{}{},
-		[]_jsii_.FQN{},
-		[]_jsii_.Override{},
-		&p,
+		nil, // no parameters
+		p,
 	)
-	return &p
 }
 
 // Defines a probe based on a command which is executed within the container.
 // Experimental.
-func Probe_FromCommand(command []string, options CommandProbeOptions) Probe {
+func Probe_FromCommand(command *[]*string, options *CommandProbeOptions) Probe {
 	_init_.Initialize()
+
 	var returns Probe
+
 	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.Probe",
 		"fromCommand",
 		[]interface{}{command, options},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
 // Defines a probe based on an HTTP GET request to the IP address of the container.
 // Experimental.
-func Probe_FromHttpGet(path string, options HttpGetProbeOptions) Probe {
+func Probe_FromHttpGet(path *string, options *HttpGetProbeOptions) Probe {
 	_init_.Initialize()
+
 	var returns Probe
+
 	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.Probe",
 		"fromHttpGet",
 		[]interface{}{path, options},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
@@ -2538,7 +2639,7 @@ type ProbeOptions struct {
 	//
 	// Defaults to 3. Minimum value is 1.
 	// Experimental.
-	FailureThreshold float64 `json:"failureThreshold"`
+	FailureThreshold *float64 `json:"failureThreshold"`
 	// Number of seconds after the container has started before liveness probes are initiated.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
 	//
@@ -2553,7 +2654,7 @@ type ProbeOptions struct {
 	//
 	// Must be 1 for liveness and startup. Minimum value is 1.
 	// Experimental.
-	SuccessThreshold float64 `json:"successThreshold"`
+	SuccessThreshold *float64 `json:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	//
 	// Defaults to 1 second. Minimum value is 1.
@@ -2582,39 +2683,43 @@ type Resource interface {
 	IResource
 	ApiObject() cdk8s.ApiObject
 	Metadata() cdk8s.ApiObjectMetadataDefinition
-	Name() string
+	Name() *string
+	OnPrepare()
+	OnSynthesize(session constructs.ISynthesisSession)
+	OnValidate() *[]*string
+	ToString() *string
 }
 
 // The jsii proxy struct for Resource
-type resource struct {
-	constructs.Construct // extends constructs.Construct
-	iResource // implements cdk8s-plus-17.IResource
+type jsiiProxy_Resource struct {
+	internal.Type__constructsConstruct
+	jsiiProxy_IResource
 }
 
-func (r *resource) ApiObject() cdk8s.ApiObject {
+func (j *jsiiProxy_Resource) ApiObject() cdk8s.ApiObject {
 	var returns cdk8s.ApiObject
 	_jsii_.Get(
-		r,
+		j,
 		"apiObject",
 		&returns,
 	)
 	return returns
 }
 
-func (r *resource) Metadata() cdk8s.ApiObjectMetadataDefinition {
+func (j *jsiiProxy_Resource) Metadata() cdk8s.ApiObjectMetadataDefinition {
 	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
-		r,
+		j,
 		"metadata",
 		&returns,
 	)
 	return returns
 }
 
-func (r *resource) Name() string {
-	var returns string
+func (j *jsiiProxy_Resource) Name() *string {
+	var returns *string
 	_jsii_.Get(
-		r,
+		j,
 		"name",
 		&returns,
 	)
@@ -2623,18 +2728,15 @@ func (r *resource) Name() string {
 
 
 // Creates a new construct node.
-func NewResource(scope constructs.Construct, id string, options constructs.ConstructOptions) Resource {
+// Experimental.
+func NewResource_Override(r Resource, scope constructs.Construct, id *string, options *constructs.ConstructOptions) {
 	_init_.Initialize()
-	r := resource{}
 
 	_jsii_.Create(
 		"cdk8s-plus-17.Resource",
 		[]interface{}{scope, id, options},
-		[]_jsii_.FQN{"cdk8s-plus-17.IResource"},
-		[]_jsii_.Override{},
-		&r,
+		r,
 	)
-	return &r
 }
 
 // Perform final modifications before synthesis.
@@ -2646,14 +2748,11 @@ func NewResource(scope constructs.Construct, id string, options constructs.Const
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
 // Experimental.
-func (r *resource) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
+func (r *jsiiProxy_Resource) OnPrepare() {
+	_jsii_.InvokeVoid(
 		r,
 		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
+		nil, // no parameters
 	)
 }
 
@@ -2662,14 +2761,11 @@ func (r *resource) OnPrepare() {
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
 // Experimental.
-func (r *resource) OnSynthesize(session constructs.ISynthesisSession) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (r *jsiiProxy_Resource) OnSynthesize(session constructs.ISynthesisSession) {
+	_jsii_.InvokeVoid(
 		r,
 		"onSynthesize",
 		[]interface{}{session},
-		false,
-		&returns,
 	)
 }
 
@@ -2681,29 +2777,31 @@ func (r *resource) OnSynthesize(session constructs.ISynthesisSession) {
 // Returns: An array of validation error messages, or an empty array if there the construct is valid.
 // Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
 // instead of overriding this method.
-func (r *resource) OnValidate() []string {
-	var returns []string
+func (r *jsiiProxy_Resource) OnValidate() *[]*string {
+	var returns *[]*string
+
 	_jsii_.Invoke(
 		r,
 		"onValidate",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
 // Returns a string representation of this construct.
 // Experimental.
-func (r *resource) ToString() string {
-	var returns string
+func (r *jsiiProxy_Resource) ToString() *string {
+	var returns *string
+
 	_jsii_.Invoke(
 		r,
 		"toString",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
@@ -2712,7 +2810,7 @@ func (r *resource) ToString() string {
 type ResourceProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
+	Metadata *cdk8s.ApiObjectMetadata `json:"metadata"`
 }
 
 // Restart policy for all containers within the pod.
@@ -2737,40 +2835,46 @@ type Secret interface {
 	Resource
 	ISecret
 	ApiObject() cdk8s.ApiObject
-	AddStringData(key string, value string)
-	GetStringData(key string) string
+	Metadata() cdk8s.ApiObjectMetadataDefinition
+	Name() *string
+	AddStringData(key *string, value *string)
+	GetStringData(key *string) *string
+	OnPrepare()
+	OnSynthesize(session constructs.ISynthesisSession)
+	OnValidate() *[]*string
+	ToString() *string
 }
 
 // The jsii proxy struct for Secret
-type secret struct {
-	resource // extends cdk8s-plus-17.Resource
-	iSecret // implements cdk8s-plus-17.ISecret
+type jsiiProxy_Secret struct {
+	jsiiProxy_Resource
+	jsiiProxy_ISecret
 }
 
-func (s *secret) ApiObject() cdk8s.ApiObject {
+func (j *jsiiProxy_Secret) ApiObject() cdk8s.ApiObject {
 	var returns cdk8s.ApiObject
 	_jsii_.Get(
-		s,
+		j,
 		"apiObject",
 		&returns,
 	)
 	return returns
 }
 
-func (s *secret) Metadata() cdk8s.ApiObjectMetadataDefinition {
+func (j *jsiiProxy_Secret) Metadata() cdk8s.ApiObjectMetadataDefinition {
 	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
-		s,
+		j,
 		"metadata",
 		&returns,
 	)
 	return returns
 }
 
-func (s *secret) Name() string {
-	var returns string
+func (j *jsiiProxy_Secret) Name() *string {
+	var returns *string
 	_jsii_.Get(
-		s,
+		j,
 		"name",
 		&returns,
 	)
@@ -2778,59 +2882,71 @@ func (s *secret) Name() string {
 }
 
 
-func NewSecret(scope constructs.Construct, id string, props SecretProps) Secret {
+// Experimental.
+func NewSecret(scope constructs.Construct, id *string, props *SecretProps) Secret {
 	_init_.Initialize()
-	s := secret{}
+
+	j := jsiiProxy_Secret{}
 
 	_jsii_.Create(
 		"cdk8s-plus-17.Secret",
 		[]interface{}{scope, id, props},
-		[]_jsii_.FQN{"cdk8s-plus-17.ISecret"},
-		[]_jsii_.Override{},
-		&s,
+		&j,
 	)
-	return &s
+
+	return &j
+}
+
+// Experimental.
+func NewSecret_Override(s Secret, scope constructs.Construct, id *string, props *SecretProps) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.Secret",
+		[]interface{}{scope, id, props},
+		s,
+	)
 }
 
 // Imports a secret from the cluster as a reference.
 // Experimental.
-func Secret_FromSecretName(name string) ISecret {
+func Secret_FromSecretName(name *string) ISecret {
 	_init_.Initialize()
+
 	var returns ISecret
+
 	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.Secret",
 		"fromSecretName",
 		[]interface{}{name},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
 // Adds a string data field to the secert.
 // Experimental.
-func (s *secret) AddStringData(key string, value string) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (s *jsiiProxy_Secret) AddStringData(key *string, value *string) {
+	_jsii_.InvokeVoid(
 		s,
 		"addStringData",
 		[]interface{}{key, value},
-		false,
-		&returns,
 	)
 }
 
 // Gets a string data by key or undefined.
 // Experimental.
-func (s *secret) GetStringData(key string) string {
-	var returns string
+func (s *jsiiProxy_Secret) GetStringData(key *string) *string {
+	var returns *string
+
 	_jsii_.Invoke(
 		s,
 		"getStringData",
 		[]interface{}{key},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
@@ -2843,14 +2959,11 @@ func (s *secret) GetStringData(key string) string {
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
 // Experimental.
-func (s *secret) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
+func (s *jsiiProxy_Secret) OnPrepare() {
+	_jsii_.InvokeVoid(
 		s,
 		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
+		nil, // no parameters
 	)
 }
 
@@ -2859,14 +2972,11 @@ func (s *secret) OnPrepare() {
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
 // Experimental.
-func (s *secret) OnSynthesize(session constructs.ISynthesisSession) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (s *jsiiProxy_Secret) OnSynthesize(session constructs.ISynthesisSession) {
+	_jsii_.InvokeVoid(
 		s,
 		"onSynthesize",
 		[]interface{}{session},
-		false,
-		&returns,
 	)
 }
 
@@ -2878,29 +2988,31 @@ func (s *secret) OnSynthesize(session constructs.ISynthesisSession) {
 // Returns: An array of validation error messages, or an empty array if there the construct is valid.
 // Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
 // instead of overriding this method.
-func (s *secret) OnValidate() []string {
-	var returns []string
+func (s *jsiiProxy_Secret) OnValidate() *[]*string {
+	var returns *[]*string
+
 	_jsii_.Invoke(
 		s,
 		"onValidate",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
 // Returns a string representation of this construct.
 // Experimental.
-func (s *secret) ToString() string {
-	var returns string
+func (s *jsiiProxy_Secret) ToString() *string {
+	var returns *string
+
 	_jsii_.Invoke(
 		s,
 		"toString",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
@@ -2908,7 +3020,7 @@ func (s *secret) ToString() string {
 type SecretProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
+	Metadata *cdk8s.ApiObjectMetadata `json:"metadata"`
 	// stringData allows specifying non-binary secret data in string form.
 	//
 	// It is
@@ -2916,20 +3028,13 @@ type SecretProps struct {
 	// into the data field on write, overwriting any existing values. It is never
 	// output when reading from the API.
 	// Experimental.
-	StringData map[string]string `json:"stringData"`
+	StringData *map[string]*string `json:"stringData"`
 	// Optional type associated with the secret.
 	//
 	// Used to facilitate programmatic
 	// handling of secret data by various controllers.
 	// Experimental.
-	Type string `json:"type"`
-}
-
-// ToResourceProps is a convenience function to obtain a new ResourceProps from this SecretProps.
-func (s *SecretProps) ToResourceProps() ResourceProps {
-	return ResourceProps {
-		Metadata: s.Metadata,
-	}
+	Type *string `json:"type"`
 }
 
 // Represents a specific value in JSON secret.
@@ -2937,7 +3042,7 @@ func (s *SecretProps) ToResourceProps() ResourceProps {
 type SecretValue struct {
 	// The JSON key.
 	// Experimental.
-	Key string `json:"key"`
+	Key *string `json:"key"`
 	// The secret.
 	// Experimental.
 	Secret ISecret `json:"secret"`
@@ -2960,75 +3065,101 @@ type SecretValue struct {
 type Service interface {
 	Resource
 	ApiObject() cdk8s.ApiObject
-	ClusterIp() string
-	ExternalName() string
-	Ports() []ServicePort
-	Selector() map[string]string
+	ClusterIP() *string
+	ExternalName() *string
+	Metadata() cdk8s.ApiObjectMetadataDefinition
+	Name() *string
+	Ports() *[]*ServicePort
+	Selector() *map[string]*string
 	Type() ServiceType
-	AddDeployment(deployment Deployment, port float64, options ServicePortOptions)
-	AddSelector(label string, value string)
-	Serve(port float64, options ServicePortOptions)
+	AddDeployment(deployment Deployment, port *float64, options *ServicePortOptions)
+	AddSelector(label *string, value *string)
+	OnPrepare()
+	OnSynthesize(session constructs.ISynthesisSession)
+	OnValidate() *[]*string
+	Serve(port *float64, options *ServicePortOptions)
+	ToString() *string
 }
 
 // The jsii proxy struct for Service
-type service struct {
-	resource // extends cdk8s-plus-17.Resource
+type jsiiProxy_Service struct {
+	jsiiProxy_Resource
 }
 
-func (s *service) ApiObject() cdk8s.ApiObject {
+func (j *jsiiProxy_Service) ApiObject() cdk8s.ApiObject {
 	var returns cdk8s.ApiObject
 	_jsii_.Get(
-		s,
+		j,
 		"apiObject",
 		&returns,
 	)
 	return returns
 }
 
-func (s *service) ClusterIp() string {
-	var returns string
+func (j *jsiiProxy_Service) ClusterIP() *string {
+	var returns *string
 	_jsii_.Get(
-		s,
+		j,
 		"clusterIP",
 		&returns,
 	)
 	return returns
 }
 
-func (s *service) ExternalName() string {
-	var returns string
+func (j *jsiiProxy_Service) ExternalName() *string {
+	var returns *string
 	_jsii_.Get(
-		s,
+		j,
 		"externalName",
 		&returns,
 	)
 	return returns
 }
 
-func (s *service) Ports() []ServicePort {
-	var returns []ServicePort
+func (j *jsiiProxy_Service) Metadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
-		s,
+		j,
+		"metadata",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_Service) Name() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"name",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_Service) Ports() *[]*ServicePort {
+	var returns *[]*ServicePort
+	_jsii_.Get(
+		j,
 		"ports",
 		&returns,
 	)
 	return returns
 }
 
-func (s *service) Selector() map[string]string {
-	var returns map[string]string
+func (j *jsiiProxy_Service) Selector() *map[string]*string {
+	var returns *map[string]*string
 	_jsii_.Get(
-		s,
+		j,
 		"selector",
 		&returns,
 	)
 	return returns
 }
 
-func (s *service) Type() ServiceType {
+func (j *jsiiProxy_Service) Type() ServiceType {
 	var returns ServiceType
 	_jsii_.Get(
-		s,
+		j,
 		"type",
 		&returns,
 	)
@@ -3036,18 +3167,30 @@ func (s *service) Type() ServiceType {
 }
 
 
-func NewService(scope constructs.Construct, id string, props ServiceProps) Service {
+// Experimental.
+func NewService(scope constructs.Construct, id *string, props *ServiceProps) Service {
 	_init_.Initialize()
-	s := service{}
+
+	j := jsiiProxy_Service{}
 
 	_jsii_.Create(
 		"cdk8s-plus-17.Service",
 		[]interface{}{scope, id, props},
-		[]_jsii_.FQN{},
-		[]_jsii_.Override{},
-		&s,
+		&j,
 	)
-	return &s
+
+	return &j
+}
+
+// Experimental.
+func NewService_Override(s Service, scope constructs.Construct, id *string, props *ServiceProps) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.Service",
+		[]interface{}{scope, id, props},
+		s,
+	)
 }
 
 // Associate a deployment to this service.
@@ -3056,43 +3199,100 @@ func NewService(scope constructs.Construct, id string, props ServiceProps) Servi
 // to the port exposed by the first container in the deployment's pods.
 // The deployment's `labelSelector` will be used to select pods.
 // Experimental.
-func (s *service) AddDeployment(deployment Deployment, port float64, options ServicePortOptions) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (s *jsiiProxy_Service) AddDeployment(deployment Deployment, port *float64, options *ServicePortOptions) {
+	_jsii_.InvokeVoid(
 		s,
 		"addDeployment",
 		[]interface{}{deployment, port, options},
-		false,
-		&returns,
 	)
 }
 
 // Services defined using this spec will select pods according the provided label.
 // Experimental.
-func (s *service) AddSelector(label string, value string) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (s *jsiiProxy_Service) AddSelector(label *string, value *string) {
+	_jsii_.InvokeVoid(
 		s,
 		"addSelector",
 		[]interface{}{label, value},
-		false,
+	)
+}
+
+// Perform final modifications before synthesis.
+//
+// This method can be implemented by derived constructs in order to perform
+// final changes before synthesis. prepare() will be called after child
+// constructs have been prepared.
+//
+// This is an advanced framework feature. Only use this if you
+// understand the implications.
+// Experimental.
+func (s *jsiiProxy_Service) OnPrepare() {
+	_jsii_.InvokeVoid(
+		s,
+		"onPrepare",
+		nil, // no parameters
+	)
+}
+
+// Allows this construct to emit artifacts into the cloud assembly during synthesis.
+//
+// This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
+// as they participate in synthesizing the cloud assembly.
+// Experimental.
+func (s *jsiiProxy_Service) OnSynthesize(session constructs.ISynthesisSession) {
+	_jsii_.InvokeVoid(
+		s,
+		"onSynthesize",
+		[]interface{}{session},
+	)
+}
+
+// Validate the current construct.
+//
+// This method can be implemented by derived constructs in order to perform
+// validation logic. It is called on all constructs before synthesis.
+//
+// Returns: An array of validation error messages, or an empty array if there the construct is valid.
+// Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
+// instead of overriding this method.
+func (s *jsiiProxy_Service) OnValidate() *[]*string {
+	var returns *[]*string
+
+	_jsii_.Invoke(
+		s,
+		"onValidate",
+		nil, // no parameters
 		&returns,
 	)
+
+	return returns
 }
 
 // Configure a port the service will bind to.
 //
 // This method can be called multiple times.
 // Experimental.
-func (s *service) Serve(port float64, options ServicePortOptions) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (s *jsiiProxy_Service) Serve(port *float64, options *ServicePortOptions) {
+	_jsii_.InvokeVoid(
 		s,
 		"serve",
 		[]interface{}{port, options},
-		false,
+	)
+}
+
+// Returns a string representation of this construct.
+// Experimental.
+func (s *jsiiProxy_Service) ToString() *string {
+	var returns *string
+
+	_jsii_.Invoke(
+		s,
+		"toString",
+		nil, // no parameters
 		&returns,
 	)
+
+	return returns
 }
 
 // A service account provides an identity for processes that run in a Pod.
@@ -3110,96 +3310,113 @@ type ServiceAccount interface {
 	Resource
 	IServiceAccount
 	ApiObject() cdk8s.ApiObject
-	Secrets() []ISecret
+	Metadata() cdk8s.ApiObjectMetadataDefinition
+	Name() *string
+	Secrets() *[]ISecret
 	AddSecret(secret ISecret)
+	OnPrepare()
+	OnSynthesize(session constructs.ISynthesisSession)
+	OnValidate() *[]*string
+	ToString() *string
 }
 
 // The jsii proxy struct for ServiceAccount
-type serviceAccount struct {
-	resource // extends cdk8s-plus-17.Resource
-	iServiceAccount // implements cdk8s-plus-17.IServiceAccount
+type jsiiProxy_ServiceAccount struct {
+	jsiiProxy_Resource
+	jsiiProxy_IServiceAccount
 }
 
-func (s *serviceAccount) ApiObject() cdk8s.ApiObject {
+func (j *jsiiProxy_ServiceAccount) ApiObject() cdk8s.ApiObject {
 	var returns cdk8s.ApiObject
 	_jsii_.Get(
-		s,
+		j,
 		"apiObject",
 		&returns,
 	)
 	return returns
 }
 
-func (s *serviceAccount) Secrets() []ISecret {
-	var returns []ISecret
-	_jsii_.Get(
-		s,
-		"secrets",
-		&returns,
-	)
-	return returns
-}
-
-func (s *serviceAccount) Metadata() cdk8s.ApiObjectMetadataDefinition {
+func (j *jsiiProxy_ServiceAccount) Metadata() cdk8s.ApiObjectMetadataDefinition {
 	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
-		s,
+		j,
 		"metadata",
 		&returns,
 	)
 	return returns
 }
 
-func (s *serviceAccount) Name() string {
-	var returns string
+func (j *jsiiProxy_ServiceAccount) Name() *string {
+	var returns *string
 	_jsii_.Get(
-		s,
+		j,
 		"name",
 		&returns,
 	)
 	return returns
 }
 
-
-func NewServiceAccount(scope constructs.Construct, id string, props ServiceAccountProps) ServiceAccount {
-	_init_.Initialize()
-	s := serviceAccount{}
-
-	_jsii_.Create(
-		"cdk8s-plus-17.ServiceAccount",
-		[]interface{}{scope, id, props},
-		[]_jsii_.FQN{"cdk8s-plus-17.IServiceAccount"},
-		[]_jsii_.Override{},
-		&s,
-	)
-	return &s
-}
-
-// Imports a service account from the cluster as a reference.
-// Experimental.
-func ServiceAccount_FromServiceAccountName(name string) IServiceAccount {
-	_init_.Initialize()
-	var returns IServiceAccount
-	_jsii_.StaticInvoke(
-		"cdk8s-plus-17.ServiceAccount",
-		"fromServiceAccountName",
-		[]interface{}{name},
-		true,
+func (j *jsiiProxy_ServiceAccount) Secrets() *[]ISecret {
+	var returns *[]ISecret
+	_jsii_.Get(
+		j,
+		"secrets",
 		&returns,
 	)
 	return returns
 }
 
+
+// Experimental.
+func NewServiceAccount(scope constructs.Construct, id *string, props *ServiceAccountProps) ServiceAccount {
+	_init_.Initialize()
+
+	j := jsiiProxy_ServiceAccount{}
+
+	_jsii_.Create(
+		"cdk8s-plus-17.ServiceAccount",
+		[]interface{}{scope, id, props},
+		&j,
+	)
+
+	return &j
+}
+
+// Experimental.
+func NewServiceAccount_Override(s ServiceAccount, scope constructs.Construct, id *string, props *ServiceAccountProps) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.ServiceAccount",
+		[]interface{}{scope, id, props},
+		s,
+	)
+}
+
+// Imports a service account from the cluster as a reference.
+// Experimental.
+func ServiceAccount_FromServiceAccountName(name *string) IServiceAccount {
+	_init_.Initialize()
+
+	var returns IServiceAccount
+
+	_jsii_.StaticInvoke(
+		"cdk8s-plus-17.ServiceAccount",
+		"fromServiceAccountName",
+		[]interface{}{name},
+		&returns,
+	)
+
+	return returns
+}
+
 // Allow a secret to be accessed by pods using this service account.
 // Experimental.
-func (s *serviceAccount) AddSecret(secret ISecret) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (s *jsiiProxy_ServiceAccount) AddSecret(secret ISecret) {
+	_jsii_.InvokeVoid(
 		s,
 		"addSecret",
 		[]interface{}{secret},
-		false,
-		&returns,
 	)
 }
 
@@ -3212,14 +3429,11 @@ func (s *serviceAccount) AddSecret(secret ISecret) {
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
 // Experimental.
-func (s *serviceAccount) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
+func (s *jsiiProxy_ServiceAccount) OnPrepare() {
+	_jsii_.InvokeVoid(
 		s,
 		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
+		nil, // no parameters
 	)
 }
 
@@ -3228,14 +3442,11 @@ func (s *serviceAccount) OnPrepare() {
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
 // Experimental.
-func (s *serviceAccount) OnSynthesize(session constructs.ISynthesisSession) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (s *jsiiProxy_ServiceAccount) OnSynthesize(session constructs.ISynthesisSession) {
+	_jsii_.InvokeVoid(
 		s,
 		"onSynthesize",
 		[]interface{}{session},
-		false,
-		&returns,
 	)
 }
 
@@ -3247,29 +3458,31 @@ func (s *serviceAccount) OnSynthesize(session constructs.ISynthesisSession) {
 // Returns: An array of validation error messages, or an empty array if there the construct is valid.
 // Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
 // instead of overriding this method.
-func (s *serviceAccount) OnValidate() []string {
-	var returns []string
+func (s *jsiiProxy_ServiceAccount) OnValidate() *[]*string {
+	var returns *[]*string
+
 	_jsii_.Invoke(
 		s,
 		"onValidate",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
 // Returns a string representation of this construct.
 // Experimental.
-func (s *serviceAccount) ToString() string {
-	var returns string
+func (s *jsiiProxy_ServiceAccount) ToString() *string {
+	var returns *string
+
 	_jsii_.Invoke(
 		s,
 		"toString",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
@@ -3280,19 +3493,12 @@ func (s *serviceAccount) ToString() string {
 type ServiceAccountProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
+	Metadata *cdk8s.ApiObjectMetadata `json:"metadata"`
 	// List of secrets allowed to be used by pods running using this ServiceAccount.
 	// See: https://kubernetes.io/docs/concepts/configuration/secret
 	//
 	// Experimental.
-	Secrets []ISecret `json:"secrets"`
-}
-
-// ToResourceProps is a convenience function to obtain a new ResourceProps from this ServiceAccountProps.
-func (s *ServiceAccountProps) ToResourceProps() ResourceProps {
-	return ResourceProps {
-		Metadata: s.Metadata,
-	}
+	Secrets *[]ISecret `json:"secrets"`
 }
 
 // Options for setting up backends for ingress rules.
@@ -3305,7 +3511,7 @@ type ServiceIngressV1BetaBackendOptions struct {
 	// - If the service exposes a single port, this option is optional and if
 	//    specified, it must be the same port exposed by the service.
 	// Experimental.
-	Port float64 `json:"port"`
+	Port *float64 `json:"port"`
 }
 
 // Definition of a service port.
@@ -3318,7 +3524,7 @@ type ServicePort struct {
 	// field in EndpointPort objects. Optional if only one ServicePort is defined
 	// on this service.
 	// Experimental.
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The port on each node on which this service is exposed when type=NodePort or LoadBalancer.
 	//
 	// Usually assigned by the system. If specified, it will be
@@ -3328,7 +3534,7 @@ type ServicePort struct {
 	// See: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
 	//
 	// Experimental.
-	NodePort float64 `json:"nodePort"`
+	NodePort *float64 `json:"nodePort"`
 	// The IP protocol for this port.
 	//
 	// Supports "TCP", "UDP", and "SCTP". Default is TCP.
@@ -3336,20 +3542,10 @@ type ServicePort struct {
 	Protocol Protocol `json:"protocol"`
 	// The port number the service will redirect to.
 	// Experimental.
-	TargetPort float64 `json:"targetPort"`
+	TargetPort *float64 `json:"targetPort"`
 	// The port number the service will bind to.
 	// Experimental.
-	Port float64 `json:"port"`
-}
-
-// ToServicePortOptions is a convenience function to obtain a new ServicePortOptions from this ServicePort.
-func (s *ServicePort) ToServicePortOptions() ServicePortOptions {
-	return ServicePortOptions {
-		Name: s.Name,
-		NodePort: s.NodePort,
-		Protocol: s.Protocol,
-		TargetPort: s.TargetPort,
-	}
+	Port *float64 `json:"port"`
 }
 
 // Experimental.
@@ -3361,7 +3557,7 @@ type ServicePortOptions struct {
 	// field in EndpointPort objects. Optional if only one ServicePort is defined
 	// on this service.
 	// Experimental.
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The port on each node on which this service is exposed when type=NodePort or LoadBalancer.
 	//
 	// Usually assigned by the system. If specified, it will be
@@ -3371,7 +3567,7 @@ type ServicePortOptions struct {
 	// See: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
 	//
 	// Experimental.
-	NodePort float64 `json:"nodePort"`
+	NodePort *float64 `json:"nodePort"`
 	// The IP protocol for this port.
 	//
 	// Supports "TCP", "UDP", and "SCTP". Default is TCP.
@@ -3379,7 +3575,7 @@ type ServicePortOptions struct {
 	Protocol Protocol `json:"protocol"`
 	// The port number the service will redirect to.
 	// Experimental.
-	TargetPort float64 `json:"targetPort"`
+	TargetPort *float64 `json:"targetPort"`
 }
 
 // Properties for initialization of `Service`.
@@ -3387,7 +3583,7 @@ type ServicePortOptions struct {
 type ServiceProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
+	Metadata *cdk8s.ApiObjectMetadata `json:"metadata"`
 	// The IP address of the service and is usually assigned randomly by the master.
 	//
 	// If an address is specified manually and is not in use by others, it
@@ -3399,7 +3595,7 @@ type ServiceProps struct {
 	// See: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
 	//
 	// Experimental.
-	ClusterIp string `json:"clusterIP"`
+	ClusterIP *string `json:"clusterIP"`
 	// A list of IP addresses for which nodes in the cluster will also accept traffic for this service.
 	//
 	// These IPs are not managed by Kubernetes. The user
@@ -3407,32 +3603,25 @@ type ServiceProps struct {
 	// common example is external load-balancers that are not part of the
 	// Kubernetes system.
 	// Experimental.
-	ExternalIPs []string `json:"externalIPs"`
+	ExternalIPs *[]*string `json:"externalIPs"`
 	// The externalName to be used when ServiceType.EXTERNAL_NAME is set.
 	// Experimental.
-	ExternalName string `json:"externalName"`
+	ExternalName *string `json:"externalName"`
 	// A list of CIDR IP addresses, if specified and supported by the platform, will restrict traffic through the cloud-provider load-balancer to the specified client IPs.
 	//
 	// More info: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/
 	// Experimental.
-	LoadBalancerSourceRanges []string `json:"loadBalancerSourceRanges"`
+	LoadBalancerSourceRanges *[]*string `json:"loadBalancerSourceRanges"`
 	// The port exposed by this service.
 	//
 	// More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
 	// Experimental.
-	Ports []ServicePort `json:"ports"`
+	Ports *[]*ServicePort `json:"ports"`
 	// Determines how the Service is exposed.
 	//
 	// More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
 	// Experimental.
 	Type ServiceType `json:"type"`
-}
-
-// ToResourceProps is a convenience function to obtain a new ResourceProps from this ServiceProps.
-func (s *ServiceProps) ToResourceProps() ResourceProps {
-	return ResourceProps {
-		Metadata: s.Metadata,
-	}
 }
 
 // For some parts of your application (for example, frontends) you may want to expose a Service onto an external IP address, that's outside of your cluster.
@@ -3478,189 +3667,190 @@ type StatefulSet interface {
 	Resource
 	IPodTemplate
 	ApiObject() cdk8s.ApiObject
-	Containers() []Container
-	LabelSelector() map[string]string
+	Containers() *[]Container
+	LabelSelector() *map[string]*string
+	Metadata() cdk8s.ApiObjectMetadataDefinition
+	Name() *string
 	PodManagementPolicy() PodManagementPolicy
 	PodMetadata() cdk8s.ApiObjectMetadataDefinition
-	Replicas() float64
+	Replicas() *float64
 	RestartPolicy() RestartPolicy
 	ServiceAccount() IServiceAccount
-	Volumes() []Volume
-	AddContainer(container ContainerProps) Container
+	Volumes() *[]Volume
+	AddContainer(container *ContainerProps) Container
 	AddVolume(volume Volume)
-	SelectByLabel(key string, value string)
+	OnPrepare()
+	OnSynthesize(session constructs.ISynthesisSession)
+	OnValidate() *[]*string
+	SelectByLabel(key *string, value *string)
+	ToString() *string
 }
 
 // The jsii proxy struct for StatefulSet
-type statefulSet struct {
-	resource // extends cdk8s-plus-17.Resource
-	iPodTemplate // implements cdk8s-plus-17.IPodTemplate
+type jsiiProxy_StatefulSet struct {
+	jsiiProxy_Resource
+	jsiiProxy_IPodTemplate
 }
 
-func (s *statefulSet) ApiObject() cdk8s.ApiObject {
+func (j *jsiiProxy_StatefulSet) ApiObject() cdk8s.ApiObject {
 	var returns cdk8s.ApiObject
 	_jsii_.Get(
-		s,
+		j,
 		"apiObject",
 		&returns,
 	)
 	return returns
 }
 
-func (s *statefulSet) Containers() []Container {
-	var returns []Container
+func (j *jsiiProxy_StatefulSet) Containers() *[]Container {
+	var returns *[]Container
 	_jsii_.Get(
-		s,
+		j,
 		"containers",
 		&returns,
 	)
 	return returns
 }
 
-func (s *statefulSet) LabelSelector() map[string]string {
-	var returns map[string]string
+func (j *jsiiProxy_StatefulSet) LabelSelector() *map[string]*string {
+	var returns *map[string]*string
 	_jsii_.Get(
-		s,
+		j,
 		"labelSelector",
 		&returns,
 	)
 	return returns
 }
 
-func (s *statefulSet) PodManagementPolicy() PodManagementPolicy {
-	var returns PodManagementPolicy
-	_jsii_.Get(
-		s,
-		"podManagementPolicy",
-		&returns,
-	)
-	return returns
-}
-
-func (s *statefulSet) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
+func (j *jsiiProxy_StatefulSet) Metadata() cdk8s.ApiObjectMetadataDefinition {
 	var returns cdk8s.ApiObjectMetadataDefinition
 	_jsii_.Get(
-		s,
-		"podMetadata",
-		&returns,
-	)
-	return returns
-}
-
-func (s *statefulSet) Replicas() float64 {
-	var returns float64
-	_jsii_.Get(
-		s,
-		"replicas",
-		&returns,
-	)
-	return returns
-}
-
-func (s *statefulSet) RestartPolicy() RestartPolicy {
-	var returns RestartPolicy
-	_jsii_.Get(
-		s,
-		"restartPolicy",
-		&returns,
-	)
-	return returns
-}
-
-func (s *statefulSet) ServiceAccount() IServiceAccount {
-	var returns IServiceAccount
-	_jsii_.Get(
-		s,
-		"serviceAccount",
-		&returns,
-	)
-	return returns
-}
-
-func (s *statefulSet) Volumes() []Volume {
-	var returns []Volume
-	_jsii_.Get(
-		s,
-		"volumes",
-		&returns,
-	)
-	return returns
-}
-
-func (s *statefulSet) Metadata() cdk8s.ApiObjectMetadataDefinition {
-	var returns cdk8s.ApiObjectMetadataDefinition
-	_jsii_.Get(
-		s,
+		j,
 		"metadata",
 		&returns,
 	)
 	return returns
 }
 
-func (s *statefulSet) Name() string {
-	var returns string
+func (j *jsiiProxy_StatefulSet) Name() *string {
+	var returns *string
 	_jsii_.Get(
-		s,
+		j,
 		"name",
 		&returns,
 	)
 	return returns
 }
 
-
-func NewStatefulSet(scope constructs.Construct, id string, props StatefulSetProps) StatefulSet {
-	_init_.Initialize()
-	s := statefulSet{}
-
-	_jsii_.Create(
-		"cdk8s-plus-17.StatefulSet",
-		[]interface{}{scope, id, props},
-		[]_jsii_.FQN{"cdk8s-plus-17.IPodTemplate"},
-		[]_jsii_.Override{},
-		&s,
-	)
-	return &s
-}
-
-// Add a container to the pod.
-// Experimental.
-func (s *statefulSet) AddContainer(container ContainerProps) Container {
-	var returns Container
-	_jsii_.Invoke(
-		s,
-		"addContainer",
-		[]interface{}{container},
-		true,
+func (j *jsiiProxy_StatefulSet) PodManagementPolicy() PodManagementPolicy {
+	var returns PodManagementPolicy
+	_jsii_.Get(
+		j,
+		"podManagementPolicy",
 		&returns,
 	)
 	return returns
 }
 
-// Add a volume to the pod.
-// Experimental.
-func (s *statefulSet) AddVolume(volume Volume) {
-	var returns interface{}
-	_jsii_.Invoke(
-		s,
-		"addVolume",
-		[]interface{}{volume},
-		false,
+func (j *jsiiProxy_StatefulSet) PodMetadata() cdk8s.ApiObjectMetadataDefinition {
+	var returns cdk8s.ApiObjectMetadataDefinition
+	_jsii_.Get(
+		j,
+		"podMetadata",
 		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_StatefulSet) Replicas() *float64 {
+	var returns *float64
+	_jsii_.Get(
+		j,
+		"replicas",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_StatefulSet) RestartPolicy() RestartPolicy {
+	var returns RestartPolicy
+	_jsii_.Get(
+		j,
+		"restartPolicy",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_StatefulSet) ServiceAccount() IServiceAccount {
+	var returns IServiceAccount
+	_jsii_.Get(
+		j,
+		"serviceAccount",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_StatefulSet) Volumes() *[]Volume {
+	var returns *[]Volume
+	_jsii_.Get(
+		j,
+		"volumes",
+		&returns,
+	)
+	return returns
+}
+
+
+// Experimental.
+func NewStatefulSet(scope constructs.Construct, id *string, props *StatefulSetProps) StatefulSet {
+	_init_.Initialize()
+
+	j := jsiiProxy_StatefulSet{}
+
+	_jsii_.Create(
+		"cdk8s-plus-17.StatefulSet",
+		[]interface{}{scope, id, props},
+		&j,
+	)
+
+	return &j
+}
+
+// Experimental.
+func NewStatefulSet_Override(s StatefulSet, scope constructs.Construct, id *string, props *StatefulSetProps) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.StatefulSet",
+		[]interface{}{scope, id, props},
+		s,
 	)
 }
 
-// Configure a label selector to this deployment.
-//
-// Pods that have the label will be selected by deployments configured with this spec.
+// Add a container to the pod.
 // Experimental.
-func (s *statefulSet) SelectByLabel(key string, value string) {
-	var returns interface{}
+func (s *jsiiProxy_StatefulSet) AddContainer(container *ContainerProps) Container {
+	var returns Container
+
 	_jsii_.Invoke(
 		s,
-		"selectByLabel",
-		[]interface{}{key, value},
-		false,
+		"addContainer",
+		[]interface{}{container},
 		&returns,
+	)
+
+	return returns
+}
+
+// Add a volume to the pod.
+// Experimental.
+func (s *jsiiProxy_StatefulSet) AddVolume(volume Volume) {
+	_jsii_.InvokeVoid(
+		s,
+		"addVolume",
+		[]interface{}{volume},
 	)
 }
 
@@ -3673,14 +3863,11 @@ func (s *statefulSet) SelectByLabel(key string, value string) {
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
 // Experimental.
-func (s *statefulSet) OnPrepare() {
-	var returns interface{}
-	_jsii_.Invoke(
+func (s *jsiiProxy_StatefulSet) OnPrepare() {
+	_jsii_.InvokeVoid(
 		s,
 		"onPrepare",
-		[]interface{}{},
-		false,
-		&returns,
+		nil, // no parameters
 	)
 }
 
@@ -3689,14 +3876,11 @@ func (s *statefulSet) OnPrepare() {
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
 // Experimental.
-func (s *statefulSet) OnSynthesize(session constructs.ISynthesisSession) {
-	var returns interface{}
-	_jsii_.Invoke(
+func (s *jsiiProxy_StatefulSet) OnSynthesize(session constructs.ISynthesisSession) {
+	_jsii_.InvokeVoid(
 		s,
 		"onSynthesize",
 		[]interface{}{session},
-		false,
-		&returns,
 	)
 }
 
@@ -3708,29 +3892,43 @@ func (s *statefulSet) OnSynthesize(session constructs.ISynthesisSession) {
 // Returns: An array of validation error messages, or an empty array if there the construct is valid.
 // Deprecated: use `Node.addValidation()` to subscribe validation functions on this construct
 // instead of overriding this method.
-func (s *statefulSet) OnValidate() []string {
-	var returns []string
+func (s *jsiiProxy_StatefulSet) OnValidate() *[]*string {
+	var returns *[]*string
+
 	_jsii_.Invoke(
 		s,
 		"onValidate",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
+}
+
+// Configure a label selector to this deployment.
+//
+// Pods that have the label will be selected by deployments configured with this spec.
+// Experimental.
+func (s *jsiiProxy_StatefulSet) SelectByLabel(key *string, value *string) {
+	_jsii_.InvokeVoid(
+		s,
+		"selectByLabel",
+		[]interface{}{key, value},
+	)
 }
 
 // Returns a string representation of this construct.
 // Experimental.
-func (s *statefulSet) ToString() string {
-	var returns string
+func (s *jsiiProxy_StatefulSet) ToString() *string {
+	var returns *string
+
 	_jsii_.Invoke(
 		s,
 		"toString",
-		[]interface{}{},
-		true,
+		nil, // no parameters
 		&returns,
 	)
+
 	return returns
 }
 
@@ -3739,7 +3937,7 @@ func (s *statefulSet) ToString() string {
 type StatefulSetProps struct {
 	// Metadata that all persisted resources must have, which includes all objects users must create.
 	// Experimental.
-	Metadata cdk8s.ApiObjectMetadata `json:"metadata"`
+	Metadata *cdk8s.ApiObjectMetadata `json:"metadata"`
 	// List of containers belonging to the pod.
 	//
 	// Containers cannot currently be
@@ -3747,7 +3945,7 @@ type StatefulSetProps struct {
 	//
 	// You can add additionnal containers using `podSpec.addContainer()`
 	// Experimental.
-	Containers []ContainerProps `json:"containers"`
+	Containers *[]*ContainerProps `json:"containers"`
 	// Restart policy for all containers within the pod.
 	// See: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	//
@@ -3771,10 +3969,10 @@ type StatefulSetProps struct {
 	// See: https://kubernetes.io/docs/concepts/storage/volumes
 	//
 	// Experimental.
-	Volumes []Volume `json:"volumes"`
+	Volumes *[]Volume `json:"volumes"`
 	// The pod metadata.
 	// Experimental.
-	PodMetadata cdk8s.ApiObjectMetadata `json:"podMetadata"`
+	PodMetadata *cdk8s.ApiObjectMetadata `json:"podMetadata"`
 	// Service to associate with the statefulset.
 	// Experimental.
 	Service Service `json:"service"`
@@ -3783,41 +3981,13 @@ type StatefulSetProps struct {
 	// If this is set to `false` you must define your selector through
 	// `statefulset.podMetadata.addLabel()` and `statefulset.selectByLabel()`.
 	// Experimental.
-	DefaultSelector bool `json:"defaultSelector"`
+	DefaultSelector *bool `json:"defaultSelector"`
 	// Pod management policy to use for this statefulset.
 	// Experimental.
 	PodManagementPolicy PodManagementPolicy `json:"podManagementPolicy"`
 	// Number of desired pods.
 	// Experimental.
-	Replicas float64 `json:"replicas"`
-}
-
-// ToResourceProps is a convenience function to obtain a new ResourceProps from this StatefulSetProps.
-func (s *StatefulSetProps) ToResourceProps() ResourceProps {
-	return ResourceProps {
-		Metadata: s.Metadata,
-	}
-}
-
-// ToPodSpecProps is a convenience function to obtain a new PodSpecProps from this StatefulSetProps.
-func (s *StatefulSetProps) ToPodSpecProps() PodSpecProps {
-	return PodSpecProps {
-		Containers: s.Containers,
-		RestartPolicy: s.RestartPolicy,
-		ServiceAccount: s.ServiceAccount,
-		Volumes: s.Volumes,
-	}
-}
-
-// ToPodTemplateProps is a convenience function to obtain a new PodTemplateProps from this StatefulSetProps.
-func (s *StatefulSetProps) ToPodTemplateProps() PodTemplateProps {
-	return PodTemplateProps {
-		Containers: s.Containers,
-		RestartPolicy: s.RestartPolicy,
-		ServiceAccount: s.ServiceAccount,
-		Volumes: s.Volumes,
-		PodMetadata: s.PodMetadata,
-	}
+	Replicas *float64 `json:"replicas"`
 }
 
 // Volume represents a named volume in a pod that may be accessed by any container in the pod.
@@ -3852,18 +4022,18 @@ func (s *StatefulSetProps) ToPodTemplateProps() PodTemplateProps {
 // image. Volumes can not mount onto other volumes
 // Experimental.
 type Volume interface {
-	Name() string
+	Name() *string
 }
 
 // The jsii proxy struct for Volume
-type volume struct {
+type jsiiProxy_Volume struct {
 	_ byte // padding
 }
 
-func (v *volume) Name() string {
-	var returns string
+func (j *jsiiProxy_Volume) Name() *string {
+	var returns *string
 	_jsii_.Get(
-		v,
+		j,
 		"name",
 		&returns,
 	)
@@ -3871,18 +4041,30 @@ func (v *volume) Name() string {
 }
 
 
-func NewVolume(name string, config interface{}) Volume {
+// Experimental.
+func NewVolume(name *string, config interface{}) Volume {
 	_init_.Initialize()
-	v := volume{}
+
+	j := jsiiProxy_Volume{}
 
 	_jsii_.Create(
 		"cdk8s-plus-17.Volume",
 		[]interface{}{name, config},
-		[]_jsii_.FQN{},
-		[]_jsii_.Override{},
-		&v,
+		&j,
 	)
-	return &v
+
+	return &j
+}
+
+// Experimental.
+func NewVolume_Override(v Volume, name *string, config interface{}) {
+	_init_.Initialize()
+
+	_jsii_.Create(
+		"cdk8s-plus-17.Volume",
+		[]interface{}{name, config},
+		v,
+	)
 }
 
 // Populate the volume from a ConfigMap.
@@ -3896,16 +4078,18 @@ func NewVolume(name string, config interface{}) Volume {
 // volume to reference it. You can also customize the path to use for a
 // specific entry in the ConfigMap.
 // Experimental.
-func Volume_FromConfigMap(configMap IConfigMap, options ConfigMapVolumeOptions) Volume {
+func Volume_FromConfigMap(configMap IConfigMap, options *ConfigMapVolumeOptions) Volume {
 	_init_.Initialize()
+
 	var returns Volume
+
 	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.Volume",
 		"fromConfigMap",
 		[]interface{}{configMap, options},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
@@ -3919,16 +4103,18 @@ func Volume_FromConfigMap(configMap IConfigMap, options ConfigMapVolumeOptions) 
 // See: http://kubernetes.io/docs/user-guide/volumes#emptydir
 //
 // Experimental.
-func Volume_FromEmptyDir(name string, options EmptyDirVolumeOptions) Volume {
+func Volume_FromEmptyDir(name *string, options *EmptyDirVolumeOptions) Volume {
 	_init_.Initialize()
+
 	var returns Volume
+
 	_jsii_.StaticInvoke(
 		"cdk8s-plus-17.Volume",
 		"fromEmptyDir",
 		[]interface{}{name, options},
-		true,
 		&returns,
 	)
+
 	return returns
 }
 
@@ -3949,10 +4135,10 @@ type VolumeMount struct {
 	//
 	// Defaults to false.
 	// Experimental.
-	ReadOnly bool `json:"readOnly"`
+	ReadOnly *bool `json:"readOnly"`
 	// Path within the volume from which the container's volume should be mounted.).
 	// Experimental.
-	SubPath string `json:"subPath"`
+	SubPath *string `json:"subPath"`
 	// Expanded path within the volume from which the container's volume should be mounted.
 	//
 	// Behaves similarly to SubPath but environment variable references
@@ -3963,25 +4149,15 @@ type VolumeMount struct {
 	// `subPathExpr` and `subPath` are mutually exclusive. This field is beta in
 	// 1.15.
 	// Experimental.
-	SubPathExpr string `json:"subPathExpr"`
+	SubPathExpr *string `json:"subPathExpr"`
 	// Path within the container at which the volume should be mounted.
 	//
 	// Must not
 	// contain ':'.
 	// Experimental.
-	Path string `json:"path"`
+	Path *string `json:"path"`
 	// The volume to mount.
 	// Experimental.
 	Volume Volume `json:"volume"`
-}
-
-// ToMountOptions is a convenience function to obtain a new MountOptions from this VolumeMount.
-func (v *VolumeMount) ToMountOptions() MountOptions {
-	return MountOptions {
-		Propagation: v.Propagation,
-		ReadOnly: v.ReadOnly,
-		SubPath: v.SubPath,
-		SubPathExpr: v.SubPathExpr,
-	}
 }
 

@@ -18,11 +18,26 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.ConfigMap",
 		reflect.TypeOf((*ConfigMap)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addBinaryData", GoMethod: "AddBinaryData"},
+			_jsii_.MemberMethod{JsiiMethod: "addData", GoMethod: "AddData"},
+			_jsii_.MemberMethod{JsiiMethod: "addDirectory", GoMethod: "AddDirectory"},
+			_jsii_.MemberMethod{JsiiMethod: "addFile", GoMethod: "AddFile"},
+			_jsii_.MemberProperty{JsiiProperty: "apiObject", GoGetter: "ApiObject"},
+			_jsii_.MemberProperty{JsiiProperty: "binaryData", GoGetter: "BinaryData"},
+			_jsii_.MemberProperty{JsiiProperty: "data", GoGetter: "Data"},
+			_jsii_.MemberProperty{JsiiProperty: "metadata", GoGetter: "Metadata"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
 		func() interface{} {
-			c := configMap{}
-			_jsii_.InitJsiiProxy(&c.resource)
-			_jsii_.InitJsiiProxy(&c.iConfigMap)
-			return &c
+			j := jsiiProxy_ConfigMap{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_Resource)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IConfigMap)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -36,8 +51,21 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.Container",
 		reflect.TypeOf((*Container)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addEnv", GoMethod: "AddEnv"},
+			_jsii_.MemberProperty{JsiiProperty: "args", GoGetter: "Args"},
+			_jsii_.MemberProperty{JsiiProperty: "command", GoGetter: "Command"},
+			_jsii_.MemberProperty{JsiiProperty: "env", GoGetter: "Env"},
+			_jsii_.MemberProperty{JsiiProperty: "image", GoGetter: "Image"},
+			_jsii_.MemberProperty{JsiiProperty: "imagePullPolicy", GoGetter: "ImagePullPolicy"},
+			_jsii_.MemberMethod{JsiiMethod: "mount", GoMethod: "Mount"},
+			_jsii_.MemberProperty{JsiiProperty: "mounts", GoGetter: "Mounts"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberProperty{JsiiProperty: "port", GoGetter: "Port"},
+			_jsii_.MemberProperty{JsiiProperty: "workingDir", GoGetter: "WorkingDir"},
+		},
 		func() interface{} {
-			return &container{}
+			return &jsiiProxy_Container{}
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -47,11 +75,31 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.Deployment",
 		reflect.TypeOf((*Deployment)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addContainer", GoMethod: "AddContainer"},
+			_jsii_.MemberMethod{JsiiMethod: "addVolume", GoMethod: "AddVolume"},
+			_jsii_.MemberProperty{JsiiProperty: "apiObject", GoGetter: "ApiObject"},
+			_jsii_.MemberProperty{JsiiProperty: "containers", GoGetter: "Containers"},
+			_jsii_.MemberMethod{JsiiMethod: "expose", GoMethod: "Expose"},
+			_jsii_.MemberProperty{JsiiProperty: "labelSelector", GoGetter: "LabelSelector"},
+			_jsii_.MemberProperty{JsiiProperty: "metadata", GoGetter: "Metadata"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberProperty{JsiiProperty: "podMetadata", GoGetter: "PodMetadata"},
+			_jsii_.MemberProperty{JsiiProperty: "replicas", GoGetter: "Replicas"},
+			_jsii_.MemberProperty{JsiiProperty: "restartPolicy", GoGetter: "RestartPolicy"},
+			_jsii_.MemberMethod{JsiiMethod: "selectByLabel", GoMethod: "SelectByLabel"},
+			_jsii_.MemberProperty{JsiiProperty: "serviceAccount", GoGetter: "ServiceAccount"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberProperty{JsiiProperty: "volumes", GoGetter: "Volumes"},
+		},
 		func() interface{} {
-			d := deployment{}
-			_jsii_.InitJsiiProxy(&d.resource)
-			_jsii_.InitJsiiProxy(&d.iPodTemplate)
-			return &d
+			j := jsiiProxy_Deployment{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_Resource)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IPodTemplate)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -73,8 +121,12 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.EnvValue",
 		reflect.TypeOf((*EnvValue)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "value", GoGetter: "Value"},
+			_jsii_.MemberProperty{JsiiProperty: "valueFrom", GoGetter: "ValueFrom"},
+		},
 		func() interface{} {
-			return &envValue{}
+			return &jsiiProxy_EnvValue{}
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -100,51 +152,80 @@ func init() {
 	_jsii_.RegisterInterface(
 		"cdk8s-plus-17.IConfigMap",
 		reflect.TypeOf((*IConfigMap)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+		},
 		func() interface{} {
-			i := iConfigMap{}
-			_jsii_.InitJsiiProxy(&i.iResource)
-			return &i
+			j := jsiiProxy_IConfigMap{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IResource)
+			return &j
 		},
 	)
 	_jsii_.RegisterInterface(
 		"cdk8s-plus-17.IPodSpec",
 		reflect.TypeOf((*IPodSpec)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addContainer", GoMethod: "AddContainer"},
+			_jsii_.MemberMethod{JsiiMethod: "addVolume", GoMethod: "AddVolume"},
+			_jsii_.MemberProperty{JsiiProperty: "containers", GoGetter: "Containers"},
+			_jsii_.MemberProperty{JsiiProperty: "restartPolicy", GoGetter: "RestartPolicy"},
+			_jsii_.MemberProperty{JsiiProperty: "serviceAccount", GoGetter: "ServiceAccount"},
+			_jsii_.MemberProperty{JsiiProperty: "volumes", GoGetter: "Volumes"},
+		},
 		func() interface{} {
-			return &iPodSpec{}
+			return &jsiiProxy_IPodSpec{}
 		},
 	)
 	_jsii_.RegisterInterface(
 		"cdk8s-plus-17.IPodTemplate",
 		reflect.TypeOf((*IPodTemplate)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addContainer", GoMethod: "AddContainer"},
+			_jsii_.MemberMethod{JsiiMethod: "addVolume", GoMethod: "AddVolume"},
+			_jsii_.MemberProperty{JsiiProperty: "containers", GoGetter: "Containers"},
+			_jsii_.MemberProperty{JsiiProperty: "podMetadata", GoGetter: "PodMetadata"},
+			_jsii_.MemberProperty{JsiiProperty: "restartPolicy", GoGetter: "RestartPolicy"},
+			_jsii_.MemberProperty{JsiiProperty: "serviceAccount", GoGetter: "ServiceAccount"},
+			_jsii_.MemberProperty{JsiiProperty: "volumes", GoGetter: "Volumes"},
+		},
 		func() interface{} {
-			i := iPodTemplate{}
-			_jsii_.InitJsiiProxy(&i.iPodSpec)
-			return &i
+			j := jsiiProxy_IPodTemplate{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IPodSpec)
+			return &j
 		},
 	)
 	_jsii_.RegisterInterface(
 		"cdk8s-plus-17.IResource",
 		reflect.TypeOf((*IResource)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+		},
 		func() interface{} {
-			return &iResource{}
+			return &jsiiProxy_IResource{}
 		},
 	)
 	_jsii_.RegisterInterface(
 		"cdk8s-plus-17.ISecret",
 		reflect.TypeOf((*ISecret)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+		},
 		func() interface{} {
-			i := iSecret{}
-			_jsii_.InitJsiiProxy(&i.iResource)
-			return &i
+			j := jsiiProxy_ISecret{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IResource)
+			return &j
 		},
 	)
 	_jsii_.RegisterInterface(
 		"cdk8s-plus-17.IServiceAccount",
 		reflect.TypeOf((*IServiceAccount)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+		},
 		func() interface{} {
-			i := iServiceAccount{}
-			_jsii_.InitJsiiProxy(&i.iResource)
-			return &i
+			j := jsiiProxy_IServiceAccount{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IResource)
+			return &j
 		},
 	)
 	_jsii_.RegisterEnum(
@@ -159,17 +240,32 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.IngressV1Beta1",
 		reflect.TypeOf((*IngressV1Beta1)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addDefaultBackend", GoMethod: "AddDefaultBackend"},
+			_jsii_.MemberMethod{JsiiMethod: "addHostDefaultBackend", GoMethod: "AddHostDefaultBackend"},
+			_jsii_.MemberMethod{JsiiMethod: "addHostRule", GoMethod: "AddHostRule"},
+			_jsii_.MemberMethod{JsiiMethod: "addRule", GoMethod: "AddRule"},
+			_jsii_.MemberMethod{JsiiMethod: "addRules", GoMethod: "AddRules"},
+			_jsii_.MemberProperty{JsiiProperty: "apiObject", GoGetter: "ApiObject"},
+			_jsii_.MemberProperty{JsiiProperty: "metadata", GoGetter: "Metadata"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
 		func() interface{} {
-			i := ingressV1Beta1{}
-			_jsii_.InitJsiiProxy(&i.resource)
-			return &i
+			j := jsiiProxy_IngressV1Beta1{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_Resource)
+			return &j
 		},
 	)
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.IngressV1Beta1Backend",
 		reflect.TypeOf((*IngressV1Beta1Backend)(nil)).Elem(),
+		nil, // no members
 		func() interface{} {
-			return &ingressV1Beta1Backend{}
+			return &jsiiProxy_IngressV1Beta1Backend{}
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -183,10 +279,29 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.Job",
 		reflect.TypeOf((*Job)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "activeDeadline", GoGetter: "ActiveDeadline"},
+			_jsii_.MemberMethod{JsiiMethod: "addContainer", GoMethod: "AddContainer"},
+			_jsii_.MemberMethod{JsiiMethod: "addVolume", GoMethod: "AddVolume"},
+			_jsii_.MemberProperty{JsiiProperty: "apiObject", GoGetter: "ApiObject"},
+			_jsii_.MemberProperty{JsiiProperty: "backoffLimit", GoGetter: "BackoffLimit"},
+			_jsii_.MemberProperty{JsiiProperty: "containers", GoGetter: "Containers"},
+			_jsii_.MemberProperty{JsiiProperty: "metadata", GoGetter: "Metadata"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberProperty{JsiiProperty: "podMetadata", GoGetter: "PodMetadata"},
+			_jsii_.MemberProperty{JsiiProperty: "restartPolicy", GoGetter: "RestartPolicy"},
+			_jsii_.MemberProperty{JsiiProperty: "serviceAccount", GoGetter: "ServiceAccount"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberProperty{JsiiProperty: "ttlAfterFinished", GoGetter: "TtlAfterFinished"},
+			_jsii_.MemberProperty{JsiiProperty: "volumes", GoGetter: "Volumes"},
+		},
 		func() interface{} {
-			j := job{}
-			_jsii_.InitJsiiProxy(&j.resource)
-			_jsii_.InitJsiiProxy(&j.iPodTemplate)
+			j := jsiiProxy_Job{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_Resource)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IPodTemplate)
 			return &j
 		},
 	)
@@ -214,11 +329,26 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.Pod",
 		reflect.TypeOf((*Pod)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addContainer", GoMethod: "AddContainer"},
+			_jsii_.MemberMethod{JsiiMethod: "addVolume", GoMethod: "AddVolume"},
+			_jsii_.MemberProperty{JsiiProperty: "apiObject", GoGetter: "ApiObject"},
+			_jsii_.MemberProperty{JsiiProperty: "containers", GoGetter: "Containers"},
+			_jsii_.MemberProperty{JsiiProperty: "metadata", GoGetter: "Metadata"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberProperty{JsiiProperty: "restartPolicy", GoGetter: "RestartPolicy"},
+			_jsii_.MemberProperty{JsiiProperty: "serviceAccount", GoGetter: "ServiceAccount"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberProperty{JsiiProperty: "volumes", GoGetter: "Volumes"},
+		},
 		func() interface{} {
-			p := pod{}
-			_jsii_.InitJsiiProxy(&p.resource)
-			_jsii_.InitJsiiProxy(&p.iPodSpec)
-			return &p
+			j := jsiiProxy_Pod{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_Resource)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IPodSpec)
+			return &j
 		},
 	)
 	_jsii_.RegisterEnum(
@@ -236,10 +366,18 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.PodSpec",
 		reflect.TypeOf((*PodSpec)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addContainer", GoMethod: "AddContainer"},
+			_jsii_.MemberMethod{JsiiMethod: "addVolume", GoMethod: "AddVolume"},
+			_jsii_.MemberProperty{JsiiProperty: "containers", GoGetter: "Containers"},
+			_jsii_.MemberProperty{JsiiProperty: "restartPolicy", GoGetter: "RestartPolicy"},
+			_jsii_.MemberProperty{JsiiProperty: "serviceAccount", GoGetter: "ServiceAccount"},
+			_jsii_.MemberProperty{JsiiProperty: "volumes", GoGetter: "Volumes"},
+		},
 		func() interface{} {
-			p := podSpec{}
-			_jsii_.InitJsiiProxy(&p.iPodSpec)
-			return &p
+			j := jsiiProxy_PodSpec{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IPodSpec)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -249,11 +387,20 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.PodTemplate",
 		reflect.TypeOf((*PodTemplate)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addContainer", GoMethod: "AddContainer"},
+			_jsii_.MemberMethod{JsiiMethod: "addVolume", GoMethod: "AddVolume"},
+			_jsii_.MemberProperty{JsiiProperty: "containers", GoGetter: "Containers"},
+			_jsii_.MemberProperty{JsiiProperty: "podMetadata", GoGetter: "PodMetadata"},
+			_jsii_.MemberProperty{JsiiProperty: "restartPolicy", GoGetter: "RestartPolicy"},
+			_jsii_.MemberProperty{JsiiProperty: "serviceAccount", GoGetter: "ServiceAccount"},
+			_jsii_.MemberProperty{JsiiProperty: "volumes", GoGetter: "Volumes"},
+		},
 		func() interface{} {
-			p := podTemplate{}
-			_jsii_.InitJsiiProxy(&p.podSpec)
-			_jsii_.InitJsiiProxy(&p.iPodTemplate)
-			return &p
+			j := jsiiProxy_PodTemplate{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_PodSpec)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IPodTemplate)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -263,8 +410,9 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.Probe",
 		reflect.TypeOf((*Probe)(nil)).Elem(),
+		nil, // no members
 		func() interface{} {
-			return &probe{}
+			return &jsiiProxy_Probe{}
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -283,11 +431,20 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.Resource",
 		reflect.TypeOf((*Resource)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "apiObject", GoGetter: "ApiObject"},
+			_jsii_.MemberProperty{JsiiProperty: "metadata", GoGetter: "Metadata"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
 		func() interface{} {
-			r := resource{}
-			_jsii_.InitJsiiProxy(&r.Construct)
-			_jsii_.InitJsiiProxy(&r.iResource)
-			return &r
+			j := jsiiProxy_Resource{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IResource)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -306,11 +463,22 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.Secret",
 		reflect.TypeOf((*Secret)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addStringData", GoMethod: "AddStringData"},
+			_jsii_.MemberProperty{JsiiProperty: "apiObject", GoGetter: "ApiObject"},
+			_jsii_.MemberMethod{JsiiMethod: "getStringData", GoMethod: "GetStringData"},
+			_jsii_.MemberProperty{JsiiProperty: "metadata", GoGetter: "Metadata"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
 		func() interface{} {
-			s := secret{}
-			_jsii_.InitJsiiProxy(&s.resource)
-			_jsii_.InitJsiiProxy(&s.iSecret)
-			return &s
+			j := jsiiProxy_Secret{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_Resource)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_ISecret)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -324,20 +492,48 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.Service",
 		reflect.TypeOf((*Service)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addDeployment", GoMethod: "AddDeployment"},
+			_jsii_.MemberMethod{JsiiMethod: "addSelector", GoMethod: "AddSelector"},
+			_jsii_.MemberProperty{JsiiProperty: "apiObject", GoGetter: "ApiObject"},
+			_jsii_.MemberProperty{JsiiProperty: "clusterIP", GoGetter: "ClusterIP"},
+			_jsii_.MemberProperty{JsiiProperty: "externalName", GoGetter: "ExternalName"},
+			_jsii_.MemberProperty{JsiiProperty: "metadata", GoGetter: "Metadata"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberProperty{JsiiProperty: "ports", GoGetter: "Ports"},
+			_jsii_.MemberProperty{JsiiProperty: "selector", GoGetter: "Selector"},
+			_jsii_.MemberMethod{JsiiMethod: "serve", GoMethod: "Serve"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberProperty{JsiiProperty: "type", GoGetter: "Type"},
+		},
 		func() interface{} {
-			s := service{}
-			_jsii_.InitJsiiProxy(&s.resource)
-			return &s
+			j := jsiiProxy_Service{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_Resource)
+			return &j
 		},
 	)
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.ServiceAccount",
 		reflect.TypeOf((*ServiceAccount)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addSecret", GoMethod: "AddSecret"},
+			_jsii_.MemberProperty{JsiiProperty: "apiObject", GoGetter: "ApiObject"},
+			_jsii_.MemberProperty{JsiiProperty: "metadata", GoGetter: "Metadata"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberProperty{JsiiProperty: "secrets", GoGetter: "Secrets"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
 		func() interface{} {
-			s := serviceAccount{}
-			_jsii_.InitJsiiProxy(&s.resource)
-			_jsii_.InitJsiiProxy(&s.iServiceAccount)
-			return &s
+			j := jsiiProxy_ServiceAccount{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_Resource)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IServiceAccount)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -373,11 +569,31 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.StatefulSet",
 		reflect.TypeOf((*StatefulSet)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addContainer", GoMethod: "AddContainer"},
+			_jsii_.MemberMethod{JsiiMethod: "addVolume", GoMethod: "AddVolume"},
+			_jsii_.MemberProperty{JsiiProperty: "apiObject", GoGetter: "ApiObject"},
+			_jsii_.MemberProperty{JsiiProperty: "containers", GoGetter: "Containers"},
+			_jsii_.MemberProperty{JsiiProperty: "labelSelector", GoGetter: "LabelSelector"},
+			_jsii_.MemberProperty{JsiiProperty: "metadata", GoGetter: "Metadata"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberProperty{JsiiProperty: "podManagementPolicy", GoGetter: "PodManagementPolicy"},
+			_jsii_.MemberProperty{JsiiProperty: "podMetadata", GoGetter: "PodMetadata"},
+			_jsii_.MemberProperty{JsiiProperty: "replicas", GoGetter: "Replicas"},
+			_jsii_.MemberProperty{JsiiProperty: "restartPolicy", GoGetter: "RestartPolicy"},
+			_jsii_.MemberMethod{JsiiMethod: "selectByLabel", GoMethod: "SelectByLabel"},
+			_jsii_.MemberProperty{JsiiProperty: "serviceAccount", GoGetter: "ServiceAccount"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+			_jsii_.MemberProperty{JsiiProperty: "volumes", GoGetter: "Volumes"},
+		},
 		func() interface{} {
-			s := statefulSet{}
-			_jsii_.InitJsiiProxy(&s.resource)
-			_jsii_.InitJsiiProxy(&s.iPodTemplate)
-			return &s
+			j := jsiiProxy_StatefulSet{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_Resource)
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_IPodTemplate)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -387,8 +603,11 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s-plus-17.Volume",
 		reflect.TypeOf((*Volume)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+		},
 		func() interface{} {
-			return &volume{}
+			return &jsiiProxy_Volume{}
 		},
 	)
 	_jsii_.RegisterStruct(

@@ -10,10 +10,25 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s.ApiObject",
 		reflect.TypeOf((*ApiObject)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addDependency", GoMethod: "AddDependency"},
+			_jsii_.MemberMethod{JsiiMethod: "addJsonPatch", GoMethod: "AddJsonPatch"},
+			_jsii_.MemberProperty{JsiiProperty: "apiGroup", GoGetter: "ApiGroup"},
+			_jsii_.MemberProperty{JsiiProperty: "apiVersion", GoGetter: "ApiVersion"},
+			_jsii_.MemberProperty{JsiiProperty: "chart", GoGetter: "Chart"},
+			_jsii_.MemberProperty{JsiiProperty: "kind", GoGetter: "Kind"},
+			_jsii_.MemberProperty{JsiiProperty: "metadata", GoGetter: "Metadata"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberMethod{JsiiMethod: "toJson", GoMethod: "ToJson"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
 		func() interface{} {
-			a := apiObject{}
-			_jsii_.InitJsiiProxy(&a.Construct)
-			return &a
+			j := jsiiProxy_ApiObject{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -23,8 +38,17 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s.ApiObjectMetadataDefinition",
 		reflect.TypeOf((*ApiObjectMetadataDefinition)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "add", GoMethod: "Add"},
+			_jsii_.MemberMethod{JsiiMethod: "addAnnotation", GoMethod: "AddAnnotation"},
+			_jsii_.MemberMethod{JsiiMethod: "addLabel", GoMethod: "AddLabel"},
+			_jsii_.MemberMethod{JsiiMethod: "getLabel", GoMethod: "GetLabel"},
+			_jsii_.MemberProperty{JsiiProperty: "name", GoGetter: "Name"},
+			_jsii_.MemberProperty{JsiiProperty: "namespace", GoGetter: "Namespace"},
+			_jsii_.MemberMethod{JsiiMethod: "toJson", GoMethod: "ToJson"},
+		},
 		func() interface{} {
-			return &apiObjectMetadataDefinition{}
+			return &jsiiProxy_ApiObjectMetadataDefinition{}
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -34,10 +58,18 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s.App",
 		reflect.TypeOf((*App)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberProperty{JsiiProperty: "outdir", GoGetter: "Outdir"},
+			_jsii_.MemberMethod{JsiiMethod: "synth", GoMethod: "Synth"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
 		func() interface{} {
-			a := app{}
-			_jsii_.InitJsiiProxy(&a.Construct)
-			return &a
+			j := jsiiProxy_App{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -47,10 +79,21 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s.Chart",
 		reflect.TypeOf((*Chart)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addDependency", GoMethod: "AddDependency"},
+			_jsii_.MemberMethod{JsiiMethod: "generateObjectName", GoMethod: "GenerateObjectName"},
+			_jsii_.MemberProperty{JsiiProperty: "labels", GoGetter: "Labels"},
+			_jsii_.MemberProperty{JsiiProperty: "namespace", GoGetter: "Namespace"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberMethod{JsiiMethod: "toJson", GoMethod: "ToJson"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
 		func() interface{} {
-			c := chart{}
-			_jsii_.InitJsiiProxy(&c.Construct)
-			return &c
+			j := jsiiProxy_Chart{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -60,22 +103,42 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s.DependencyGraph",
 		reflect.TypeOf((*DependencyGraph)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "root", GoGetter: "Root"},
+			_jsii_.MemberMethod{JsiiMethod: "topology", GoMethod: "Topology"},
+		},
 		func() interface{} {
-			return &dependencyGraph{}
+			return &jsiiProxy_DependencyGraph{}
 		},
 	)
 	_jsii_.RegisterClass(
 		"cdk8s.DependencyVertex",
 		reflect.TypeOf((*DependencyVertex)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "addChild", GoMethod: "AddChild"},
+			_jsii_.MemberProperty{JsiiProperty: "inbound", GoGetter: "Inbound"},
+			_jsii_.MemberProperty{JsiiProperty: "outbound", GoGetter: "Outbound"},
+			_jsii_.MemberMethod{JsiiMethod: "topology", GoMethod: "Topology"},
+			_jsii_.MemberProperty{JsiiProperty: "value", GoGetter: "Value"},
+		},
 		func() interface{} {
-			return &dependencyVertex{}
+			return &jsiiProxy_DependencyVertex{}
 		},
 	)
 	_jsii_.RegisterClass(
 		"cdk8s.Duration",
 		reflect.TypeOf((*Duration)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "toDays", GoMethod: "ToDays"},
+			_jsii_.MemberMethod{JsiiMethod: "toHours", GoMethod: "ToHours"},
+			_jsii_.MemberMethod{JsiiMethod: "toHumanString", GoMethod: "ToHumanString"},
+			_jsii_.MemberMethod{JsiiMethod: "toIsoString", GoMethod: "ToIsoString"},
+			_jsii_.MemberMethod{JsiiMethod: "toMilliseconds", GoMethod: "ToMilliseconds"},
+			_jsii_.MemberMethod{JsiiMethod: "toMinutes", GoMethod: "ToMinutes"},
+			_jsii_.MemberMethod{JsiiMethod: "toSeconds", GoMethod: "ToSeconds"},
+		},
 		func() interface{} {
-			return &duration{}
+			return &jsiiProxy_Duration{}
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -85,10 +148,18 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s.Helm",
 		reflect.TypeOf((*Helm)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "apiObjects", GoGetter: "ApiObjects"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberProperty{JsiiProperty: "releaseName", GoGetter: "ReleaseName"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
 		func() interface{} {
-			h := helm{}
-			_jsii_.InitJsiiProxy(&h.include)
-			return &h
+			j := jsiiProxy_Helm{}
+			_jsii_.InitJsiiProxy(&j.jsiiProxy_Include)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -98,17 +169,27 @@ func init() {
 	_jsii_.RegisterInterface(
 		"cdk8s.IAnyProducer",
 		reflect.TypeOf((*IAnyProducer)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "produce", GoMethod: "Produce"},
+		},
 		func() interface{} {
-			return &iAnyProducer{}
+			return &jsiiProxy_IAnyProducer{}
 		},
 	)
 	_jsii_.RegisterClass(
 		"cdk8s.Include",
 		reflect.TypeOf((*Include)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberProperty{JsiiProperty: "apiObjects", GoGetter: "ApiObjects"},
+			_jsii_.MemberMethod{JsiiMethod: "onPrepare", GoMethod: "OnPrepare"},
+			_jsii_.MemberMethod{JsiiMethod: "onSynthesize", GoMethod: "OnSynthesize"},
+			_jsii_.MemberMethod{JsiiMethod: "onValidate", GoMethod: "OnValidate"},
+			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
+		},
 		func() interface{} {
-			i := include{}
-			_jsii_.InitJsiiProxy(&i.Construct)
-			return &i
+			j := jsiiProxy_Include{}
+			_jsii_.InitJsiiProxy(&j.Type__constructsConstruct)
+			return &j
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -118,15 +199,19 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s.JsonPatch",
 		reflect.TypeOf((*JsonPatch)(nil)).Elem(),
+		nil, // no members
 		func() interface{} {
-			return &jsonPatch{}
+			return &jsiiProxy_JsonPatch{}
 		},
 	)
 	_jsii_.RegisterClass(
 		"cdk8s.Lazy",
 		reflect.TypeOf((*Lazy)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "produce", GoMethod: "Produce"},
+		},
 		func() interface{} {
-			return &lazy{}
+			return &jsiiProxy_Lazy{}
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -136,15 +221,23 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s.Names",
 		reflect.TypeOf((*Names)(nil)).Elem(),
+		nil, // no members
 		func() interface{} {
-			return &names{}
+			return &jsiiProxy_Names{}
 		},
 	)
 	_jsii_.RegisterClass(
 		"cdk8s.Size",
 		reflect.TypeOf((*Size)(nil)).Elem(),
+		[]_jsii_.Member{
+			_jsii_.MemberMethod{JsiiMethod: "toGibibytes", GoMethod: "ToGibibytes"},
+			_jsii_.MemberMethod{JsiiMethod: "toKibibytes", GoMethod: "ToKibibytes"},
+			_jsii_.MemberMethod{JsiiMethod: "toMebibytes", GoMethod: "ToMebibytes"},
+			_jsii_.MemberMethod{JsiiMethod: "toPebibytes", GoMethod: "ToPebibytes"},
+			_jsii_.MemberMethod{JsiiMethod: "toTebibytes", GoMethod: "ToTebibytes"},
+		},
 		func() interface{} {
-			return &size{}
+			return &jsiiProxy_Size{}
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -163,8 +256,9 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s.Testing",
 		reflect.TypeOf((*Testing)(nil)).Elem(),
+		nil, // no members
 		func() interface{} {
-			return &testing{}
+			return &jsiiProxy_Testing{}
 		},
 	)
 	_jsii_.RegisterStruct(
@@ -174,8 +268,9 @@ func init() {
 	_jsii_.RegisterClass(
 		"cdk8s.Yaml",
 		reflect.TypeOf((*Yaml)(nil)).Elem(),
+		nil, // no members
 		func() interface{} {
-			return &yaml{}
+			return &jsiiProxy_Yaml{}
 		},
 	)
 }
