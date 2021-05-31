@@ -3,13 +3,12 @@ package cdk8s
 
 import (
 	_jsii_ "github.com/aws/jsii-runtime-go"
-	_init_ "github.com/awslabs/cdk8s-go/cdk8s/jsii"
+	_init_ "github.com/cdk8s-team/cdk8s-go/cdk8s/jsii"
 
 	"github.com/aws/constructs-go/constructs/v3"
-	"github.com/awslabs/cdk8s-go/cdk8s/internal"
+	"github.com/cdk8s-team/cdk8s-go/cdk8s/internal"
 )
 
-// Experimental.
 type ApiObject interface {
 	constructs.Construct
 	ApiGroup() *string
@@ -94,7 +93,6 @@ func (j *jsiiProxy_ApiObject) Name() *string {
 
 
 // Defines an API object.
-// Experimental.
 func NewApiObject(scope constructs.Construct, id *string, props *ApiObjectProps) ApiObject {
 	_init_.Initialize()
 
@@ -110,7 +108,6 @@ func NewApiObject(scope constructs.Construct, id *string, props *ApiObjectProps)
 }
 
 // Defines an API object.
-// Experimental.
 func NewApiObject_Override(a ApiObject, scope constructs.Construct, id *string, props *ApiObjectProps) {
 	_init_.Initialize()
 
@@ -126,7 +123,6 @@ func NewApiObject_Override(a ApiObject, scope constructs.Construct, id *string, 
 // If `c` is an `ApiObject`, it is returned directly. Throws an
 // exception if the construct does not have a child named `Default` _or_ if
 // this child is not an `ApiObject`.
-// Experimental.
 func ApiObject_Of(c constructs.IConstruct) ApiObject {
 	_init_.Initialize()
 
@@ -145,7 +141,6 @@ func ApiObject_Of(c constructs.IConstruct) ApiObject {
 // Create a dependency between this ApiObject and other constructs.
 //
 // These can be other ApiObjects, Charts, or custom.
-// Experimental.
 func (a *jsiiProxy_ApiObject) AddDependency(dependencies ...constructs.IConstruct) {
 	args := []interface{}{}
 	for _, a := range dependencies {
@@ -163,7 +158,6 @@ func (a *jsiiProxy_ApiObject) AddDependency(dependencies ...constructs.IConstruc
 //
 // TODO: EXAMPLE
 //
-// Experimental.
 func (a *jsiiProxy_ApiObject) AddJsonPatch(ops ...JsonPatch) {
 	args := []interface{}{}
 	for _, a := range ops {
@@ -185,7 +179,6 @@ func (a *jsiiProxy_ApiObject) AddJsonPatch(ops ...JsonPatch) {
 //
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
-// Experimental.
 func (a *jsiiProxy_ApiObject) OnPrepare() {
 	_jsii_.InvokeVoid(
 		a,
@@ -198,7 +191,6 @@ func (a *jsiiProxy_ApiObject) OnPrepare() {
 //
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
-// Experimental.
 func (a *jsiiProxy_ApiObject) OnSynthesize(session constructs.ISynthesisSession) {
 	_jsii_.InvokeVoid(
 		a,
@@ -232,7 +224,6 @@ func (a *jsiiProxy_ApiObject) OnValidate() *[]*string {
 //
 // To disable sorting of dictionary keys in output object set the
 // `CDK8S_DISABLE_SORT` environment variable to any non-empty value.
-// Experimental.
 func (a *jsiiProxy_ApiObject) ToJson() interface{} {
 	var returns interface{}
 
@@ -247,7 +238,6 @@ func (a *jsiiProxy_ApiObject) ToJson() interface{} {
 }
 
 // Returns a string representation of this construct.
-// Experimental.
 func (a *jsiiProxy_ApiObject) ToString() *string {
 	var returns *string
 
@@ -262,7 +252,6 @@ func (a *jsiiProxy_ApiObject) ToString() *string {
 }
 
 // Metadata associated with this object.
-// Experimental.
 type ApiObjectMetadata struct {
 	// Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.
 	//
@@ -270,14 +259,12 @@ type ApiObjectMetadata struct {
 	// preserved when modifying objects.
 	// See: http://kubernetes.io/docs/user-guide/annotations
 	//
-	// Experimental.
 	Annotations *map[string]*string `json:"annotations"`
 	// Map of string keys and values that can be used to organize and categorize (scope and select) objects.
 	//
 	// May match selectors of replication controllers and services.
 	// See: http://kubernetes.io/docs/user-guide/labels
 	//
-	// Experimental.
 	Labels *map[string]*string `json:"labels"`
 	// The unique, namespace-global, name of this object inside the Kubernetes cluster.
 	//
@@ -293,18 +280,15 @@ type ApiObjectMetadata struct {
 	// composability of your construct because it won't be possible to include
 	// more than one instance in any app. Therefore it is highly recommended to
 	// leave this unspecified.
-	// Experimental.
 	Name *string `json:"name"`
 	// Namespace defines the space within each name must be unique.
 	//
 	// An empty namespace is equivalent to the "default" namespace, but "default" is the canonical representation.
 	// Not all objects are required to be scoped to a namespace - the value of this field for those objects will be empty. Must be a DNS_LABEL. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/namespaces
-	// Experimental.
 	Namespace *string `json:"namespace"`
 }
 
 // Object metadata.
-// Experimental.
 type ApiObjectMetadataDefinition interface {
 	Name() *string
 	Namespace() *string
@@ -341,7 +325,6 @@ func (j *jsiiProxy_ApiObjectMetadataDefinition) Namespace() *string {
 }
 
 
-// Experimental.
 func NewApiObjectMetadataDefinition(options *ApiObjectMetadata) ApiObjectMetadataDefinition {
 	_init_.Initialize()
 
@@ -356,7 +339,6 @@ func NewApiObjectMetadataDefinition(options *ApiObjectMetadata) ApiObjectMetadat
 	return &j
 }
 
-// Experimental.
 func NewApiObjectMetadataDefinition_Override(a ApiObjectMetadataDefinition, options *ApiObjectMetadata) {
 	_init_.Initialize()
 
@@ -368,7 +350,6 @@ func NewApiObjectMetadataDefinition_Override(a ApiObjectMetadataDefinition, opti
 }
 
 // Adds an arbitrary key/value to the object metadata.
-// Experimental.
 func (a *jsiiProxy_ApiObjectMetadataDefinition) Add(key *string, value interface{}) {
 	_jsii_.InvokeVoid(
 		a,
@@ -378,7 +359,6 @@ func (a *jsiiProxy_ApiObjectMetadataDefinition) Add(key *string, value interface
 }
 
 // Add an annotation.
-// Experimental.
 func (a *jsiiProxy_ApiObjectMetadataDefinition) AddAnnotation(key *string, value *string) {
 	_jsii_.InvokeVoid(
 		a,
@@ -388,7 +368,6 @@ func (a *jsiiProxy_ApiObjectMetadataDefinition) AddAnnotation(key *string, value
 }
 
 // Add a label.
-// Experimental.
 func (a *jsiiProxy_ApiObjectMetadataDefinition) AddLabel(key *string, value *string) {
 	_jsii_.InvokeVoid(
 		a,
@@ -398,7 +377,6 @@ func (a *jsiiProxy_ApiObjectMetadataDefinition) AddLabel(key *string, value *str
 }
 
 // Returns: a value of a label or undefined
-// Experimental.
 func (a *jsiiProxy_ApiObjectMetadataDefinition) GetLabel(key *string) *string {
 	var returns *string
 
@@ -413,7 +391,6 @@ func (a *jsiiProxy_ApiObjectMetadataDefinition) GetLabel(key *string) *string {
 }
 
 // Synthesizes a k8s ObjectMeta for this metadata set.
-// Experimental.
 func (a *jsiiProxy_ApiObjectMetadataDefinition) ToJson() interface{} {
 	var returns interface{}
 
@@ -428,24 +405,19 @@ func (a *jsiiProxy_ApiObjectMetadataDefinition) ToJson() interface{} {
 }
 
 // Options for defining API objects.
-// Experimental.
 type ApiObjectProps struct {
 	// API version.
-	// Experimental.
 	ApiVersion *string `json:"apiVersion"`
 	// Resource kind.
-	// Experimental.
 	Kind *string `json:"kind"`
 	// Object metadata.
 	//
 	// If `name` is not specified, an app-unique name will be allocated by the
 	// framework based on the path of the construct within thes construct tree.
-	// Experimental.
 	Metadata *ApiObjectMetadata `json:"metadata"`
 }
 
 // Represents a cdk8s application.
-// Experimental.
 type App interface {
 	constructs.Construct
 	Outdir() *string
@@ -473,7 +445,6 @@ func (j *jsiiProxy_App) Outdir() *string {
 
 
 // Defines an app.
-// Experimental.
 func NewApp(props *AppProps) App {
 	_init_.Initialize()
 
@@ -489,7 +460,6 @@ func NewApp(props *AppProps) App {
 }
 
 // Defines an app.
-// Experimental.
 func NewApp_Override(a App, props *AppProps) {
 	_init_.Initialize()
 
@@ -508,7 +478,6 @@ func NewApp_Override(a App, props *AppProps) {
 //
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
-// Experimental.
 func (a *jsiiProxy_App) OnPrepare() {
 	_jsii_.InvokeVoid(
 		a,
@@ -521,7 +490,6 @@ func (a *jsiiProxy_App) OnPrepare() {
 //
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
-// Experimental.
 func (a *jsiiProxy_App) OnSynthesize(session constructs.ISynthesisSession) {
 	_jsii_.InvokeVoid(
 		a,
@@ -552,7 +520,6 @@ func (a *jsiiProxy_App) OnValidate() *[]*string {
 }
 
 // Synthesizes all manifests to the output directory.
-// Experimental.
 func (a *jsiiProxy_App) Synth() {
 	_jsii_.InvokeVoid(
 		a,
@@ -562,7 +529,6 @@ func (a *jsiiProxy_App) Synth() {
 }
 
 // Returns a string representation of this construct.
-// Experimental.
 func (a *jsiiProxy_App) ToString() *string {
 	var returns *string
 
@@ -576,14 +542,11 @@ func (a *jsiiProxy_App) ToString() *string {
 	return returns
 }
 
-// Experimental.
 type AppProps struct {
 	// The directory to output Kubernetes manifests.
-	// Experimental.
 	Outdir *string `json:"outdir"`
 }
 
-// Experimental.
 type Chart interface {
 	constructs.Construct
 	Labels() *map[string]*string
@@ -623,7 +586,6 @@ func (j *jsiiProxy_Chart) Namespace() *string {
 }
 
 
-// Experimental.
 func NewChart(scope constructs.Construct, id *string, props *ChartProps) Chart {
 	_init_.Initialize()
 
@@ -638,7 +600,6 @@ func NewChart(scope constructs.Construct, id *string, props *ChartProps) Chart {
 	return &j
 }
 
-// Experimental.
 func NewChart_Override(c Chart, scope constructs.Construct, id *string, props *ChartProps) {
 	_init_.Initialize()
 
@@ -650,7 +611,6 @@ func NewChart_Override(c Chart, scope constructs.Construct, id *string, props *C
 }
 
 // Finds the chart in which a node is defined.
-// Experimental.
 func Chart_Of(c constructs.IConstruct) Chart {
 	_init_.Initialize()
 
@@ -669,7 +629,6 @@ func Chart_Of(c constructs.IConstruct) Chart {
 // Create a dependency between this Chart and other constructs.
 //
 // These can be other ApiObjects, Charts, or custom.
-// Experimental.
 func (c *jsiiProxy_Chart) AddDependency(dependencies ...constructs.IConstruct) {
 	args := []interface{}{}
 	for _, a := range dependencies {
@@ -699,7 +658,6 @@ func (c *jsiiProxy_Chart) AddDependency(dependencies ...constructs.IConstruct) {
 //
 // You can override this method if you wish to customize object names at the
 // chart level.
-// Experimental.
 func (c *jsiiProxy_Chart) GenerateObjectName(apiObject ApiObject) *string {
 	var returns *string
 
@@ -721,7 +679,6 @@ func (c *jsiiProxy_Chart) GenerateObjectName(apiObject ApiObject) *string {
 //
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
-// Experimental.
 func (c *jsiiProxy_Chart) OnPrepare() {
 	_jsii_.InvokeVoid(
 		c,
@@ -734,7 +691,6 @@ func (c *jsiiProxy_Chart) OnPrepare() {
 //
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
-// Experimental.
 func (c *jsiiProxy_Chart) OnSynthesize(session constructs.ISynthesisSession) {
 	_jsii_.InvokeVoid(
 		c,
@@ -767,7 +723,6 @@ func (c *jsiiProxy_Chart) OnValidate() *[]*string {
 // Renders this chart to a set of Kubernetes JSON resources.
 //
 // Returns: array of resource manifests
-// Experimental.
 func (c *jsiiProxy_Chart) ToJson() *[]interface{} {
 	var returns *[]interface{}
 
@@ -782,7 +737,6 @@ func (c *jsiiProxy_Chart) ToJson() *[]interface{} {
 }
 
 // Returns a string representation of this construct.
-// Experimental.
 func (c *jsiiProxy_Chart) ToString() *string {
 	var returns *string
 
@@ -796,16 +750,13 @@ func (c *jsiiProxy_Chart) ToString() *string {
 	return returns
 }
 
-// Experimental.
 type ChartProps struct {
 	// Labels to apply to all resources in this chart.
-	// Experimental.
 	Labels *map[string]*string `json:"labels"`
 	// The default namespace for all objects defined in this chart (directly or indirectly).
 	//
 	// This namespace will only apply to objects that don't have a
 	// `namespace` explicitly defined for them.
-	// Experimental.
 	Namespace *string `json:"namespace"`
 }
 
@@ -819,7 +770,6 @@ type ChartProps struct {
 //
 // The graph does not include cross-scope dependencies. That is, if a child on the current scope depends on a node
 // from a different scope, that relationship is not represented in this graph.
-// Experimental.
 type DependencyGraph interface {
 	Root() DependencyVertex
 	Topology() *[]constructs.IConstruct
@@ -841,7 +791,6 @@ func (j *jsiiProxy_DependencyGraph) Root() DependencyVertex {
 }
 
 
-// Experimental.
 func NewDependencyGraph(node constructs.Node) DependencyGraph {
 	_init_.Initialize()
 
@@ -856,7 +805,6 @@ func NewDependencyGraph(node constructs.Node) DependencyGraph {
 	return &j
 }
 
-// Experimental.
 func NewDependencyGraph_Override(d DependencyGraph, node constructs.Node) {
 	_init_.Initialize()
 
@@ -869,7 +817,6 @@ func NewDependencyGraph_Override(d DependencyGraph, node constructs.Node) {
 
 // See: Vertex.topology()
 //
-// Experimental.
 func (d *jsiiProxy_DependencyGraph) Topology() *[]constructs.IConstruct {
 	var returns *[]constructs.IConstruct
 
@@ -886,7 +833,6 @@ func (d *jsiiProxy_DependencyGraph) Topology() *[]constructs.IConstruct {
 // Represents a vertex in the graph.
 //
 // The value of each vertex is an `IConstruct` that is accessible via the `.value` getter.
-// Experimental.
 type DependencyVertex interface {
 	Inbound() *[]DependencyVertex
 	Outbound() *[]DependencyVertex
@@ -931,7 +877,6 @@ func (j *jsiiProxy_DependencyVertex) Value() constructs.IConstruct {
 }
 
 
-// Experimental.
 func NewDependencyVertex(value constructs.IConstruct) DependencyVertex {
 	_init_.Initialize()
 
@@ -946,7 +891,6 @@ func NewDependencyVertex(value constructs.IConstruct) DependencyVertex {
 	return &j
 }
 
-// Experimental.
 func NewDependencyVertex_Override(d DependencyVertex, value constructs.IConstruct) {
 	_init_.Initialize()
 
@@ -962,7 +906,6 @@ func NewDependencyVertex_Override(d DependencyVertex, value constructs.IConstruc
 // Also updates the parents of `dep`, so that it contains this node as a parent.
 //
 // This operation will fail in case it creates a cycle in the graph.
-// Experimental.
 func (d *jsiiProxy_DependencyVertex) AddChild(dep DependencyVertex) {
 	_jsii_.InvokeVoid(
 		d,
@@ -972,7 +915,6 @@ func (d *jsiiProxy_DependencyVertex) AddChild(dep DependencyVertex) {
 }
 
 // Returns a topologically sorted array of the constructs in the sub-graph.
-// Experimental.
 func (d *jsiiProxy_DependencyVertex) Topology() *[]constructs.IConstruct {
 	var returns *[]constructs.IConstruct
 
@@ -990,7 +932,6 @@ func (d *jsiiProxy_DependencyVertex) Topology() *[]constructs.IConstruct {
 //
 // The amount can be specified either as a literal value (e.g: `10`) which
 // cannot be negative.
-// Experimental.
 type Duration interface {
 	ToDays(opts *TimeConversionOptions) *float64
 	ToHours(opts *TimeConversionOptions) *float64
@@ -1009,7 +950,6 @@ type jsiiProxy_Duration struct {
 // Create a Duration representing an amount of days.
 //
 // Returns: a new `Duration` representing `amount` Days.
-// Experimental.
 func Duration_Days(amount *float64) Duration {
 	_init_.Initialize()
 
@@ -1028,7 +968,6 @@ func Duration_Days(amount *float64) Duration {
 // Create a Duration representing an amount of hours.
 //
 // Returns: a new `Duration` representing `amount` Hours.
-// Experimental.
 func Duration_Hours(amount *float64) Duration {
 	_init_.Initialize()
 
@@ -1047,7 +986,6 @@ func Duration_Hours(amount *float64) Duration {
 // Create a Duration representing an amount of milliseconds.
 //
 // Returns: a new `Duration` representing `amount` ms.
-// Experimental.
 func Duration_Millis(amount *float64) Duration {
 	_init_.Initialize()
 
@@ -1066,7 +1004,6 @@ func Duration_Millis(amount *float64) Duration {
 // Create a Duration representing an amount of minutes.
 //
 // Returns: a new `Duration` representing `amount` Minutes.
-// Experimental.
 func Duration_Minutes(amount *float64) Duration {
 	_init_.Initialize()
 
@@ -1087,7 +1024,6 @@ func Duration_Minutes(amount *float64) Duration {
 // Returns: the parsed `Duration`.
 // See: https://www.iso.org/fr/standard/70907.html
 //
-// Experimental.
 func Duration_Parse(duration *string) Duration {
 	_init_.Initialize()
 
@@ -1106,7 +1042,6 @@ func Duration_Parse(duration *string) Duration {
 // Create a Duration representing an amount of seconds.
 //
 // Returns: a new `Duration` representing `amount` Seconds.
-// Experimental.
 func Duration_Seconds(amount *float64) Duration {
 	_init_.Initialize()
 
@@ -1125,7 +1060,6 @@ func Duration_Seconds(amount *float64) Duration {
 // Return the total number of days in this Duration.
 //
 // Returns: the value of this `Duration` expressed in Days.
-// Experimental.
 func (d *jsiiProxy_Duration) ToDays(opts *TimeConversionOptions) *float64 {
 	var returns *float64
 
@@ -1142,7 +1076,6 @@ func (d *jsiiProxy_Duration) ToDays(opts *TimeConversionOptions) *float64 {
 // Return the total number of hours in this Duration.
 //
 // Returns: the value of this `Duration` expressed in Hours.
-// Experimental.
 func (d *jsiiProxy_Duration) ToHours(opts *TimeConversionOptions) *float64 {
 	var returns *float64
 
@@ -1157,7 +1090,6 @@ func (d *jsiiProxy_Duration) ToHours(opts *TimeConversionOptions) *float64 {
 }
 
 // Turn this duration into a human-readable string.
-// Experimental.
 func (d *jsiiProxy_Duration) ToHumanString() *string {
 	var returns *string
 
@@ -1176,7 +1108,6 @@ func (d *jsiiProxy_Duration) ToHumanString() *string {
 // Returns: a string starting with 'PT' describing the period
 // See: https://www.iso.org/fr/standard/70907.html
 //
-// Experimental.
 func (d *jsiiProxy_Duration) ToIsoString() *string {
 	var returns *string
 
@@ -1193,7 +1124,6 @@ func (d *jsiiProxy_Duration) ToIsoString() *string {
 // Return the total number of milliseconds in this Duration.
 //
 // Returns: the value of this `Duration` expressed in Milliseconds.
-// Experimental.
 func (d *jsiiProxy_Duration) ToMilliseconds(opts *TimeConversionOptions) *float64 {
 	var returns *float64
 
@@ -1210,7 +1140,6 @@ func (d *jsiiProxy_Duration) ToMilliseconds(opts *TimeConversionOptions) *float6
 // Return the total number of minutes in this Duration.
 //
 // Returns: the value of this `Duration` expressed in Minutes.
-// Experimental.
 func (d *jsiiProxy_Duration) ToMinutes(opts *TimeConversionOptions) *float64 {
 	var returns *float64
 
@@ -1227,7 +1156,6 @@ func (d *jsiiProxy_Duration) ToMinutes(opts *TimeConversionOptions) *float64 {
 // Return the total number of seconds in this Duration.
 //
 // Returns: the value of this `Duration` expressed in Seconds.
-// Experimental.
 func (d *jsiiProxy_Duration) ToSeconds(opts *TimeConversionOptions) *float64 {
 	var returns *float64
 
@@ -1241,20 +1169,16 @@ func (d *jsiiProxy_Duration) ToSeconds(opts *TimeConversionOptions) *float64 {
 	return returns
 }
 
-// Experimental.
 type GroupVersionKind struct {
 	// The object's API version (e.g. `authorization.k8s.io/v1`).
-	// Experimental.
 	ApiVersion *string `json:"apiVersion"`
 	// The object kind.
-	// Experimental.
 	Kind *string `json:"kind"`
 }
 
 // Represents a Helm deployment.
 //
 // Use this construct to import an existing Helm chart and incorporate it into your constructs.
-// Experimental.
 type Helm interface {
 	Include
 	ApiObjects() *[]ApiObject
@@ -1291,7 +1215,6 @@ func (j *jsiiProxy_Helm) ReleaseName() *string {
 }
 
 
-// Experimental.
 func NewHelm(scope constructs.Construct, id *string, props *HelmProps) Helm {
 	_init_.Initialize()
 
@@ -1306,7 +1229,6 @@ func NewHelm(scope constructs.Construct, id *string, props *HelmProps) Helm {
 	return &j
 }
 
-// Experimental.
 func NewHelm_Override(h Helm, scope constructs.Construct, id *string, props *HelmProps) {
 	_init_.Initialize()
 
@@ -1325,7 +1247,6 @@ func NewHelm_Override(h Helm, scope constructs.Construct, id *string, props *Hel
 //
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
-// Experimental.
 func (h *jsiiProxy_Helm) OnPrepare() {
 	_jsii_.InvokeVoid(
 		h,
@@ -1338,7 +1259,6 @@ func (h *jsiiProxy_Helm) OnPrepare() {
 //
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
-// Experimental.
 func (h *jsiiProxy_Helm) OnSynthesize(session constructs.ISynthesisSession) {
 	_jsii_.InvokeVoid(
 		h,
@@ -1369,7 +1289,6 @@ func (h *jsiiProxy_Helm) OnValidate() *[]*string {
 }
 
 // Returns a string representation of this construct.
-// Experimental.
 func (h *jsiiProxy_Helm) ToString() *string {
 	var returns *string
 
@@ -1384,7 +1303,6 @@ func (h *jsiiProxy_Helm) ToString() *string {
 }
 
 // Options for `Helm`.
-// Experimental.
 type HelmProps struct {
 	// The chart name to use. It can be a chart from a helm repository or a local directory.
 	//
@@ -1392,27 +1310,20 @@ type HelmProps struct {
 	//
 	// TODO: EXAMPLE
 	//
-	// Experimental.
 	Chart *string `json:"chart"`
 	// The local helm executable to use in order to create the manifest the chart.
-	// Experimental.
 	HelmExecutable *string `json:"helmExecutable"`
 	// Additional flags to add to the `helm` execution.
-	// Experimental.
 	HelmFlags *[]*string `json:"helmFlags"`
 	// The release name.
 	// See: https://helm.sh/docs/intro/using_helm/#three-big-concepts
 	//
-	// Experimental.
 	ReleaseName *string `json:"releaseName"`
 	// Values to pass to the chart.
-	// Experimental.
 	Values *map[string]interface{} `json:"values"`
 }
 
-// Experimental.
 type IAnyProducer interface {
-	// Experimental.
 	Produce() interface{}
 }
 
@@ -1438,7 +1349,6 @@ func (i *jsiiProxy_IAnyProducer) Produce() interface{} {
 //
 // The names (`metadata.name`) of imported resources will be preserved as-is
 // from the manifest.
-// Experimental.
 type Include interface {
 	constructs.Construct
 	ApiObjects() *[]ApiObject
@@ -1464,7 +1374,6 @@ func (j *jsiiProxy_Include) ApiObjects() *[]ApiObject {
 }
 
 
-// Experimental.
 func NewInclude(scope constructs.Construct, id *string, props *IncludeProps) Include {
 	_init_.Initialize()
 
@@ -1479,7 +1388,6 @@ func NewInclude(scope constructs.Construct, id *string, props *IncludeProps) Inc
 	return &j
 }
 
-// Experimental.
 func NewInclude_Override(i Include, scope constructs.Construct, id *string, props *IncludeProps) {
 	_init_.Initialize()
 
@@ -1498,7 +1406,6 @@ func NewInclude_Override(i Include, scope constructs.Construct, id *string, prop
 //
 // This is an advanced framework feature. Only use this if you
 // understand the implications.
-// Experimental.
 func (i *jsiiProxy_Include) OnPrepare() {
 	_jsii_.InvokeVoid(
 		i,
@@ -1511,7 +1418,6 @@ func (i *jsiiProxy_Include) OnPrepare() {
 //
 // This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 // as they participate in synthesizing the cloud assembly.
-// Experimental.
 func (i *jsiiProxy_Include) OnSynthesize(session constructs.ISynthesisSession) {
 	_jsii_.InvokeVoid(
 		i,
@@ -1542,7 +1448,6 @@ func (i *jsiiProxy_Include) OnValidate() *[]*string {
 }
 
 // Returns a string representation of this construct.
-// Experimental.
 func (i *jsiiProxy_Include) ToString() *string {
 	var returns *string
 
@@ -1556,13 +1461,11 @@ func (i *jsiiProxy_Include) ToString() *string {
 	return returns
 }
 
-// Experimental.
 type IncludeProps struct {
 	// Local file path or URL which includes a Kubernetes YAML manifest.
 	//
 	// TODO: EXAMPLE
 	//
-	// Experimental.
 	Url *string `json:"url"`
 }
 
@@ -1576,7 +1479,6 @@ type IncludeProps struct {
 //
 // TODO: EXAMPLE
 //
-// Experimental.
 type JsonPatch interface {
 }
 
@@ -1593,7 +1495,6 @@ type jsiiProxy_JsonPatch struct {
 //
 // TODO: EXAMPLE
 //
-// Experimental.
 func JsonPatch_Add(path *string, value interface{}) JsonPatch {
 	_init_.Initialize()
 
@@ -1612,7 +1513,6 @@ func JsonPatch_Add(path *string, value interface{}) JsonPatch {
 // Applies a set of JSON-Patch (RFC-6902) operations to `document` and returns the result.
 //
 // Returns: The result document
-// Experimental.
 func JsonPatch_Apply(document interface{}, ops ...JsonPatch) interface{} {
 	_init_.Initialize()
 
@@ -1640,7 +1540,6 @@ func JsonPatch_Apply(document interface{}, ops ...JsonPatch) interface{} {
 //
 // TODO: EXAMPLE
 //
-// Experimental.
 func JsonPatch_Copy(from *string, path *string) JsonPatch {
 	_init_.Initialize()
 
@@ -1662,7 +1561,6 @@ func JsonPatch_Copy(from *string, path *string) JsonPatch {
 //
 // TODO: EXAMPLE
 //
-// Experimental.
 func JsonPatch_Move(from *string, path *string) JsonPatch {
 	_init_.Initialize()
 
@@ -1682,7 +1580,6 @@ func JsonPatch_Move(from *string, path *string) JsonPatch {
 //
 // TODO: EXAMPLE
 //
-// Experimental.
 func JsonPatch_Remove(path *string) JsonPatch {
 	_init_.Initialize()
 
@@ -1704,7 +1601,6 @@ func JsonPatch_Remove(path *string) JsonPatch {
 //
 // TODO: EXAMPLE
 //
-// Experimental.
 func JsonPatch_Replace(path *string, value interface{}) JsonPatch {
 	_init_.Initialize()
 
@@ -1727,7 +1623,6 @@ func JsonPatch_Replace(path *string, value interface{}) JsonPatch {
 //
 // TODO: EXAMPLE
 //
-// Experimental.
 func JsonPatch_Test(path *string, value interface{}) JsonPatch {
 	_init_.Initialize()
 
@@ -1743,7 +1638,6 @@ func JsonPatch_Test(path *string, value interface{}) JsonPatch {
 	return returns
 }
 
-// Experimental.
 type Lazy interface {
 	Produce() interface{}
 }
@@ -1753,7 +1647,6 @@ type jsiiProxy_Lazy struct {
 	_ byte // padding
 }
 
-// Experimental.
 func Lazy_Any(producer IAnyProducer) interface{} {
 	_init_.Initialize()
 
@@ -1769,7 +1662,6 @@ func Lazy_Any(producer IAnyProducer) interface{} {
 	return returns
 }
 
-// Experimental.
 func (l *jsiiProxy_Lazy) Produce() interface{} {
 	var returns interface{}
 
@@ -1784,24 +1676,18 @@ func (l *jsiiProxy_Lazy) Produce() interface{} {
 }
 
 // Options for name generation.
-// Experimental.
 type NameOptions struct {
 	// Delimiter to use between components.
-	// Experimental.
 	Delimiter *string `json:"delimiter"`
 	// Extra components to include in the name.
-	// Experimental.
 	Extra *[]*string `json:"extra"`
 	// Include a short hash as last part of the name.
-	// Experimental.
 	IncludeHash *bool `json:"includeHash"`
 	// Maximum allowed length for the name.
-	// Experimental.
 	MaxLen *float64 `json:"maxLen"`
 }
 
 // Utilities for generating unique and stable names.
-// Experimental.
 type Names interface {
 }
 
@@ -1826,7 +1712,6 @@ type jsiiProxy_Names struct {
 //
 // Note that if the total length is longer than 63 characters, we will trim
 // the first components since the last components usually encode more meaning.
-// Experimental.
 func Names_ToDnsLabel(scope constructs.Construct, options *NameOptions) *string {
 	_init_.Initialize()
 
@@ -1860,7 +1745,6 @@ func Names_ToDnsLabel(scope constructs.Construct, options *NameOptions) *string 
 //
 // Note that if the total length is longer than 63 characters, we will trim
 // the first components since the last components usually encode more meaning.
-// Experimental.
 func Names_ToLabelValue(scope constructs.Construct, options *NameOptions) *string {
 	_init_.Initialize()
 
@@ -1882,7 +1766,6 @@ func Names_ToLabelValue(scope constructs.Construct, options *NameOptions) *strin
 // cannot be negative.
 //
 // When the amount is passed as a token, unit conversion is not possible.
-// Experimental.
 type Size interface {
 	ToGibibytes(opts *SizeConversionOptions) *float64
 	ToKibibytes(opts *SizeConversionOptions) *float64
@@ -1899,7 +1782,6 @@ type jsiiProxy_Size struct {
 // Create a Storage representing an amount gibibytes.
 //
 // 1 GiB = 1024 MiB
-// Experimental.
 func Size_Gibibytes(amount *float64) Size {
 	_init_.Initialize()
 
@@ -1918,7 +1800,6 @@ func Size_Gibibytes(amount *float64) Size {
 // Create a Storage representing an amount kibibytes.
 //
 // 1 KiB = 1024 bytes
-// Experimental.
 func Size_Kibibytes(amount *float64) Size {
 	_init_.Initialize()
 
@@ -1937,7 +1818,6 @@ func Size_Kibibytes(amount *float64) Size {
 // Create a Storage representing an amount mebibytes.
 //
 // 1 MiB = 1024 KiB
-// Experimental.
 func Size_Mebibytes(amount *float64) Size {
 	_init_.Initialize()
 
@@ -1956,7 +1836,6 @@ func Size_Mebibytes(amount *float64) Size {
 // Create a Storage representing an amount pebibytes.
 //
 // 1 PiB = 1024 TiB
-// Experimental.
 func Size_Pebibyte(amount *float64) Size {
 	_init_.Initialize()
 
@@ -1975,7 +1854,6 @@ func Size_Pebibyte(amount *float64) Size {
 // Create a Storage representing an amount tebibytes.
 //
 // 1 TiB = 1024 GiB
-// Experimental.
 func Size_Tebibytes(amount *float64) Size {
 	_init_.Initialize()
 
@@ -1992,7 +1870,6 @@ func Size_Tebibytes(amount *float64) Size {
 }
 
 // Return this storage as a total number of gibibytes.
-// Experimental.
 func (s *jsiiProxy_Size) ToGibibytes(opts *SizeConversionOptions) *float64 {
 	var returns *float64
 
@@ -2007,7 +1884,6 @@ func (s *jsiiProxy_Size) ToGibibytes(opts *SizeConversionOptions) *float64 {
 }
 
 // Return this storage as a total number of kibibytes.
-// Experimental.
 func (s *jsiiProxy_Size) ToKibibytes(opts *SizeConversionOptions) *float64 {
 	var returns *float64
 
@@ -2022,7 +1898,6 @@ func (s *jsiiProxy_Size) ToKibibytes(opts *SizeConversionOptions) *float64 {
 }
 
 // Return this storage as a total number of mebibytes.
-// Experimental.
 func (s *jsiiProxy_Size) ToMebibytes(opts *SizeConversionOptions) *float64 {
 	var returns *float64
 
@@ -2037,7 +1912,6 @@ func (s *jsiiProxy_Size) ToMebibytes(opts *SizeConversionOptions) *float64 {
 }
 
 // Return this storage as a total number of pebibytes.
-// Experimental.
 func (s *jsiiProxy_Size) ToPebibytes(opts *SizeConversionOptions) *float64 {
 	var returns *float64
 
@@ -2052,7 +1926,6 @@ func (s *jsiiProxy_Size) ToPebibytes(opts *SizeConversionOptions) *float64 {
 }
 
 // Return this storage as a total number of tebibytes.
-// Experimental.
 func (s *jsiiProxy_Size) ToTebibytes(opts *SizeConversionOptions) *float64 {
 	var returns *float64
 
@@ -2067,15 +1940,12 @@ func (s *jsiiProxy_Size) ToTebibytes(opts *SizeConversionOptions) *float64 {
 }
 
 // Options for how to convert time to a different unit.
-// Experimental.
 type SizeConversionOptions struct {
 	// How conversions should behave when it encounters a non-integer result.
-	// Experimental.
 	Rounding SizeRoundingBehavior `json:"rounding"`
 }
 
 // Rounding behaviour when converting between units of `Size`.
-// Experimental.
 type SizeRoundingBehavior string
 
 const (
@@ -2085,7 +1955,6 @@ const (
 )
 
 // Testing utilities for cdk8s applications.
-// Experimental.
 type Testing interface {
 }
 
@@ -2095,7 +1964,6 @@ type jsiiProxy_Testing struct {
 }
 
 // Returns an app for testing with the following properties: - Output directory is a temp dir.
-// Experimental.
 func Testing_App() App {
 	_init_.Initialize()
 
@@ -2112,7 +1980,6 @@ func Testing_App() App {
 }
 
 // Returns: a Chart that can be used for tests
-// Experimental.
 func Testing_Chart() Chart {
 	_init_.Initialize()
 
@@ -2129,7 +1996,6 @@ func Testing_Chart() Chart {
 }
 
 // Returns the Kubernetes manifest synthesized from this chart.
-// Experimental.
 func Testing_Synth(chart Chart) *[]interface{} {
 	_init_.Initialize()
 
@@ -2146,15 +2012,12 @@ func Testing_Synth(chart Chart) *[]interface{} {
 }
 
 // Options for how to convert time to a different unit.
-// Experimental.
 type TimeConversionOptions struct {
 	// If `true`, conversions into a larger time unit (e.g. `Seconds` to `Minutes`) will fail if the result is not an integer.
-	// Experimental.
 	Integral *bool `json:"integral"`
 }
 
 // YAML utilities.
-// Experimental.
 type Yaml interface {
 }
 
@@ -2168,7 +2031,6 @@ type jsiiProxy_Yaml struct {
 // Empty documents are filtered out.
 //
 // Returns: an array of objects, each represents a document inside the YAML
-// Experimental.
 func Yaml_Load(urlOrFile *string) *[]interface{} {
 	_init_.Initialize()
 
@@ -2185,7 +2047,6 @@ func Yaml_Load(urlOrFile *string) *[]interface{} {
 }
 
 // Saves a set of objects as a multi-document YAML file.
-// Experimental.
 func Yaml_Save(filePath *string, docs *[]interface{}) {
 	_init_.Initialize()
 
@@ -2196,10 +2057,25 @@ func Yaml_Save(filePath *string, docs *[]interface{}) {
 	)
 }
 
+// Stringify a document into yaml.
+func Yaml_Stringify(doc interface{}) *string {
+	_init_.Initialize()
+
+	var returns *string
+
+	_jsii_.StaticInvoke(
+		"cdk8s.Yaml",
+		"stringify",
+		[]interface{}{doc},
+		&returns,
+	)
+
+	return returns
+}
+
 // Saves a set of YAML documents into a temp file (in /tmp).
 //
 // Returns: the path to the temporary file
-// Experimental.
 func Yaml_Tmp(docs *[]interface{}) *string {
 	_init_.Initialize()
 
