@@ -2,12 +2,12 @@
 package cdk8splus17
 
 import (
-	_jsii_ "github.com/aws/jsii-runtime-go"
+	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 	_init_ "github.com/awslabs/cdk8s-go/cdk8splus17/jsii"
 
 	"github.com/aws/constructs-go/constructs/v3"
-	"github.com/awslabs/cdk8s-go/cdk8s"
 	"github.com/awslabs/cdk8s-go/cdk8splus17/internal"
+	"github.com/cdk8s-team/cdk8s-go/cdk8s"
 )
 
 // Options for `configmap.addDirectory()`.
