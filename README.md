@@ -1,11 +1,9 @@
 ## cdk8s-go
 
-Go bindings for [cdk8s](https://cdk8s.ok)
+Go bindings for the `CDK8s` project are now maintained under the following repositories:
 
-
-## Security
-
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+- https://github.com/cdk8s-team/cdk8s-core-go
+- https://github.com/cdk8s-team/cdk8s-plus-go
 
 ## License
 
